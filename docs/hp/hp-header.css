@@ -132,8 +132,8 @@
   grid-column: 1;
   flex: 0 0 auto;
   position: relative;
-  /* 元ロゴ 291×50 基準（height 32 → width 186.24）で枠固定 */
-  width: calc(32px * 291 / 50);
+  /* 元ロゴ 292×50 基準（height 32 → width 186.88）で枠固定 */
+  width: calc(32px * 292 / 50);
   height: 32px;
   text-decoration: none;
   line-height: 0;
@@ -146,7 +146,7 @@
   left: 0;
   top: 0;
   height: 32px !important;
-  width: calc(32px * 291 / 50) !important;
+  width: calc(32px * 292 / 50) !important;
   max-width: none !important;
   max-height: none !important;
   object-fit: contain;
