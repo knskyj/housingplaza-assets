@@ -354,7 +354,7 @@
 }
 
 #housing .hp-header__panel-visual:hover img {
-  transform: scale(1.04) !important;
+  transform: scale(1.2) !important;
 }
 
 #housing .hp-header__store-grid {
