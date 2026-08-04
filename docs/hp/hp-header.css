@@ -695,6 +695,7 @@ body:has(#housing .hp-header) #primary {
 #housing:has(.hp-header) > .hp-hero,
 #housing:has(.hp-header) > .hp-topics,
 #housing:has(.hp-header) > .hp-intro,
+#housing:has(.hp-header) > .hp-stores,
 #housing:has(.hp-header) > .hp-fullbleed,
 #housing:has(.hp-header) > .hp-hero-standin {
   max-width: none;
@@ -707,7 +708,7 @@ body:has(#housing .hp-header) #primary {
 }
 
 /* 旧 Crafto section など: Infcurion と同じ左右余白柱 */
-#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-topics):not(.hp-intro):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
+#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-topics):not(.hp-intro):not(.hp-stores):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
   max-width: none;
   width: 100%;
   margin-left: 0;

@@ -1,5 +1,6 @@
-/* SkyPress カスタムCSSにこの内容だけ貼る（ハードリロードで更新確認。?v= はむやみに上げない） */
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-header.css?v=15");
+/* Housingplaza SkyPress custom CSS — paste this file's contents into SkyPress */
+@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-header.css?v=16");
 @import url("https://knskyj.github.io/housingplaza-assets/hp/hp-hero.css?v=10");
 @import url("https://knskyj.github.io/housingplaza-assets/hp/hp-topics.css?v=2");
 @import url("https://knskyj.github.io/housingplaza-assets/hp/hp-intro.css?v=2");
+@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-stores.css?v=1");
