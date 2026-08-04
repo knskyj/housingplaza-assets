@@ -4,11 +4,8 @@
   --hp-hero-fade: 2s;
   --hp-hero-zoom: 5s;
   --hp-hero-scale-from: 1.14;
-  --hp-hero-veil: linear-gradient(
-    #0000008c 0%,
-    #00000059 45%,
-    #000000b8 100%
-  );
+  /* 本番 Swiper の opacity-very-light(0.2) 相当。明るめの黒 */
+  --hp-hero-veil: rgba(0, 0, 0, 0.2);
   --hp-hero-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
   width: 100%;
@@ -110,15 +107,16 @@
   z-index: 3;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: calc(var(--hp-header-h, 76px) + 1.5rem) 1.5rem 3rem;
+  justify-content: flex-start;
+  padding: calc(var(--hp-header-h, 76px) + 1.5rem) clamp(1.25rem, 4vw, 3rem) 3rem;
   box-sizing: border-box;
   pointer-events: none;
 }
 
 #housing .hp-hero__copy-inner {
   width: min(1100px, 100%);
-  margin: 0 auto;
+  margin: 0;
+  padding-left: 1rem;
   text-align: left;
   animation: hp-hero-copy-in 1s ease-out 0.15s both;
 }
@@ -130,6 +128,13 @@
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: 0.02em;
+}
+
+/* テーマ / Crafto の h2::after 区切り線をヒーロー内では消す */
+#housing .hp-hero__title::before,
+#housing .hp-hero__title::after {
+  content: none !important;
+  display: none !important;
 }
 
 #housing .hp-hero__br-sm {
