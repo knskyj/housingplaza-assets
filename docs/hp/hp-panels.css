@@ -1,8 +1,9 @@
-/* Housingplaza panels — 解約手続 / 最新情報。#housing スコープ・Crafto なし */
+/* Housingplaza panels — 解約手続 / 最新情報。intro カード同形・Crafto なし */
 
 #housing .hp-panels {
   --hp-panels-navy: #072653;
   --hp-panels-ink: #151515;
+  --hp-panels-line: rgba(34, 34, 34, 0.12);
   --hp-panels-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
   z-index: 1;
@@ -65,19 +66,18 @@
 }
 
 #housing .hp-panels__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 #housing .hp-panels__card {
-  display: grid;
-  grid-template-columns: minmax(6.5rem, 32%) 1fr;
-  align-items: stretch;
-  min-height: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -95,7 +95,10 @@
 }
 
 #housing .hp-panels__media {
+  position: relative;
   display: block;
+  width: 100%;
+  aspect-ratio: 16 / 11;
   overflow: hidden;
   background: #d8d8d8;
 }
@@ -117,33 +120,52 @@
 
 #housing .hp-panels__body {
   display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.35rem;
+  padding: 1.35rem 1.35rem 1.5rem;
+  border-top: 1px solid var(--hp-panels-line);
+}
+
+#housing .hp-panels__ja {
+  margin: 0;
+  color: var(--hp-panels-navy);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+#housing .hp-panels__card-title {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 1rem 1.15rem;
-  min-width: 0;
+  margin: 0;
 }
 
 #housing .hp-panels__name {
   margin: 0;
-  color: var(--hp-panels-navy);
+  min-width: 0;
+  color: var(--hp-panels-ink);
   font-size: clamp(1rem, 1.35vw, 1.125rem);
   font-weight: 600;
   letter-spacing: 0.06em;
   line-height: 1.35;
+  text-transform: uppercase;
 }
 
 #housing .hp-panels__arrow {
-  display: inline-flex;
   flex: 0 0 auto;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid var(--hp-panels-navy);
   border-radius: 50%;
   color: var(--hp-panels-navy);
-  transition: background 0.25s ease, color 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 #housing .hp-panels__arrow svg {
@@ -160,6 +182,7 @@
 #housing .hp-panels__card:focus-visible .hp-panels__arrow {
   background: var(--hp-panels-navy);
   color: #fff;
+  transform: translateX(2px);
 }
 
 @media (max-width: 1099px) {
@@ -169,6 +192,14 @@
 
   #housing .hp-panels__inner {
     gap: 2.25rem;
+  }
+
+  #housing .hp-panels__list {
+    gap: 1rem;
+  }
+
+  #housing .hp-panels__body {
+    padding: 1.15rem 1.1rem 1.25rem;
   }
 }
 
@@ -191,12 +222,12 @@
     font-size: clamp(1.25rem, 5vw, 1.5rem);
   }
 
-  #housing .hp-panels__card {
-    grid-template-columns: minmax(5.5rem, 34%) 1fr;
-    min-height: 4.75rem;
+  #housing .hp-panels__list {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
   }
 
-  #housing .hp-panels__body {
-    padding: 0.85rem 0.9rem;
+  #housing .hp-panels__media {
+    aspect-ratio: 16 / 10;
   }
 }
