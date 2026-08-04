@@ -230,7 +230,7 @@
 
   #housing .hp-intro__title {
     margin-bottom: 1.15rem;
-    font-size: clamp(1.15rem, 5.2vw, 1.55rem);
+    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
     line-height: 1.4;
   }
 
