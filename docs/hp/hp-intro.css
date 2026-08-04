@@ -1,15 +1,17 @@
-/* Housingplaza intro — Infcurion「What we do」風。Crafto なし */
-/* ロゴはヒーロー側オーバーレイへ移動 */
+/* Housingplaza intro / About — Infcurion About 風。Crafto なし */
 
 #housing .hp-intro {
   --hp-intro-navy: #072653;
   --hp-intro-ink: #151515;
+  --hp-intro-muted: #6b6b6b;
+  --hp-intro-line: rgba(34, 34, 34, 0.12);
   --hp-intro-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
   z-index: 1;
   margin: 0 !important;
-  padding: 7.5rem 0 8rem !important;
-  background: #fff !important;
+  /* Infcurion: padding: 150px var(--margin-side-pc) */
+  padding: 150px var(--hp-margin-side, 12.25vw) !important;
+  background: #f7f7f7 !important;
   color: var(--hp-intro-ink);
   font-family: var(--hp-intro-font);
   -webkit-font-smoothing: antialiased;
@@ -23,35 +25,31 @@
 }
 
 #housing .hp-intro__inner {
-  width: min(1320px, calc(100% - 5rem));
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: 0;
 }
 
 #housing .hp-intro__brand {
-  margin: 0 0 4.5rem;
+  margin: 0 0 1.25rem;
   color: var(--hp-intro-navy);
-  font-size: clamp(1.35rem, 2.2vw, 1.875rem);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-  text-align: left !important;
-}
-
-#housing .hp-intro__copy {
-  margin: 0;
-  padding: 0 0 0 1.5rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
   text-align: left !important;
 }
 
 #housing .hp-intro__title {
-  margin: 0 0 2.75rem;
+  margin: 0 0 1.75rem;
   color: var(--hp-intro-ink);
-  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
-  font-weight: 500;
+  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
+  font-weight: 600;
   letter-spacing: 0.04em;
-  line-height: 1.5;
+  line-height: 1.45;
   text-align: left !important;
+  white-space: nowrap;
 }
 
 #housing .hp-intro__title::before,
@@ -61,61 +59,194 @@
 }
 
 #housing .hp-intro__body {
-  margin: 0;
-  max-width: 52rem;
+  margin: 0 0 3.5rem;
+  max-width: 46rem;
   color: var(--hp-intro-ink);
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.04em;
-  line-height: 2.5;
+  line-height: 1.9;
   text-align: left !important;
+}
+
+/* 3 cards — Infcurion About の並び */
+#housing .hp-intro__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#housing .hp-intro__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #fff !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 4px;
+}
+
+#housing .hp-intro__card:hover,
+#housing .hp-intro__card:focus-visible {
+  outline: none;
+}
+
+#housing .hp-intro__card-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: #d8d8d8;
+}
+
+#housing .hp-intro__card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1);
+  transition: transform 0.55s ease;
+}
+
+#housing .hp-intro__card:hover .hp-intro__card-media img,
+#housing .hp-intro__card:focus-visible .hp-intro__card-media img {
+  transform: scale(1.2);
+}
+
+#housing .hp-intro__card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.35rem;
+  padding: 1.35rem 1.35rem 1.5rem;
+  border-top: 1px solid var(--hp-intro-line);
+}
+
+#housing .hp-intro__card-ja {
+  margin: 0;
+  color: var(--hp-intro-navy);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+#housing .hp-intro__card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+#housing .hp-intro__card-en {
+  margin: 0;
+  min-width: 0;
+  color: var(--hp-intro-ink);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+#housing .hp-intro__card-en::before,
+#housing .hp-intro__card-en::after {
+  content: none !important;
+  display: none !important;
+}
+
+#housing .hp-intro__card-arrow {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--hp-intro-navy);
+  border-radius: 50%;
+  color: var(--hp-intro-navy);
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+#housing .hp-intro__card-arrow svg {
+  width: 0.7rem;
+  height: 0.7rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#housing .hp-intro__card:hover .hp-intro__card-arrow,
+#housing .hp-intro__card:focus-visible .hp-intro__card-arrow {
+  background: var(--hp-intro-navy);
+  color: #fff;
+  transform: translateX(2px);
 }
 
 @media (max-width: 1099px) {
   #housing .hp-intro {
-    padding: 5.5rem 0 6rem !important;
-  }
-
-  #housing .hp-intro__inner {
-    width: min(1320px, calc(100% - 3rem));
-  }
-
-  #housing .hp-intro__brand {
-    margin-bottom: 3rem;
+    padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
   }
 
   #housing .hp-intro__title {
-    margin-bottom: 2rem;
+    margin-bottom: 1.35rem;
+  }
+
+  #housing .hp-intro__body {
+    margin-bottom: 2.5rem;
+  }
+
+  #housing .hp-intro__cards {
+    gap: 1rem;
+  }
+
+  #housing .hp-intro__card-body {
+    padding: 1.15rem 1.1rem 1.25rem;
   }
 }
 
 @media (max-width: 767px) {
   #housing .hp-intro {
-    padding: 4rem 0 4.5rem !important;
-  }
-
-  #housing .hp-intro__inner {
-    width: calc(100% - 2rem);
+    padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
   }
 
   #housing .hp-intro__brand {
-    margin-bottom: 2rem;
-    font-size: 1.25rem;
-  }
-
-  #housing .hp-intro__copy {
-    padding-left: 0;
+    margin-bottom: 0.85rem;
+    font-size: 1rem;
   }
 
   #housing .hp-intro__title {
-    margin-bottom: 1.5rem;
-    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
-    line-height: 1.45;
+    margin-bottom: 1.15rem;
+    font-size: clamp(1.15rem, 5.2vw, 1.55rem);
+    line-height: 1.4;
   }
 
   #housing .hp-intro__body {
+    margin-bottom: 1.75rem;
     max-width: none;
     font-size: 0.95rem;
-    line-height: 2.15;
+    line-height: 1.9;
+  }
+
+  #housing .hp-intro__cards {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  #housing .hp-intro__card-media {
+    aspect-ratio: 16 / 10;
   }
 }

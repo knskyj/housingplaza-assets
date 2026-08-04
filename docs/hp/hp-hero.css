@@ -115,7 +115,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: calc(var(--hp-header-h, 76px) + 1.5rem) clamp(1.25rem, 4vw, 3rem) 3rem;
+  padding: calc(var(--hp-header-h, 76px) + 1.5rem) var(--hp-margin-side, 12.25vw) 3rem;
   box-sizing: border-box;
   pointer-events: none;
 }
@@ -124,7 +124,7 @@
   width: auto;
   max-width: min(1100px, 100%);
   margin: 0;
-  padding-left: 1rem;
+  padding-left: 0;
   text-align: left !important;
   animation: hp-hero-copy-in 1s ease-out 0.15s both;
 }

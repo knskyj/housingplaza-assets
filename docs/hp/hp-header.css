@@ -25,6 +25,10 @@ body:has(#housing) {
   --hp-shadow: 0 24px 60px rgba(7, 38, 83, 0.14);
   /* メガタイトル列：全メガ共通の固定幅 */
   --hp-mega-lead: 18rem;
+  /* Infcurion 相当の左右余白（PC 12.25vw / SP 8vw） */
+  --hp-margin-side: 12.25vw;
+  /* ヘッダーは少し広く（左右を詰める） */
+  --hp-header-margin-side: clamp(1.5rem, 4vw, 3.5rem);
 }
 
 #housing .hp-header {
@@ -129,9 +133,11 @@ body:has(#housing) {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--hp-header-margin-side);
+  box-sizing: border-box;
   min-height: var(--hp-header-h);
 }
 
@@ -293,8 +299,8 @@ body:has(#housing) {
   grid-template-columns: var(--hp-mega-lead) minmax(0, 1fr);
   gap: 2.5rem 3rem;
   align-items: start;
-  /* inner は max 1240 + 左右 padding 込みなので、カードは中身幅に合わせる */
-  max-width: calc(1240px - 3rem);
+  /* inner は Infcurion 風の左右マージン柱に合わせる */
+  max-width: calc(100vw - var(--hp-header-margin-side) * 2);
   width: 100%;
   margin: 0 auto;
   padding: 2.25rem 2.5rem 2.4rem;
@@ -695,13 +701,14 @@ body:has(#housing .hp-header) .es-separate-container #primary {
   box-sizing: border-box;
 }
 
-/* 旧 Crafto section など: 中央柱。hp-topics / hp-intro は全幅（上のルール） */
+/* 旧 Crafto section など: Infcurion と同じ左右余白柱 */
 #housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-topics):not(.hp-intro):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  max-width: none;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--hp-margin-side);
+  padding-right: var(--hp-margin-side);
   box-sizing: border-box;
 }
 
@@ -928,6 +935,14 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__link::after {
     left: 0;
     right: 0;
+  }
+}
+
+/* Infcurion SP: --margin-side-sp: 8vw */
+@media (max-width: 767px) {
+  #housing {
+    --hp-margin-side: 8vw;
+    --hp-header-margin-side: 1.25rem;
   }
 }
 
