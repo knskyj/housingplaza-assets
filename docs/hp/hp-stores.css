@@ -213,6 +213,7 @@
     gap: 0.75rem;
   }
 
+  #housing .hp-stores__badge,
   #housing .hp-stores__meta {
     display: none;
   }
