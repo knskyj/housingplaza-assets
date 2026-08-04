@@ -131,6 +131,10 @@
   justify-self: start;
   grid-column: 1;
   flex: 0 0 auto;
+  position: relative;
+  /* light ロゴ基準（300×50 @ height 32）で枠を固定 → open 時の差し替えで位置が跳ねない */
+  width: 12rem;
+  height: 32px;
   text-decoration: none;
   line-height: 0;
   box-sizing: border-box;
@@ -138,10 +142,15 @@
 
 /* max-width:100% は grid の auto 列で幅0崩壊する（本番テーマ干渉）ので禁止 */
 #housing .hp-header__logo {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 32px !important;
-  width: auto !important;
+  width: 12rem !important;
   max-width: none !important;
   max-height: none !important;
+  object-fit: contain;
+  object-position: left center;
   display: block !important;
 }
 

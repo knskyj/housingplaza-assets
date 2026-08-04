@@ -204,13 +204,24 @@
       setNavHover(false);
     }
 
+    function lockScroll() {
+      var sbw = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.paddingRight = sbw > 0 ? sbw + "px" : "";
+    }
+
+    function unlockScroll() {
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.paddingRight = "";
+    }
+
     function closeDrawer() {
       root.classList.remove("is-open");
       if (burger) {
         burger.setAttribute("aria-expanded", "false");
         burger.setAttribute("aria-label", "メニューを開く");
       }
-      document.documentElement.style.overflow = "";
+      unlockScroll();
       syncBackdrop();
 
       if (!drawer) return;
@@ -238,7 +249,7 @@
         burger.setAttribute("aria-expanded", "true");
         burger.setAttribute("aria-label", "メニューを閉じる");
       }
-      document.documentElement.style.overflow = "hidden";
+      lockScroll();
       syncBackdrop();
     }
 

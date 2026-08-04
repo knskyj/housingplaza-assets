@@ -12,7 +12,7 @@
   }
 
   var s = document.createElement("script");
-  s.src = "https://knskyj.github.io/housingplaza-assets/hp/hp-header.js?v=3";
+  s.src = "https://knskyj.github.io/housingplaza-assets/hp/hp-header.js?v=4";
   s.defer = true;
   document.head.appendChild(s);
 })();
