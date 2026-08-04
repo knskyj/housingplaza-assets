@@ -71,8 +71,6 @@
   border: 0 !important;
   box-shadow: none !important;
   vertical-align: middle;
-  max-width: 100%;
-  height: auto;
 }
 #housing .hp-header img[data-hp-src]:not([src]) {
   background: var(--hp-placeholder);
@@ -138,32 +136,34 @@
   box-sizing: border-box;
 }
 
+/* max-width:100% は grid の auto 列で幅0崩壊する（本番テーマ干渉）ので禁止 */
 #housing .hp-header__logo {
-  height: 32px;
-  width: auto;
-  max-width: 100%;
-  display: block;
+  height: 32px !important;
+  width: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  display: block !important;
 }
 
 #housing .hp-header__logo--dark {
-  display: none;
+  display: none !important;
 }
 
 #housing .hp-header--overlay:not(.is-scrolled):not(.is-open) .hp-header__logo--light {
-  display: block;
+  display: block !important;
 }
 #housing .hp-header--overlay:not(.is-scrolled):not(.is-open) .hp-header__logo--dark {
-  display: none;
+  display: none !important;
 }
 #housing .hp-header--overlay.is-scrolled .hp-header__logo--light,
 #housing .hp-header--overlay.is-open .hp-header__logo--light,
 #housing .hp-header:not(.hp-header--overlay) .hp-header__logo--light {
-  display: none;
+  display: none !important;
 }
 #housing .hp-header--overlay.is-scrolled .hp-header__logo--dark,
 #housing .hp-header--overlay.is-open .hp-header__logo--dark,
 #housing .hp-header:not(.hp-header--overlay) .hp-header__logo--dark {
-  display: block;
+  display: block !important;
 }
 
 /* PC: logo left / nav centered / CTA right (previous site layout) */
@@ -207,7 +207,7 @@
   padding: 0 0.7rem;
   color: var(--hp-ink);
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.04em;
   text-decoration: none;
@@ -216,7 +216,7 @@
 
 #housing .hp-header--overlay:not(.is-scrolled):not(.is-open) .hp-header__trigger,
 #housing .hp-header--overlay:not(.is-scrolled):not(.is-open) .hp-header__link {
-  color: var(--hp-white);
+  color: var(--hp-white) !important;
 }
 
 #housing .hp-header__trigger::after,
@@ -867,7 +867,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__trigger,
   #housing .hp-header__link {
     padding: 0 0.55rem;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   #housing .hp-header__trigger::after,
@@ -891,7 +891,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__trigger,
   #housing .hp-header__link {
     padding: 0 0.7rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
   #housing .hp-header__trigger::after,
