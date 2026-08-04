@@ -2,6 +2,13 @@
  * Scoped under #housing only (avoid いい生活 / Crafto clashes)
  */
 
+/* mangoose/Crafto なし時のブラウザ既定余白を消す（フルブリード用） */
+html:has(#housing),
+body:has(#housing) {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 #housing {
   --hp-navy: #072653;
   --hp-navy-hover: #051a38;

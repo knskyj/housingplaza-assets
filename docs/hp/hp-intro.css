@@ -1,0 +1,121 @@
+/* Housingplaza intro — Infcurion「What we do」風。Crafto なし */
+/* ロゴはヒーロー側オーバーレイへ移動 */
+
+#housing .hp-intro {
+  --hp-intro-navy: #072653;
+  --hp-intro-ink: #151515;
+  --hp-intro-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  position: relative;
+  z-index: 1;
+  margin: 0 !important;
+  padding: 7.5rem 0 8rem !important;
+  background: #fff !important;
+  color: var(--hp-intro-ink);
+  font-family: var(--hp-intro-font);
+  -webkit-font-smoothing: antialiased;
+  border: 0 !important;
+}
+
+#housing .hp-intro *,
+#housing .hp-intro *::before,
+#housing .hp-intro *::after {
+  box-sizing: border-box;
+}
+
+#housing .hp-intro__inner {
+  width: min(1320px, calc(100% - 5rem));
+  margin: 0 auto;
+  padding: 0;
+}
+
+#housing .hp-intro__brand {
+  margin: 0 0 4.5rem;
+  color: var(--hp-intro-navy);
+  font-size: clamp(1.35rem, 2.2vw, 1.875rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-align: left !important;
+}
+
+#housing .hp-intro__copy {
+  margin: 0;
+  padding: 0 0 0 1.5rem;
+  text-align: left !important;
+}
+
+#housing .hp-intro__title {
+  margin: 0 0 2.75rem;
+  color: var(--hp-intro-ink);
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  text-align: left !important;
+}
+
+#housing .hp-intro__title::before,
+#housing .hp-intro__title::after {
+  content: none !important;
+  display: none !important;
+}
+
+#housing .hp-intro__body {
+  margin: 0;
+  max-width: 52rem;
+  color: var(--hp-intro-ink);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 2.5;
+  text-align: left !important;
+}
+
+@media (max-width: 1099px) {
+  #housing .hp-intro {
+    padding: 5.5rem 0 6rem !important;
+  }
+
+  #housing .hp-intro__inner {
+    width: min(1320px, calc(100% - 3rem));
+  }
+
+  #housing .hp-intro__brand {
+    margin-bottom: 3rem;
+  }
+
+  #housing .hp-intro__title {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #housing .hp-intro {
+    padding: 4rem 0 4.5rem !important;
+  }
+
+  #housing .hp-intro__inner {
+    width: calc(100% - 2rem);
+  }
+
+  #housing .hp-intro__brand {
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+  }
+
+  #housing .hp-intro__copy {
+    padding-left: 0;
+  }
+
+  #housing .hp-intro__title {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
+    line-height: 1.45;
+  }
+
+  #housing .hp-intro__body {
+    max-width: none;
+    font-size: 0.95rem;
+    line-height: 2.15;
+  }
+}

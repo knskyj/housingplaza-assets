@@ -4,8 +4,8 @@
   --hp-hero-fade: 2s;
   --hp-hero-zoom: 5s;
   --hp-hero-scale-from: 1.14;
-  /* 本番 Swiper の opacity-very-light(0.2) 相当。明るめの黒 */
-  --hp-hero-veil: rgba(0, 0, 0, 0.2);
+  /* 本番 Swiper の opacity-very-light(0.2) より少し濃く */
+  --hp-hero-veil: rgba(0, 0, 0, 0.35);
   --hp-hero-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
   width: 100%;
@@ -97,7 +97,14 @@
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: var(--hp-hero-veil);
+  /* 左＝文字読みやすさ、右＝写真を明るく見せる（やや抑えめ） */
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.26) 38%,
+    rgba(0, 0, 0, 0.1) 68%,
+    rgba(0, 0, 0, 0.03) 100%
+  );
   pointer-events: none;
 }
 
@@ -125,9 +132,9 @@
 #housing .hp-hero__title {
   margin: 0 0 0.55rem;
   color: #fff;
-  font-size: clamp(1.75rem, 4.2vw, 2.85rem);
+  font-size: clamp(2.35rem, 6.5vw, 3.85rem);
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.3;
   letter-spacing: 0.02em;
   /* テーマ .entry-content h2 { text-align:center } を上書き */
   text-align: left !important;
@@ -140,20 +147,10 @@
   display: none !important;
 }
 
-#housing .hp-hero__br-sm {
-  display: none;
-}
-
-@media (max-width: 575px) {
-  #housing .hp-hero__br-sm {
-    display: inline;
-  }
-}
-
 #housing .hp-hero__lead {
   margin: 0;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 0.95rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
   font-weight: 600;
   letter-spacing: 0.08em;
   line-height: 1.5;
@@ -176,11 +173,23 @@
     min-height: 700px;
     min-height: 100svh;
   }
+
+  #housing .hp-hero__title {
+    font-size: clamp(2.25rem, 9.2vw, 2.85rem);
+  }
+
+  #housing .hp-hero__lead {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 575px) {
   #housing .hp-hero {
     min-height: 700px;
+  }
+
+  #housing .hp-hero__title {
+    font-size: clamp(2.15rem, 9.5vw, 2.65rem);
   }
 }
 
