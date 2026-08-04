@@ -1,4 +1,4 @@
-/* SkyPress カスタムJSにこの内容だけ貼る（?v= を更新でキャッシュ破棄） */
+/* SkyPress カスタムJSにこの内容だけ貼る（ハードリロードで更新確認。?v= はむやみに上げない） */
 (function () {
   /* /test/ は検索除外 */
   if (/^\/test\/?$/.test(location.pathname)) {
@@ -11,8 +11,13 @@
     meta.content = "noindex, nofollow";
   }
 
-  var s = document.createElement("script");
-  s.src = "https://knskyj.github.io/housingplaza-assets/hp/hp-header.js?v=6";
-  s.defer = true;
-  document.head.appendChild(s);
+  function load(src) {
+    var s = document.createElement("script");
+    s.src = src;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  load("https://knskyj.github.io/housingplaza-assets/hp/hp-header.js?v=6");
+  load("https://knskyj.github.io/housingplaza-assets/hp/hp-hero.js?v=6");
 })();

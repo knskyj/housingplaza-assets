@@ -658,16 +658,14 @@ body:has(#housing .hp-header) .es-separate-container #primary {
   background: transparent !important;
 }
 
-/* 本番TOPを壊さない: 中央柱の戻しは .hp-header があるページだけ */
-#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper) {
-  max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  box-sizing: border-box;
-}
-
+/* 本番TOPを壊さない: 中央柱の戻しは .hp-header があるページだけ。
+ * main.js が section を .page-layout で包むため、ラッパー自体は全幅（余白なし）。
+ * テーマ直下の雑な段落などだけ柱幅に落とす。 */
+#housing:has(.hp-header) > .page-layout,
+#housing:has(.hp-header) > .navbar-modern-inner,
+#housing:has(.hp-header) > .navbar-show-modern-bg,
+#housing:has(.hp-header) > .navbar-toggler-clone,
+#housing:has(.hp-header) > .hp-hero,
 #housing:has(.hp-header) > .hp-fullbleed,
 #housing:has(.hp-header) > .hp-hero-standin {
   max-width: none;
@@ -676,6 +674,16 @@ body:has(#housing .hp-header) .es-separate-container #primary {
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
+  box-sizing: border-box;
+}
+
+#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
 }
 
 body:has(#housing .hp-header) .entry-content > p:empty,

@@ -1,0 +1,190 @@
+/* Housingplaza hero — Crafto/Swiper なし。#housing スコープ */
+
+#housing .hp-hero {
+  --hp-hero-fade: 2s;
+  --hp-hero-zoom: 5s;
+  --hp-hero-scale-from: 1.14;
+  --hp-hero-veil: rgba(5, 6, 10, 0.28);
+  --hp-hero-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  position: relative;
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #0a0f18;
+  color: #fff;
+  font-family: var(--hp-hero-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+#housing .page-layout > .hp-hero {
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#housing .hp-hero__viewport {
+  position: relative;
+  width: 100%;
+  min-height: inherit;
+  height: 100%;
+}
+
+#housing .hp-hero__slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+#housing .hp-hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity var(--hp-hero-fade) ease;
+  pointer-events: none;
+}
+
+#housing .hp-hero__slide.is-active {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+#housing .hp-hero__slide.is-leaving {
+  opacity: 0;
+  z-index: 2;
+}
+
+#housing .hp-hero__media {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(var(--hp-hero-scale-from));
+  will-change: transform;
+}
+
+/* ズームアウト中 */
+#housing .hp-hero__slide.is-active:not(.is-settled) .hp-hero__media {
+  animation: hp-hero-zoom-out var(--hp-hero-zoom) ease-out forwards;
+}
+
+/* 退場中・完了後は scale(1) を保持（切替でズームが戻らないように） */
+#housing .hp-hero__slide.is-leaving .hp-hero__media,
+#housing .hp-hero__slide.is-settled .hp-hero__media {
+  animation: none;
+  transform: scale(1);
+}
+
+@keyframes hp-hero-zoom-out {
+  from {
+    transform: scale(var(--hp-hero-scale-from));
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+#housing .hp-hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--hp-hero-veil);
+  pointer-events: none;
+}
+
+#housing .hp-hero__copy {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--hp-header-h, 76px) + 1.5rem) 1.5rem 3rem;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+#housing .hp-hero__copy-inner {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  text-align: left;
+  animation: hp-hero-copy-in 1s ease-out 0.15s both;
+}
+
+#housing .hp-hero__title {
+  margin: 0 0 0.55rem;
+  color: #fff;
+  font-size: clamp(1.75rem, 4.2vw, 2.85rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+}
+
+#housing .hp-hero__br-sm {
+  display: none;
+}
+
+@media (max-width: 575px) {
+  #housing .hp-hero__br-sm {
+    display: inline;
+  }
+}
+
+#housing .hp-hero__lead {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
+@keyframes hp-hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 767px) {
+  #housing .hp-hero {
+    min-height: 700px;
+    min-height: 100svh;
+  }
+}
+
+@media (max-width: 575px) {
+  #housing .hp-hero {
+    min-height: 700px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #housing .hp-hero {
+    --hp-hero-fade: 0.01ms;
+  }
+
+  #housing .hp-hero__media,
+  #housing .hp-hero__slide.is-active .hp-hero__media,
+  #housing .hp-hero__slide.is-leaving .hp-hero__media,
+  #housing .hp-hero__slide.is-settled .hp-hero__media {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  #housing .hp-hero__copy-inner {
+    animation: none !important;
+  }
+}
