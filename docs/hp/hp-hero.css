@@ -114,10 +114,11 @@
 }
 
 #housing .hp-hero__copy-inner {
-  width: min(1100px, 100%);
+  width: auto;
+  max-width: min(1100px, 100%);
   margin: 0;
   padding-left: 1rem;
-  text-align: left;
+  text-align: left !important;
   animation: hp-hero-copy-in 1s ease-out 0.15s both;
 }
 
@@ -128,6 +129,8 @@
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: 0.02em;
+  /* テーマ .entry-content h2 { text-align:center } を上書き */
+  text-align: left !important;
 }
 
 /* テーマ / Crafto の h2::after 区切り線をヒーロー内では消す */
@@ -154,6 +157,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   line-height: 1.5;
+  text-align: left !important;
 }
 
 @keyframes hp-hero-copy-in {
