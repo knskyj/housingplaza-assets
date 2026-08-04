@@ -11,7 +11,7 @@
   margin: 0 !important;
   /* Infcurion: padding: 150px var(--margin-side-pc) */
   padding: 150px var(--hp-margin-side, 12.25vw) !important;
-  background: #f7f7f7 !important;
+  background: #f6f6f6 !important;
   color: var(--hp-intro-ink);
   font-family: var(--hp-intro-font);
   -webkit-font-smoothing: antialiased;
