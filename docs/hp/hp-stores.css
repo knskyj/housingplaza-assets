@@ -209,7 +209,19 @@
   }
 
   #housing .hp-stores__grid {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  #housing .hp-stores__meta {
+    display: none;
+  }
+
+  #housing .hp-stores__body {
+    padding: 0.85rem 0.75rem 1rem;
+  }
+
+  #housing .hp-stores__name {
+    font-size: 0.9rem;
   }
 }
