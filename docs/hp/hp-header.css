@@ -219,7 +219,8 @@
   padding: 0 0.7rem;
   color: var(--hp-ink);
   font-family: inherit;
-  font-size: 0.95rem !important;
+  /* シンカ 14px に近い既存サイズ = 0.9rem（14.4px @16） */
+  font-size: 0.9rem !important;
   font-weight: 500 !important;
   letter-spacing: 0.04em;
   text-decoration: none;
@@ -916,7 +917,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__trigger,
   #housing .hp-header__link {
     padding: 0 0.7rem;
-    font-size: 0.95rem !important;
+    font-size: 0.9rem !important;
   }
 
   #housing .hp-header__trigger::after,
