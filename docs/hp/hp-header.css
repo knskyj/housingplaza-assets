@@ -15,7 +15,7 @@
   --hp-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   --hp-shadow: 0 24px 60px rgba(7, 38, 83, 0.14);
   /* メガタイトル列：全メガ共通の固定幅 */
-  --hp-mega-lead: 21rem;
+  --hp-mega-lead: 18rem;
 }
 
 #housing .hp-header {
@@ -921,7 +921,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 /* ~1000px: 余白を詰め、タイトル列も少し縮める（全メガ共通） */
 @media (max-width: 1100px) {
   #housing {
-    --hp-mega-lead: 18.5rem;
+    --hp-mega-lead: 16rem;
   }
 
   #housing .hp-header__panel-card {
