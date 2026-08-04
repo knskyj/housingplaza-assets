@@ -50,9 +50,9 @@
 }
 
 #housing .hp-panels__title {
-  margin: 0 0 1.5rem;
+  margin: 0 0 2.75rem;
   color: var(--hp-panels-ink);
-  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
   line-height: 1.45;
@@ -194,6 +194,10 @@
     gap: 2.25rem;
   }
 
+  #housing .hp-panels__title {
+    margin-bottom: 2rem;
+  }
+
   #housing .hp-panels__list {
     gap: 1rem;
   }
@@ -218,8 +222,8 @@
   }
 
   #housing .hp-panels__title {
-    margin-bottom: 1.15rem;
-    font-size: clamp(1.25rem, 5vw, 1.5rem);
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
   }
 
   #housing .hp-panels__list {
