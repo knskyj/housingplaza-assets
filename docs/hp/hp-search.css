@@ -138,8 +138,8 @@
 
 #housing .hp-search__card:hover .hp-search__cta,
 #housing .hp-search__card:focus-visible .hp-search__cta {
-  background: transparent;
-  color: #fff;
+  background: #fff;
+  color: var(--hp-search-navy);
   border-color: #fff;
 }
 
