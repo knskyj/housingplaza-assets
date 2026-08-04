@@ -12,6 +12,8 @@
   --hp-placeholder: #e8eef5;
   --hp-backdrop: rgba(5, 6, 10, 0.42);
   --hp-header-h: 76px;
+  /* 元ロゴ 292×50。少し小さく（旧 32px → 28px） */
+  --hp-logo-h: 28px;
   --hp-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   --hp-shadow: 0 24px 60px rgba(7, 38, 83, 0.14);
   /* メガタイトル列：全メガ共通の固定幅 */
@@ -133,9 +135,9 @@
   grid-column: 1;
   flex: 0 0 auto;
   position: relative;
-  /* 元ロゴ 292×50 基準（height 32 → width 186.88）で枠固定 */
-  width: calc(32px * 292 / 50);
-  height: 32px;
+  /* 元ロゴ 292×50 基準で枠固定 */
+  width: calc(var(--hp-logo-h) * 292 / 50);
+  height: var(--hp-logo-h);
   text-decoration: none;
   line-height: 0;
   box-sizing: border-box;
@@ -146,8 +148,8 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 32px !important;
-  width: calc(32px * 292 / 50) !important;
+  height: var(--hp-logo-h) !important;
+  width: calc(var(--hp-logo-h) * 292 / 50) !important;
   max-width: none !important;
   max-height: none !important;
   object-fit: contain;
