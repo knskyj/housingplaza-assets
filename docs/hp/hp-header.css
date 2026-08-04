@@ -153,6 +153,14 @@
   object-fit: contain;
   object-position: left center;
   display: block !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* いい生活 .site-content a:hover img { scale(1.1) } を打ち消し */
+#housing .hp-header__brand:hover .hp-header__logo,
+#housing .hp-header a.hp-header__brand:hover img {
+  transform: none !important;
 }
 
 #housing .hp-header__logo--dark {
@@ -352,7 +360,7 @@
 }
 
 #housing .hp-header__panel-visual:hover img {
-  transform: scale(1.04);
+  transform: scale(1.04) !important;
 }
 
 #housing .hp-header__store-grid {
