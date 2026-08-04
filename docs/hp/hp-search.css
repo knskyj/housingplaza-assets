@@ -112,10 +112,10 @@
 #housing .hp-search__name {
   margin: 0;
   color: inherit;
-  font-size: 1.0625rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
   font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.4;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
 }
 
 #housing .hp-search__cta {
@@ -190,9 +190,5 @@
   #housing .hp-search__icon {
     width: 2.75rem;
     height: 2.75rem;
-  }
-
-  #housing .hp-search__name {
-    font-size: 0.9rem;
   }
 }

@@ -127,10 +127,10 @@
 #housing .hp-panels__name {
   margin: 0;
   color: var(--hp-panels-navy);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  line-height: 1.4;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
 }
 
 #housing .hp-panels__arrow {
@@ -198,9 +198,5 @@
 
   #housing .hp-panels__body {
     padding: 0.85rem 0.9rem;
-  }
-
-  #housing .hp-panels__name {
-    font-size: 0.9rem;
   }
 }
