@@ -498,7 +498,8 @@
 }
 
 #housing .hp-header__cta {
-  display: inline-flex;
+  /* display は PC（≥1100px）のみ。このブロックで inline-flex するとモバイルに出る */
+  display: none;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
@@ -517,27 +518,27 @@
   text-decoration: none !important;
   white-space: nowrap;
   box-sizing: border-box;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-/* ホバー: 塗りなし＋枠線 */
+/* ホバーも塗りつぶしのまま（枠線ボタンにしない） */
 #housing .hp-header__cta:hover {
-  background: transparent;
-  border-color: var(--hp-navy);
-  color: var(--hp-navy) !important;
+  background: var(--hp-navy-hover);
+  border-color: var(--hp-navy-hover);
+  color: var(--hp-white) !important;
 }
 
-/* ヒーロー上も塗りネイビーのまま。ホバーは白枠 */
-#housing .hp-header--overlay:not(.is-scrolled):not(.is-open) .hp-header__cta {
+/* ヒーロー上・スクロール後とも塗りネイビー固定（枠線化しない） */
+#housing .hp-header--overlay .hp-header__cta,
+#housing .hp-header--overlay .hp-header__cta:hover {
   background: var(--hp-navy);
   border-color: var(--hp-navy);
   color: var(--hp-white) !important;
 }
 
-#housing .hp-header--overlay:not(.is-scrolled):not(.is-open) .hp-header__cta:hover {
-  background: transparent;
-  border-color: var(--hp-white);
-  color: var(--hp-white) !important;
+#housing .hp-header--overlay .hp-header__cta:hover {
+  background: var(--hp-navy-hover);
+  border-color: var(--hp-navy-hover);
 }
 
 #housing .hp-header__burger {
@@ -863,26 +864,8 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 }
 
 #housing .hp-header__drawer-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2.25rem;
-  height: 48px;
-  min-height: 48px;
-  padding: 0 1.25rem 1px;
-  border-radius: 5px;
-  background: var(--hp-navy);
-  color: var(--hp-white) !important;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: normal;
-  line-height: 1;
-  text-decoration: none !important;
-  box-sizing: border-box;
-}
-
-#housing .hp-header__drawer-cta:hover {
-  background: var(--hp-navy-hover);
+  /* お問い合わせボタンは PC ヘッダーのみ。ドロワーでは出さない */
+  display: none !important;
 }
 
 @media (min-width: 1100px) {
