@@ -49,7 +49,8 @@
 #housing .hp-header menu {
   list-style: none !important;
   margin: 0 !important;
-  padding: 0 !important;
+  /* padding は各コンポーネント側で指定（!important だとメガ/ドロワーの余白が潰れる） */
+  padding: 0;
 }
 #housing .hp-header li {
   margin: 0;
@@ -64,7 +65,7 @@
 #housing .hp-header button {
   appearance: none;
   -webkit-appearance: none;
-  font: inherit;
+  font-family: inherit;
   color: inherit;
 }
 #housing .hp-header img {
@@ -215,9 +216,9 @@
   min-height: var(--hp-header-h);
   padding: 0 0.7rem;
   color: var(--hp-ink);
-  font: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-family: inherit;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
   letter-spacing: 0.04em;
   text-decoration: none;
   line-height: 1.2;
@@ -307,7 +308,7 @@
 
 #housing .hp-header__panel-card--with-visual .hp-header__cols {
   /* 物件検索: card 2.25rem + cols 0.2rem 上、下は card 2.4rem */
-  padding: calc(2.25rem + 0.2rem) 2.5rem 2.4rem 1rem;
+  padding: calc(2.25rem + 0.2rem) 2.5rem 2.4rem 1rem !important;
   margin-left: 3rem;
 }
 
@@ -451,7 +452,7 @@
   row-gap: 0.15rem;
   list-style: none;
   margin: 0;
-  padding: 0.2rem 0 0 1rem;
+  padding: 0.2rem 0 0 1rem !important;
 }
 
 #housing .hp-header__cols--3 {
@@ -793,8 +794,8 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   column-gap: 1rem;
   row-gap: 0;
   list-style: none;
-  margin: 0 0 0.85rem;
-  padding: 0.2rem 0 0.45rem 1.35rem;
+  margin: 0 0 0.85rem !important;
+  padding: 0.2rem 0 0.45rem 1.35rem !important;
   border-top: 0;
 }
 
@@ -876,7 +877,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__trigger,
   #housing .hp-header__link {
     padding: 0 0.55rem;
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
   }
 
   #housing .hp-header__trigger::after,
@@ -900,7 +901,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__trigger,
   #housing .hp-header__link {
     padding: 0 0.7rem;
-    font-size: 0.95rem;
+    font-size: 0.95rem !important;
   }
 
   #housing .hp-header__trigger::after,
@@ -938,7 +939,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   }
 
   #housing .hp-header__panel-card--with-visual .hp-header__cols {
-    padding: calc(1.75rem + 0.2rem) 1.75rem 1.9rem 1rem;
+    padding: calc(1.75rem + 0.2rem) 1.75rem 1.9rem 1rem !important;
     margin-left: 2.25rem;
   }
 
