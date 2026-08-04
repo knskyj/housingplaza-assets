@@ -91,7 +91,7 @@
   text-decoration: none !important;
   box-shadow: none !important;
   border: 0 !important;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 #housing .hp-intro__card:hover,
