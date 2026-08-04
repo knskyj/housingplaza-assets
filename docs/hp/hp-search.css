@@ -1,0 +1,200 @@
+/* Housingplaza search — 賃貸物件検索。#housing スコープ・Crafto なし */
+
+#housing .hp-search {
+  --hp-search-navy: #072653;
+  --hp-search-ink: #151515;
+  --hp-search-muted: #3d3d3d;
+  --hp-search-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  position: relative;
+  z-index: 1;
+  margin: 0 !important;
+  padding: 150px var(--hp-margin-side, 12.25vw) !important;
+  background: #f7f7f7 !important;
+  color: var(--hp-search-ink);
+  font-family: var(--hp-search-font);
+  -webkit-font-smoothing: antialiased;
+  border: 0 !important;
+}
+
+#housing .hp-search *,
+#housing .hp-search *::before,
+#housing .hp-search *::after {
+  box-sizing: border-box;
+}
+
+#housing .hp-search__inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+#housing .hp-search__en {
+  margin: 0 0 0.5rem;
+  color: var(--hp-search-navy);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-align: left !important;
+}
+
+#housing .hp-search__title {
+  margin: 0 0 2.75rem;
+  color: var(--hp-search-ink);
+  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  text-align: left !important;
+}
+
+#housing .hp-search__title::before,
+#housing .hp-search__title::after {
+  content: none !important;
+  display: none !important;
+}
+
+#housing .hp-search__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#housing .hp-search__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  height: 100%;
+  margin: 0;
+  padding: 1.75rem 1.4rem 1.6rem;
+  overflow: hidden;
+  background: #fff !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  border-radius: 4px;
+}
+
+#housing .hp-search__card:hover,
+#housing .hp-search__card:focus-visible {
+  outline: none;
+}
+
+#housing .hp-search__icon {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--hp-search-navy);
+}
+
+#housing .hp-search__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+#housing .hp-search__name {
+  margin: 0;
+  color: var(--hp-search-navy);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+#housing .hp-search__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: auto;
+  color: var(--hp-search-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+#housing .hp-search__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border: 1px solid var(--hp-search-navy);
+  border-radius: 50%;
+  color: var(--hp-search-navy);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+#housing .hp-search__arrow svg {
+  width: 0.7rem;
+  height: 0.7rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#housing .hp-search__card:hover .hp-search__arrow,
+#housing .hp-search__card:focus-visible .hp-search__arrow {
+  background: var(--hp-search-navy);
+  color: #fff;
+}
+
+@media (max-width: 1099px) {
+  #housing .hp-search {
+    padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
+  }
+
+  #housing .hp-search__title {
+    margin-bottom: 2rem;
+  }
+
+  #housing .hp-search__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #housing .hp-search {
+    padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
+  }
+
+  #housing .hp-search__en {
+    font-size: 1rem;
+  }
+
+  #housing .hp-search__title {
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
+  }
+
+  #housing .hp-search__grid {
+    gap: 0.75rem;
+  }
+
+  #housing .hp-search__card {
+    padding: 1.25rem 1rem 1.15rem;
+    gap: 0.85rem;
+  }
+
+  #housing .hp-search__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  #housing .hp-search__name {
+    font-size: 0.9rem;
+  }
+}
