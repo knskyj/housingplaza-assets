@@ -157,12 +157,6 @@
   transition: none !important;
 }
 
-/* いい生活 .site-content a:hover img { scale(1.1) } を打ち消し */
-#housing .hp-header__brand:hover .hp-header__logo,
-#housing .hp-header a.hp-header__brand:hover img {
-  transform: none !important;
-}
-
 #housing .hp-header__logo--dark {
   display: none !important;
 }
@@ -587,6 +581,11 @@
  */
 
 /* --- A: #housing ページ共通（本番TOPの左右余白対策） --- */
+
+/* いい生活 .site-content a:hover img { scale(1.1) } をサイト全体で無効化 */
+.site-content a:hover img {
+  transform: none !important;
+}
 html:has(#housing),
 html.hp-header-active {
   overflow-x: clip;
