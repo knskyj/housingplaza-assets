@@ -69,10 +69,10 @@
   text-align: left !important;
 }
 
-/* 4 cards — 会社紹介 + 沿線 */
+/* 3 cards — Infcurion About の並び */
 #housing .hp-intro__cards {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
   margin: 0;
   padding: 0;
@@ -210,7 +210,6 @@
   }
 
   #housing .hp-intro__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
 
