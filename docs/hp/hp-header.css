@@ -682,6 +682,8 @@ body:has(#housing .hp-header) .es-separate-container #primary {
 #housing:has(.hp-header) > .navbar-show-modern-bg,
 #housing:has(.hp-header) > .navbar-toggler-clone,
 #housing:has(.hp-header) > .hp-hero,
+#housing:has(.hp-header) > .hp-topics,
+#housing:has(.hp-header) > .hp-intro,
 #housing:has(.hp-header) > .hp-fullbleed,
 #housing:has(.hp-header) > .hp-hero-standin {
   max-width: none;
@@ -693,7 +695,8 @@ body:has(#housing .hp-header) .es-separate-container #primary {
   box-sizing: border-box;
 }
 
-#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
+/* 旧 Crafto section など: 中央柱。hp-topics / hp-intro は全幅（上のルール） */
+#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-topics):not(.hp-intro):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
   max-width: 1240px;
   margin-left: auto;
   margin-right: auto;
