@@ -96,8 +96,8 @@
 
 #housing .hp-search__icon {
   display: block;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 3.125rem; /* ~50px, matches original icon-extra-large */
+  height: 3.125rem;
   color: inherit;
   transition: color 0.35s ease;
 }
@@ -188,8 +188,8 @@
   }
 
   #housing .hp-search__icon {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   #housing .hp-search__name {
