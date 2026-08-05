@@ -31,6 +31,38 @@ body:has(#housing) {
   --hp-header-margin-side: clamp(1.5rem, 4vw, 3.5rem);
 }
 
+/* Infcurion Insight 風：外部リンク右アイコン */
+#housing a.hp-ext {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.4em;
+}
+
+#housing .hp-ext__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: -0.1em;
+  border: 1px solid currentColor;
+  box-sizing: border-box;
+  opacity: 0.85;
+}
+
+#housing .hp-ext__icon::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  width: 140%;
+  height: 140%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(35%, -35%);
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+
 #housing .hp-header {
   position: relative;
   z-index: 99990;

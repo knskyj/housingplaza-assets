@@ -178,6 +178,13 @@
   stroke-linejoin: round;
 }
 
+#housing .hp-panels__arrow--ext .hp-ext__icon {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0;
+  opacity: 1;
+}
+
 #housing .hp-panels__card:hover .hp-panels__arrow,
 #housing .hp-panels__card:focus-visible .hp-panels__arrow {
   background: var(--hp-panels-navy);
