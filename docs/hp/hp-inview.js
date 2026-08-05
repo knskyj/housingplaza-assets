@@ -77,6 +77,9 @@
       ".hp-news__en",
       ".hp-news__title",
       ".hp-news__more",
+      ".hp-recruit__en",
+      ".hp-recruit__title",
+      ".hp-recruit__card",
     ].forEach(function (sel) {
       root.querySelectorAll(sel).forEach(wireFade);
     });

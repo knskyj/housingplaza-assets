@@ -1,4 +1,4 @@
-/* Housingplaza panels — 解約手続 / 最新情報。intro カード同形・Crafto なし */
+/* Housingplaza panels — 解約手続（全幅）。intro カード同形・Crafto なし */
 
 #housing .hp-panels {
   --hp-panels-navy: #072653;
@@ -23,19 +23,11 @@
 }
 
 #housing .hp-panels__inner {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2.5rem 3rem;
+  display: block;
   width: 100%;
   max-width: none;
   margin: 0;
   padding: 0;
-}
-
-#housing .hp-panels__col {
-  margin: 0;
-  padding: 0;
-  min-width: 0;
 }
 
 #housing .hp-panels__en {
@@ -148,7 +140,7 @@
   margin: 0;
   min-width: 0;
   color: var(--hp-panels-ink);
-  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  font-size: clamp(0.97rem, 1.3vw, 1.09rem);
   font-weight: 600;
   letter-spacing: 0.06em;
   line-height: 1.35;
@@ -163,7 +155,6 @@
   margin-left: 0.22em;
   margin-top: -0.08em;
   vertical-align: middle;
-  /* .hp-ext の flex 化を打ち消し、タイトル行で右に飛ばないようにする */
   flex: none;
 }
 
@@ -198,10 +189,6 @@
     padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
   }
 
-  #housing .hp-panels__inner {
-    gap: 2.25rem;
-  }
-
   #housing .hp-panels__title {
     margin-bottom: 2rem;
   }
@@ -218,11 +205,6 @@
 @media (max-width: 767px) {
   #housing .hp-panels {
     padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
-  }
-
-  #housing .hp-panels__inner {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
   }
 
   #housing .hp-panels__en {
