@@ -204,7 +204,7 @@
 
 #housing .hp-footer__nav {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem 1.5rem;
   margin: 0;
   padding: 0;
@@ -225,6 +225,10 @@
   letter-spacing: 0.06em;
   line-height: 1.4;
   text-align: left !important;
+}
+
+#housing .hp-footer__col-title--stacked {
+  margin-top: 1.75rem;
 }
 
 #housing .hp-footer__col-title::before,
