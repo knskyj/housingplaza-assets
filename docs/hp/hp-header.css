@@ -828,6 +828,25 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   }
 }
 
+/* ロゴ／各メニュー行：その場で下から出現（overflow クリップ） */
+@keyframes hp-reveal-in {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hp-reveal-out {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -110%, 0);
+  }
+}
+
 #housing .hp-header__drawer {
   position: fixed;
   inset: 0;
@@ -840,7 +859,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 }
 
 #housing .hp-header.is-open .hp-header__drawer {
-  animation: hp-drawer-in 0.5s ease-out forwards;
+  animation: hp-drawer-in 0.6s ease-out forwards;
 }
 
 #housing .hp-header.is-drawer-closing .hp-header__drawer {
@@ -863,7 +882,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s linear, visibility 0.3s linear, background-color 0.2s ease;
+  transition: opacity 0.3s linear, visibility 0.3s linear;
 }
 
 /* モバイルドロワー時: ブランド色フルフェード（Infcurion の緑相当 → navy） */
@@ -898,10 +917,69 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   box-sizing: border-box;
 }
 
-/* ドロワー項目はパネルと一緒に見える（右スライドスタガーは使わない） */
-#housing .hp-header__drawer-inner > * {
-  opacity: 1;
-  transform: none;
+/* クリップ枠（ロゴ・各メニュー行） */
+#housing .hp-header__brand {
+  overflow: hidden;
+}
+
+#housing .hp-header__brand > .hp-header__reveal-clip,
+#housing .hp-header__brand .hp-header__reveal {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+}
+
+#housing .hp-header__reveal-clip {
+  overflow: hidden;
+  display: block;
+}
+
+#housing .hp-header__reveal {
+  display: block;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+#housing .hp-header__drawer-reveal {
+  display: block;
+}
+
+/* 開く: パネル開始から少し遅れて下から出現 */
+#housing .hp-header.is-open .hp-header__brand .hp-header__reveal {
+  animation: hp-reveal-in 0.55s ease-out 0.28s both;
+}
+
+#housing .hp-header.is-open .hp-header__drawer-reveal .hp-header__reveal {
+  animation: hp-reveal-in 0.55s ease-out both;
+}
+
+#housing .hp-header.is-open .hp-header__drawer-reveal:nth-child(1) .hp-header__reveal {
+  animation-delay: 0.28s;
+}
+#housing .hp-header.is-open .hp-header__drawer-reveal:nth-child(2) .hp-header__reveal {
+  animation-delay: 0.32s;
+}
+#housing .hp-header.is-open .hp-header__drawer-reveal:nth-child(3) .hp-header__reveal {
+  animation-delay: 0.36s;
+}
+#housing .hp-header.is-open .hp-header__drawer-reveal:nth-child(4) .hp-header__reveal {
+  animation-delay: 0.4s;
+}
+#housing .hp-header.is-open .hp-header__drawer-reveal:nth-child(5) .hp-header__reveal {
+  animation-delay: 0.44s;
+}
+#housing .hp-header.is-open .hp-header__drawer-reveal:nth-child(6) .hp-header__reveal {
+  animation-delay: 0.48s;
+}
+#housing .hp-header.is-open .hp-header__drawer-reveal:nth-child(n + 7) .hp-header__reveal {
+  animation-delay: 0.52s;
+}
+
+/* 閉じる: その場で上へ抜ける（パネルと連動） */
+#housing .hp-header.is-drawer-closing .hp-header__brand .hp-header__reveal,
+#housing .hp-header.is-drawer-closing .hp-header__drawer-reveal .hp-header__reveal {
+  animation: hp-reveal-out 0.45s ease-out both;
 }
 
 /* アコーディオン開閉 */

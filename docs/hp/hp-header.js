@@ -6,7 +6,7 @@
   "use strict";
 
   var FADE_MS = 300;
-  var DRAWER_MS = 500;
+  var DRAWER_MS = 600;
 
   function ready(fn) {
     if (document.readyState === "loading") {
@@ -46,12 +46,47 @@
     var bar = root.querySelector(".hp-header__bar");
     var burger = root.querySelector("[data-hp-burger]");
     var drawer = root.querySelector("[data-hp-drawer]");
+    var drawerInner = drawer && drawer.querySelector(".hp-header__drawer-inner");
+    var brand = root.querySelector(".hp-header__brand");
     var backdrop = root.querySelector("[data-hp-backdrop]");
     var mq = window.matchMedia("(min-width: 1100px)");
     var backdropHideTimer = null;
     var drawerHideTimer = null;
     var navLeaveTimer = null;
     var backdropShowRaf = null;
+
+    /* Infcurion: overflow クリップ内で下から出現させるラッパー */
+    function wrapReveal(host) {
+      if (!host || host.querySelector(".hp-header__reveal-clip")) return;
+      var clip = document.createElement("div");
+      clip.className = "hp-header__reveal-clip";
+      var reveal = document.createElement("div");
+      reveal.className = "hp-header__reveal";
+      while (host.firstChild) reveal.appendChild(host.firstChild);
+      clip.appendChild(reveal);
+      host.appendChild(clip);
+    }
+
+    if (brand) wrapReveal(brand);
+    if (drawerInner) {
+      var kids = Array.prototype.slice.call(drawerInner.children);
+      for (var wi = 0; wi < kids.length; wi++) {
+        var clipHost = document.createElement("div");
+        clipHost.className = "hp-header__drawer-reveal";
+        drawerInner.insertBefore(clipHost, kids[wi]);
+        clipHost.appendChild(kids[wi]);
+        wrapReveal(clipHost);
+      }
+    }
+
+    function restartReveals() {
+      var nodes = root.querySelectorAll(".hp-header__reveal");
+      for (var i = 0; i < nodes.length; i++) {
+        nodes[i].style.animation = "none";
+        void nodes[i].offsetWidth;
+        nodes[i].style.animation = "";
+      }
+    }
 
     function isDrawerActive() {
       return (
@@ -277,6 +312,7 @@
         /* アニメ再起動のため一度リフロー */
         void drawer.offsetWidth;
       }
+      restartReveals();
       root.classList.add("is-open");
       root.classList.remove("is-header-hidden");
       if (burger) {
