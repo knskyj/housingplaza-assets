@@ -52,6 +52,11 @@
   white-space: nowrap;
 }
 
+/* PC は1行。SP は読点後で改行（孤児防止） */
+#housing .hp-intro__title br {
+  display: none;
+}
+
 #housing .hp-intro__title::before,
 #housing .hp-intro__title::after {
   content: none !important;
@@ -204,6 +209,10 @@
   #housing .hp-intro__title {
     margin-bottom: 1.35rem;
     white-space: normal;
+  }
+
+  #housing .hp-intro__title br {
+    display: inline;
   }
 
   #housing .hp-intro__body {
