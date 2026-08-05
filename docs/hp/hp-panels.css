@@ -41,7 +41,7 @@
 }
 
 #housing .hp-panels__title {
-  margin: 0 0 2.75rem;
+  margin: 0 0 0.85rem;
   color: var(--hp-panels-ink);
   font-size: clamp(1.85rem, 3.8vw, 2.75rem);
   font-weight: 600;
@@ -54,6 +54,17 @@
 #housing .hp-panels__title::after {
   content: none !important;
   display: none !important;
+}
+
+#housing .hp-panels__desc {
+  margin: 0 0 2.25rem;
+  max-width: 40em;
+  color: var(--hp-panels-ink);
+  font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.85;
+  text-align: left !important;
 }
 
 #housing .hp-panels__actions {
@@ -191,8 +202,14 @@
   }
 
   #housing .hp-panels__title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.65rem;
     font-size: clamp(1.45rem, 6.5vw, 1.85rem);
+  }
+
+  #housing .hp-panels__desc {
+    margin-bottom: 1.5rem;
+    font-size: 0.92rem;
+    line-height: 1.75;
   }
 
   #housing .hp-panels__actions {
