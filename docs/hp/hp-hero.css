@@ -77,6 +77,12 @@
   animation: hp-hero-zoom-out var(--hp-hero-zoom) ease-out forwards;
 }
 
+/* TOP 入場前はズームを止め、入場と同時の跳ねを防ぐ */
+#housing.hp-await-enter:not(.hp-is-entered) .hp-hero__slide.is-active .hp-hero__media {
+  animation: none !important;
+  transform: scale(var(--hp-hero-scale-from));
+}
+
 /* 退場中・完了後は scale(1) を保持（切替でズームが戻らないように） */
 #housing .hp-hero__slide.is-leaving .hp-hero__media,
 #housing .hp-hero__slide.is-settled .hp-hero__media {

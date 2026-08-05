@@ -101,7 +101,11 @@
     function start() {
       if (started) return;
       started = true;
-      restartZoom(slides[index]);
+      /* 入場待ちだった場合は restartZoom しない（入場瞬間の背景跳ね防止）。
+         CSS が .hp-is-entered でズームを開始する */
+      if (!waitEnter) {
+        restartZoom(slides[index]);
+      }
       schedule();
     }
 

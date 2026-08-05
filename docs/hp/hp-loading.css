@@ -1,6 +1,11 @@
 /* Housingplaza TOP loading + first-view entrance — #housing スコープ・Crafto なし
    中身スロット（.hp-loading__slot）差し替えでロゴ等に変更可 */
 
+/* スクロールバー出現による横ズレ防止 */
+html:has(#housing[data-hp-top]) {
+  scrollbar-gutter: stable;
+}
+
 html.hp-preload {
   overflow: hidden;
 }
