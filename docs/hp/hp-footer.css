@@ -87,13 +87,13 @@
 }
 
 #housing .hp-footer__actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: 0.85rem;
   margin: 0;
   padding: 0;
+  min-width: min(100%, 28rem);
 }
 
 #housing .hp-footer__btn {
@@ -102,11 +102,12 @@
   justify-content: center;
   gap: 0.65rem;
   margin: 0;
+  width: 100%;
   min-height: 56px;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   color: #fff !important;
   font-family: inherit;
-  font-size: 1.05rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -335,6 +336,8 @@
 
   #housing .hp-footer__actions {
     justify-content: flex-start;
+    width: 100%;
+    min-width: 0;
   }
 
   #housing .hp-footer__main {
