@@ -129,7 +129,8 @@ html.hp-preload .hp-loading.is-active,
 #housing.hp-await-enter.hp-is-entered .hp-header {
   transform: translate3d(0, 0, 0);
   visibility: visible;
-  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  /* ヒーロー文字のあと */
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.55s;
 }
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__title,
@@ -145,12 +146,12 @@ html.hp-preload .hp-loading.is-active,
   visibility: visible;
   transform: translate3d(0, 0, 0);
   transition:
-    opacity 1s ease,
-    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #housing.hp-await-enter.hp-is-entered .hp-hero__lead {
-  transition-delay: 0.15s;
+  transition-delay: 0.12s;
 }
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-topics {
@@ -163,9 +164,10 @@ html.hp-preload .hp-loading.is-active,
   opacity: 1;
   visibility: visible;
   transform: translate3d(0, 0, 0);
+  /* ヒーロー文字のあと（ヘッダーと同タイミング） */
   transition:
-    opacity 1s ease 0.25s,
-    transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s;
+    opacity 0.9s ease 0.55s,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s;
 }
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__scroll {
@@ -180,8 +182,8 @@ html.hp-preload .hp-loading.is-active,
   visibility: visible;
   transform: translate3d(0, 0, 0);
   transition:
-    opacity 0.8s ease 0.55s,
-    transform 0.7s ease 0.55s;
+    opacity 0.75s ease 0.95s,
+    transform 0.7s ease 0.95s;
   pointer-events: auto;
 }
 
