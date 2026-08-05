@@ -9,9 +9,9 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  min-height: min(68vh, 34rem);
+  min-height: min(48vh, 24rem);
   margin: 0 !important;
-  padding: 5.5rem var(--hp-margin-side, 12.25vw) !important;
+  padding: 4rem var(--hp-margin-side, 12.25vw) !important;
   overflow: hidden;
   background: #0a1524 !important;
   color: #fff;
@@ -159,15 +159,15 @@
 
 @media (max-width: 1099px) {
   #housing .hp-recruit {
-    min-height: min(58vh, 28rem);
-    padding: 4.5rem var(--hp-margin-side, 8vw) !important;
+    min-height: min(42vh, 20rem);
+    padding: 3.5rem var(--hp-margin-side, 8vw) !important;
   }
 }
 
 @media (max-width: 767px) {
   #housing .hp-recruit {
-    min-height: min(52vh, 24rem);
-    padding: 3.75rem var(--hp-margin-side, 8vw) !important;
+    min-height: min(38vh, 18rem);
+    padding: 3rem var(--hp-margin-side, 8vw) !important;
   }
 
   #housing .hp-recruit__en {
