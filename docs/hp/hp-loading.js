@@ -75,14 +75,16 @@
     loading.classList.remove("is-active", "is-leaving");
   }
 
-  /** 入場アニメ再生（ローディング有無どちらからも呼ぶ） */
+  /** 入場アニメ再生（ローディング完了後） */
   function playEntrance(root, opts) {
     var shouldMark = !opts || opts.mark !== false;
     root.classList.add("hp-await-enter");
-    root.classList.remove("hp-is-loading", "hp-is-entered", "hp-end-loading");
+    root.classList.remove("hp-is-loading", "hp-end-loading");
+    /* すでに隠し状態なら外さず、そのまま入場へ */
+    root.classList.remove("hp-is-entered");
     requestAnimationFrame(function () {
-      root.classList.add("hp-is-entered");
       requestAnimationFrame(function () {
+        root.classList.add("hp-is-entered");
         unlockScroll();
         if (shouldMark) markSession();
         window.dispatchEvent(new CustomEvent("hp:entered"));
@@ -96,10 +98,11 @@
     unlockScroll();
     root.classList.add("hp-await-enter");
     root.classList.remove("hp-is-entered", "hp-is-loading", "hp-end-loading");
-    /* 隠し状態を1フレーム描画してから入場 */
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        playEntrance(root, { mark: true });
+        root.classList.add("hp-is-entered");
+        markSession();
+        window.dispatchEvent(new CustomEvent("hp:entered"));
       });
     });
   }

@@ -121,22 +121,27 @@ html.hp-preload #housing .hp-loading,
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-header {
   transform: translate3d(0, -120px, 0);
+  visibility: hidden;
+  pointer-events: none;
 }
 
 #housing.hp-await-enter.hp-is-entered .hp-header {
   transform: translate3d(0, 0, 0);
+  visibility: visible;
   transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__title,
 #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__lead {
   opacity: 0;
+  visibility: hidden;
   transform: translate3d(0, 28px, 0);
 }
 
 #housing.hp-await-enter.hp-is-entered .hp-hero__title,
 #housing.hp-await-enter.hp-is-entered .hp-hero__lead {
   opacity: 1;
+  visibility: visible;
   transform: translate3d(0, 0, 0);
   transition:
     opacity 1s ease,
@@ -149,11 +154,13 @@ html.hp-preload #housing .hp-loading,
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-topics {
   opacity: 0;
+  visibility: hidden;
   transform: translate3d(0, 28px, 0);
 }
 
 #housing.hp-await-enter.hp-is-entered .hp-topics {
   opacity: 1;
+  visibility: visible;
   transform: translate3d(0, 0, 0);
   transition:
     opacity 1s ease 0.25s,
@@ -162,12 +169,14 @@ html.hp-preload #housing .hp-loading,
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__scroll {
   opacity: 0;
+  visibility: hidden;
   transform: translate3d(0, 12px, 0);
   pointer-events: none;
 }
 
 #housing.hp-await-enter.hp-is-entered .hp-hero__scroll {
   opacity: 1;
+  visibility: visible;
   transform: translate3d(0, 0, 0);
   transition:
     opacity 0.8s ease 0.55s,
