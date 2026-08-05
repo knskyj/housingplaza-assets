@@ -222,6 +222,12 @@
   #housing .hp-stores__meta li {
     font-size: 0.75rem;
   }
+
+  #housing .hp-stores__icon {
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-top: 0.12rem;
+  }
 }
 
 /* 525px以下: 1列・左画像／右に店名・電話・営業時間（intro と同境界） */
@@ -269,5 +275,11 @@
 
   #housing .hp-stores__meta li {
     font-size: 0.75rem;
+  }
+
+  #housing .hp-stores__icon {
+    width: 0.65rem;
+    height: 0.65rem;
+    margin-top: 0.1rem;
   }
 }
