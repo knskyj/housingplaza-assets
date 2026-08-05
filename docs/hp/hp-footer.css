@@ -30,7 +30,6 @@
   padding: 5rem var(--hp-margin-side, 12.25vw) !important;
   background: var(--hp-footer-navy) !important;
   border: 0 !important;
-  border-bottom: 1px solid var(--hp-footer-line) !important;
 }
 
 #housing .hp-footer__contact-inner {
@@ -101,28 +100,30 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  gap: 0.65rem;
   margin: 0;
-  padding: 0.95rem 1.55rem;
+  min-height: 56px;
+  padding: 0 2rem;
   color: #fff !important;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  line-height: 1.3;
+  line-height: 1;
   text-decoration: none !important;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 999px;
+  border-radius: 5px;
   background: transparent !important;
   box-shadow: none !important;
+  box-sizing: border-box;
   transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
 
 #housing .hp-footer__btn svg {
   flex: 0 0 auto;
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1.2rem;
+  height: 1.2rem;
   stroke: currentColor;
   fill: none;
   stroke-width: 1.75;
@@ -364,7 +365,8 @@
 
   #housing .hp-footer__btn {
     width: 100%;
-    padding: 0.9rem 1.25rem;
+    min-height: 52px;
+    padding: 0 1.5rem;
   }
 
   #housing .hp-footer__main {
