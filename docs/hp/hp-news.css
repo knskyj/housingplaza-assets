@@ -2,9 +2,9 @@
 
 #housing .hp-news {
   --hp-news-navy: #072653;
-  --hp-news-ink: #151515;
-  --hp-news-muted: #6b6b6b;
-  --hp-news-line: rgba(21, 21, 21, 0.12);
+  --hp-news-ink: #222222;
+  --hp-news-muted: #7f7f7f;
+  --hp-news-line: rgba(34, 34, 34, 0.12);
   --hp-news-bg: #fafafa;
   --hp-news-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
@@ -39,23 +39,26 @@
   padding: 0;
 }
 
+/* stores / panels と同じ見出しサイズ */
 #housing .hp-news__en {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.5rem;
   color: var(--hp-news-navy);
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   line-height: 1.3;
-  text-transform: none;
+  text-transform: uppercase;
+  text-align: left !important;
 }
 
 #housing .hp-news__title {
   margin: 0;
   color: var(--hp-news-ink);
-  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
-  line-height: 1.4;
+  line-height: 1.45;
+  text-align: left !important;
 }
 
 #housing .hp-news__title::before,
@@ -81,12 +84,14 @@
   border-bottom: 1px solid var(--hp-news-line);
 }
 
+/* 日付・バッジ・タイトルを一列 */
 #housing .hp-news__item {
   display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 1.5rem;
   margin: 0;
-  padding: 1.35rem 0.15rem 1.35rem 0;
+  padding: 1.15rem 0.15rem 1.15rem 0;
   color: inherit;
   text-decoration: none !important;
   transition: opacity 0.25s ease;
@@ -98,56 +103,66 @@
   opacity: 0.72;
 }
 
-#housing .hp-news__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.65rem 1rem;
-}
-
-#housing .hp-news__meta time {
-  color: var(--hp-news-muted);
-  font-size: 0.8125rem;
+#housing .hp-news__item time {
+  flex: 0 0 auto;
+  color: var(--hp-news-ink);
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.06em;
-  line-height: 1.4;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 
+/* topics バッジと同型 */
 #housing .hp-news__badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.15rem 0.55rem;
-  border: 1px solid rgba(7, 38, 83, 0.35);
-  border-radius: 2px;
-  color: var(--hp-news-navy);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  line-height: 1.4;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 3px 12px;
+  border: 1px solid var(--hp-news-muted);
+  border-radius: 20px;
+  color: var(--hp-news-muted);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
   white-space: nowrap;
+  text-transform: uppercase;
 }
 
 #housing .hp-news__item-title {
+  flex: 1 1 auto;
+  min-width: 0;
   margin: 0;
   color: var(--hp-news-ink);
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 1.65;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #housing .hp-news__more {
   display: inline-flex;
   align-items: center;
   gap: 0.85rem;
-  margin: 1.75rem 0 0;
+  margin: 1.75rem 0 0 auto;
   color: var(--hp-news-ink);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-decoration: none !important;
   transition: opacity 0.25s ease;
+}
+
+#housing .hp-news__body {
+  display: flex;
+  flex-direction: column;
 }
 
 #housing .hp-news__more:hover,
@@ -190,11 +205,28 @@
     gap: 1.75rem;
   }
 
+  #housing .hp-news__title {
+    white-space: normal;
+  }
+
   #housing .hp-news__item {
-    padding: 1.15rem 0;
+    gap: 0.75rem 1rem;
+    padding: 1rem 0;
   }
 
   #housing .hp-news__item-title {
-    font-size: 0.9375rem;
+    flex: 1 1 100%;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 560px) {
+  /* 狭い画面は日付＋バッジの次行にタイトル */
+  #housing .hp-news__item {
+    flex-wrap: wrap;
   }
 }
