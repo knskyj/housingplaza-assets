@@ -371,7 +371,12 @@
     }
 
     function syncHeaderHide(y, pastHero, justCrossedDown, goingDown, goingUp) {
-      /* ヒーロー過ぎで下スクロール時に隠す／上スクロール・下部で出す（全幅共通） */
+      /*
+       * PC / モバイル共通:
+       * - ヒーロー内: 常時表示（透過・fixed）→ 隠さない
+       * - ヒーロー過ぎ + 下スクロール: 隠す
+       * - 上スクロール / ページ最下部: 白背景で表示（is-scrolled）
+       */
       if (
         root.classList.contains("is-open") ||
         root.classList.contains("is-mega-open")

@@ -160,13 +160,17 @@ body:has(#housing) {
 }
 
 #housing .hp-header--overlay .hp-header__bar {
-  position: absolute;
-  inset: 0 0 auto;
+  /* ヒーロー上：画面上端に固定＋透過（スクロールしても追従） */
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
   background: transparent;
   box-shadow: none;
 }
 
-/* ヒーローを過ぎたら白背景で固定 */
+/* ヒーロー過ぎ（またはメニュー開）：白背景で固定表示 */
 #housing .hp-header--overlay.is-scrolled .hp-header__bar,
 #housing .hp-header--overlay.is-open .hp-header__bar {
   position: fixed;
@@ -174,9 +178,9 @@ body:has(#housing) {
   box-shadow: 0 1px 0 var(--hp-line);
 }
 
-/* メガ開時（ヒーロー上）は透過のまま */
+/* メガ開時（ヒーロー上）も透過のまま固定 */
 #housing .hp-header--overlay.is-mega-open:not(.is-scrolled):not(.is-open) .hp-header__bar {
-  position: absolute;
+  position: fixed;
   background: transparent;
   box-shadow: none;
 }
