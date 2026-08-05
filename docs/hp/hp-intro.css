@@ -203,6 +203,7 @@
 
   #housing .hp-intro__title {
     margin-bottom: 1.35rem;
+    white-space: normal;
   }
 
   #housing .hp-intro__body {
