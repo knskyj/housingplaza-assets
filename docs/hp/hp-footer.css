@@ -118,7 +118,8 @@
   background: transparent !important;
   box-shadow: none !important;
   box-sizing: border-box;
-  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+  /* ホバー塗りは hp-inview.css（background-size） */
+  transition: color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
 
 #housing .hp-footer__btn svg {
@@ -141,18 +142,9 @@
 #housing .hp-footer__btn:hover,
 #housing .hp-footer__btn:focus-visible {
   outline: none;
-  background: #fff !important;
-  color: var(--hp-footer-navy) !important;
-  border-color: #fff;
-  transform: translateY(-1px);
 }
 
-#housing .hp-footer__btn--mail:hover,
-#housing .hp-footer__btn--mail:focus-visible {
-  background: transparent !important;
-  color: #fff !important;
-  border-color: rgba(255, 255, 255, 0.7);
-}
+/* mail ホバー塗りは hp-inview.css */
 
 /* —— MAIN / NAV —— */
 #housing .hp-footer__main {

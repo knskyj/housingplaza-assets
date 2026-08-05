@@ -1,0 +1,158 @@
+/**
+ * Housingplaza — shared inview (fade-up / stagger / shutter).
+ * Starts after hp:entered (or immediately if already entered / no gate).
+ * Auto-wires TOP sections under #housing[data-hp-top].
+ */
+(function () {
+  "use strict";
+
+  var ROOT_MARGIN = "-100px 0px";
+  var SELECTOR = "[data-hp-inview], [data-hp-shutter]";
+
+  function ready(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      fn();
+    }
+  }
+
+  function reduceMotion() {
+    return (
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
+  function mark(el) {
+    if (!el || el.classList.contains("is-in")) return;
+    el.classList.add("is-in");
+  }
+
+  function wireStagger(container) {
+    if (!container || container.getAttribute("data-hp-stagger-ready") === "1") {
+      return;
+    }
+    container.setAttribute("data-hp-stagger", "");
+    container.setAttribute("data-hp-stagger-ready", "1");
+    var kids = container.children;
+    for (var i = 0; i < kids.length; i++) {
+      var kid = kids[i];
+      kid.setAttribute("data-hp-inview", "");
+      kid.style.setProperty("--hp-stagger", String(i));
+    }
+  }
+
+  function wireShutter(node) {
+    if (!node || node.getAttribute("data-hp-shutter") != null) return;
+    node.setAttribute("data-hp-shutter", "");
+  }
+
+  function wireFade(node) {
+    if (!node || node.getAttribute("data-hp-inview") != null) return;
+    node.setAttribute("data-hp-inview", "");
+  }
+
+  function autoWireTop(root) {
+    if (!root || root.getAttribute("data-hp-inview-wired") === "1") return;
+    root.setAttribute("data-hp-inview-wired", "1");
+
+    [
+      ".hp-intro__brand",
+      ".hp-intro__title",
+      ".hp-intro__body",
+      ".hp-stores__en",
+      ".hp-stores__title",
+      ".hp-search__en",
+      ".hp-search__title",
+      ".hp-panels__en",
+      ".hp-panels__title",
+      ".hp-footer__en",
+      ".hp-footer__title",
+      ".hp-footer__hours",
+      ".hp-footer__actions",
+    ].forEach(function (sel) {
+      root.querySelectorAll(sel).forEach(wireFade);
+    });
+
+    [
+      ".hp-intro__cards",
+      ".hp-stores__grid",
+      ".hp-search__grid",
+      ".hp-panels__list",
+    ].forEach(function (sel) {
+      root.querySelectorAll(sel).forEach(wireStagger);
+    });
+
+    [
+      ".hp-intro__card-media",
+      ".hp-stores__media",
+      ".hp-panels__media",
+    ].forEach(function (sel) {
+      root.querySelectorAll(sel).forEach(wireShutter);
+    });
+  }
+
+  function observeAll(scope) {
+    var nodes = Array.prototype.slice.call(
+      (scope || document).querySelectorAll(SELECTOR)
+    );
+    if (!nodes.length) return;
+
+    if (reduceMotion() || !("IntersectionObserver" in window)) {
+      nodes.forEach(mark);
+      return;
+    }
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          mark(entry.target);
+          io.unobserve(entry.target);
+        });
+      },
+      { root: null, rootMargin: ROOT_MARGIN, threshold: 0.01 }
+    );
+
+    nodes.forEach(function (el) {
+      if (el.classList.contains("is-in")) return;
+      io.observe(el);
+    });
+  }
+
+  function start() {
+    var housing = document.getElementById("housing");
+    if (!housing) return;
+    if (housing.getAttribute("data-hp-top") != null) {
+      autoWireTop(housing);
+    }
+    observeAll(housing);
+  }
+
+  function whenEntered(fn) {
+    var housing = document.getElementById("housing");
+    if (
+      !housing ||
+      !housing.classList.contains("hp-await-enter") ||
+      housing.classList.contains("hp-is-entered")
+    ) {
+      fn();
+      return;
+    }
+    var done = false;
+    function run() {
+      if (done) return;
+      done = true;
+      window.removeEventListener("hp:entered", run);
+      fn();
+    }
+    window.addEventListener("hp:entered", run);
+    /* 入場が来ない場合の保険 */
+    setTimeout(run, 4000);
+  }
+
+  ready(function () {
+    whenEntered(start);
+  });
+})();

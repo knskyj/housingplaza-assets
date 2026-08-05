@@ -143,7 +143,10 @@ body:has(#housing) {
   position: relative;
   z-index: 4;
   background: var(--hp-white);
-  transition: background 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #housing .hp-header--overlay .hp-header__bar {
@@ -571,7 +574,7 @@ body:has(#housing) {
   text-decoration: none !important;
   white-space: nowrap;
   box-sizing: border-box;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 /* ホバーも塗りつぶしのまま（枠線ボタンにしない） */
@@ -775,14 +778,17 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   padding: calc(var(--hp-header-h) + 1.75rem) 0 2.75rem;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px);
-  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  transform: translate3d(100%, 0, 0);
+  transition:
+    opacity 0.35s ease,
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.42s ease;
 }
 
 #housing .hp-header.is-open .hp-header__drawer {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 #housing .hp-header__drawer[hidden] {
@@ -829,6 +835,51 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   /* モバイル左右余白。48rem未満のときはこの余白が効く */
   padding: 0.5rem max(var(--hp-header-margin-side), 8vw) 2rem;
   box-sizing: border-box;
+}
+
+/* ドロワー項目の入場（Infcurion 風スタガー） */
+#housing .hp-header__drawer-inner > * {
+  opacity: 0;
+  transform: translate3d(18px, 0, 0);
+  transition:
+    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#housing .hp-header.is-open .hp-header__drawer-inner > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+#housing .hp-header.is-open .hp-header__drawer-inner > *:nth-child(1) {
+  transition-delay: 0.08s;
+}
+#housing .hp-header.is-open .hp-header__drawer-inner > *:nth-child(2) {
+  transition-delay: 0.12s;
+}
+#housing .hp-header.is-open .hp-header__drawer-inner > *:nth-child(3) {
+  transition-delay: 0.16s;
+}
+#housing .hp-header.is-open .hp-header__drawer-inner > *:nth-child(4) {
+  transition-delay: 0.2s;
+}
+#housing .hp-header.is-open .hp-header__drawer-inner > *:nth-child(5) {
+  transition-delay: 0.24s;
+}
+#housing .hp-header.is-open .hp-header__drawer-inner > *:nth-child(6) {
+  transition-delay: 0.28s;
+}
+#housing .hp-header.is-open .hp-header__drawer-inner > *:nth-child(n + 7) {
+  transition-delay: 0.32s;
+}
+
+/* アコーディオン開閉 */
+#housing .hp-header__acc ul {
+  transition: opacity 0.28s ease;
+}
+
+#housing .hp-header__acc[open] ul {
+  opacity: 1;
 }
 
 /* Infcurion 風: 閉じた状態の＋ドロップダウン */
@@ -978,6 +1029,12 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__cta {
     display: inline-flex;
     grid-column: 5;
+  }
+
+  /* PC: 下スクロールでバーだけ隠す（transform は bar のみ） */
+  #housing .hp-header.is-header-hidden:not(.is-open):not(.is-mega-open) .hp-header__bar {
+    transform: translate3d(0, -100%, 0);
+    pointer-events: none;
   }
 
   #housing .hp-header__burger,

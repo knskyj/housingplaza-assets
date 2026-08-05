@@ -1,0 +1,160 @@
+/* Housingplaza — shared inview / shutter / Infcurion button motion
+ * Scoped under #housing. Driven by hp-inview.js (.is-in).
+ */
+
+#housing {
+  --hp-in-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hp-shutter-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --hp-shutter-bg: #072653;
+}
+
+/* —— Fade up —— */
+#housing [data-hp-inview] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 1s var(--hp-in-ease),
+    transform 1s var(--hp-in-ease);
+  will-change: opacity, transform;
+}
+
+#housing [data-hp-inview].is-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* —— Stagger children（親に data-hp-stagger） —— */
+#housing [data-hp-stagger] > [data-hp-inview] {
+  transform: translate3d(0, 30px, 0);
+  transition-duration: 1.4s;
+  transition-delay: calc(var(--hp-stagger, 0) * 300ms);
+}
+
+#housing [data-hp-stagger] > [data-hp-inview].is-in {
+  transform: translate3d(0, 0, 0);
+}
+
+/* —— Image shutter —— */
+#housing [data-hp-shutter] {
+  position: relative;
+  overflow: hidden;
+}
+
+#housing [data-hp-shutter]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--hp-shutter-bg);
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 1.8s var(--hp-shutter-ease);
+  pointer-events: none;
+}
+
+#housing [data-hp-shutter].is-in::after {
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+/* 画像はシャッター後に軽くスケール戻し */
+#housing [data-hp-shutter] > img {
+  transform: scale(1.06);
+  transition: transform 1.8s var(--hp-shutter-ease);
+}
+
+#housing [data-hp-shutter].is-in > img {
+  transform: scale(1);
+}
+
+/* —— Infcurion 風ボタン（塗りが左から） —— */
+#housing .hp-footer__btn {
+  background-color: transparent !important;
+  background-image: linear-gradient(#fff, #fff);
+  background-size: 0% 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  transition:
+    background-size 0.45s var(--hp-in-ease),
+    color 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+#housing .hp-footer__btn--mail {
+  background-color: #fff !important;
+  background-image: linear-gradient(var(--hp-footer-navy, #072653), var(--hp-footer-navy, #072653));
+  background-size: 0% 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  color: var(--hp-footer-navy, #072653) !important;
+}
+
+#housing .hp-header__cta {
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(var(--hp-navy-hover, #051a38), var(--hp-navy-hover, #051a38));
+  background-size: 0% 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  transition:
+    background-size 0.45s var(--hp-in-ease),
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@media (hover: hover) {
+  #housing .hp-footer__btn:hover,
+  #housing .hp-footer__btn:focus-visible {
+    background-size: 100% 100%;
+    color: var(--hp-footer-navy, #072653) !important;
+    border-color: #fff;
+    transform: translateY(-1px);
+  }
+
+  #housing .hp-footer__btn--mail:hover,
+  #housing .hp-footer__btn--mail:focus-visible {
+    background-color: #fff !important;
+    background-size: 100% 100%;
+    color: #fff !important;
+    border-color: #fff;
+  }
+
+  #housing .hp-header__cta:hover,
+  #housing .hp-header__cta:focus-visible {
+    background-size: 100% 100%;
+    background-color: var(--hp-navy) !important;
+    border-color: var(--hp-navy) !important;
+    color: var(--hp-white) !important;
+  }
+
+  #housing .hp-header--overlay .hp-header__cta:hover,
+  #housing .hp-header--overlay .hp-header__cta:focus-visible {
+    background-color: var(--hp-navy) !important;
+    border-color: var(--hp-navy) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #housing [data-hp-inview],
+  #housing [data-hp-stagger] > [data-hp-inview],
+  #housing [data-hp-shutter]::after,
+  #housing [data-hp-shutter] > img,
+  #housing .hp-footer__btn,
+  #housing .hp-header__cta {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  #housing [data-hp-inview],
+  #housing [data-hp-shutter].is-in > img,
+  #housing [data-hp-shutter] > img {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #housing [data-hp-shutter]::after {
+    display: none !important;
+  }
+}

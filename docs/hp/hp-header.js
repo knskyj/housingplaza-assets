@@ -6,6 +6,7 @@
   "use strict";
 
   var FADE_MS = 200;
+  var DRAWER_MS = 420;
 
   function ready(fn) {
     if (document.readyState === "loading") {
@@ -187,6 +188,7 @@
       item.classList.add("is-open");
       if (btn) btn.setAttribute("aria-expanded", "true");
       root.classList.add("is-mega-open");
+      root.classList.remove("is-header-hidden");
       syncBackdrop();
     }
 
@@ -225,11 +227,13 @@
       syncBackdrop();
 
       if (!drawer) return;
+      var accs = drawer.querySelectorAll(".hp-header__acc");
+      for (var i = 0; i < accs.length; i++) accs[i].open = false;
       if (drawerHideTimer) clearTimeout(drawerHideTimer);
       drawerHideTimer = setTimeout(function () {
         if (!root.classList.contains("is-open")) drawer.hidden = true;
         drawerHideTimer = null;
-      }, FADE_MS);
+      }, DRAWER_MS);
     }
 
     function openDrawer() {
@@ -241,10 +245,9 @@
       if (drawer) {
         drawer.hidden = false;
         void drawer.offsetWidth;
-        var accs = drawer.querySelectorAll(".hp-header__acc");
-        for (var i = 0; i < accs.length; i++) accs[i].open = true;
       }
       root.classList.add("is-open");
+      root.classList.remove("is-header-hidden");
       if (burger) {
         burger.setAttribute("aria-expanded", "true");
         burger.setAttribute("aria-label", "メニューを閉じる");
@@ -348,8 +351,12 @@
     }
 
     var scrollTicking = false;
+    var lastScrollY = window.scrollY || 0;
+    var mqHide = window.matchMedia("(min-width: 1100px)");
+
     function heroScrollThreshold() {
       var hero =
+        document.querySelector("#housing .hp-hero") ||
         document.querySelector("#housing .swiper.full-screen") ||
         document.querySelector("#housing .full-screen") ||
         document.querySelector(".swiper.full-screen");
@@ -359,18 +366,49 @@
       return Math.max(24, top + hero.offsetHeight - headerH);
     }
 
+    function syncHeaderHide(y, pastHero) {
+      /* PCのみ：ヒーロー過ぎで下スクロール時に隠す／上スクロール・下部で出す */
+      if (
+        !mqHide.matches ||
+        root.classList.contains("is-open") ||
+        root.classList.contains("is-mega-open")
+      ) {
+        root.classList.remove("is-header-hidden");
+        return;
+      }
+      var doc = document.documentElement;
+      var nearBottom = y + window.innerHeight >= doc.scrollHeight - 96;
+      var goingDown = y > lastScrollY + 2;
+      var goingUp = y < lastScrollY - 2;
+
+      if (!pastHero || y < 80 || nearBottom || goingUp) {
+        root.classList.remove("is-header-hidden");
+      } else if (pastHero && goingDown && y > 120) {
+        root.classList.add("is-header-hidden");
+      }
+    }
+
     function onScroll() {
       if (scrollTicking) return;
       scrollTicking = true;
       window.requestAnimationFrame(function () {
-        if (window.scrollY > heroScrollThreshold()) root.classList.add("is-scrolled");
+        var y = window.scrollY || document.documentElement.scrollTop;
+        var pastHero = y > heroScrollThreshold();
+        if (pastHero) root.classList.add("is-scrolled");
         else root.classList.remove("is-scrolled");
+        syncHeaderHide(y, pastHero);
+        lastScrollY = y;
         scrollTicking = false;
       });
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+    if (typeof mqHide.addEventListener === "function") {
+      mqHide.addEventListener("change", onScroll);
+    } else if (typeof mqHide.addListener === "function") {
+      mqHide.addListener(onScroll);
+    }
     onScroll();
   });
 })();
