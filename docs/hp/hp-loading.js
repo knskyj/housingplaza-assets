@@ -1,8 +1,9 @@
 /**
- * Housingplaza TOP — session-first loading + first-view entrance.
+ * Housingplaza TOP — session-first loading + every-reload entrance.
+ * - Loading spinner: once per session (sessionStorage)
+ * - Header / hero copy / topics entrance: every reload
  * Markup: #housing[data-hp-top] + [data-hp-loading]
- * sessionStorage key: hp-top-session-loaded
- * Force replay: ?hp-loading=1
+ * Force loading: ?hp-loading=1  /  hold: ?hp-loading=hold
  */
 (function () {
   "use strict";
@@ -21,6 +22,14 @@
   function forceLoading() {
     try {
       return /(?:^|[?&])hp-loading=(?:1|hold)(?:&|$)/.test(location.search);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function holdLoading() {
+    try {
+      return /(?:^|[?&])hp-loading=hold(?:&|$)/.test(location.search);
     } catch (e) {
       return false;
     }
@@ -58,33 +67,50 @@
     document.documentElement.classList.remove("hp-preload");
   }
 
-  function enter(root) {
-    /* 先に入場クラス → 次フレームでスクロール解除（遷移の開始点を確保） */
-    root.classList.add("hp-await-enter");
-    root.classList.remove("hp-is-loading");
-    requestAnimationFrame(function () {
-      root.classList.add("hp-is-entered");
-      requestAnimationFrame(function () {
-        unlockScroll();
-        markSession();
-        window.dispatchEvent(new CustomEvent("hp:entered"));
-      });
-    });
-  }
-
   function hideLoader(loading) {
     if (!loading) return;
     loading.hidden = true;
     loading.setAttribute("aria-hidden", "true");
     loading.removeAttribute("aria-busy");
+    loading.classList.remove("is-active", "is-leaving");
   }
 
-  function holdLoading() {
-    try {
-      return /(?:^|[?&])hp-loading=hold(?:&|$)/.test(location.search);
-    } catch (e) {
-      return false;
-    }
+  /** 入場アニメ再生（ローディング有無どちらからも呼ぶ） */
+  function playEntrance(root, opts) {
+    var shouldMark = !opts || opts.mark !== false;
+    root.classList.add("hp-await-enter");
+    root.classList.remove("hp-is-loading", "hp-is-entered", "hp-end-loading");
+    requestAnimationFrame(function () {
+      root.classList.add("hp-is-entered");
+      requestAnimationFrame(function () {
+        unlockScroll();
+        if (shouldMark) markSession();
+        window.dispatchEvent(new CustomEvent("hp:entered"));
+      });
+    });
+  }
+
+  /** ローディングなしで入場のみ（リロード毎回） */
+  function enterWithoutLoader(root, loading) {
+    hideLoader(loading);
+    unlockScroll();
+    root.classList.add("hp-await-enter");
+    root.classList.remove("hp-is-entered", "hp-is-loading", "hp-end-loading");
+    /* 隠し状態を1フレーム描画してから入場 */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        playEntrance(root, { mark: true });
+      });
+    });
+  }
+
+  function enterInstant(root, loading) {
+    hideLoader(loading);
+    unlockScroll();
+    root.classList.remove("hp-await-enter", "hp-is-loading", "hp-end-loading");
+    root.classList.add("hp-is-entered");
+    markSession();
+    window.dispatchEvent(new CustomEvent("hp:entered"));
   }
 
   ready(function () {
@@ -92,32 +118,28 @@
     if (!root || root.getAttribute("data-hp-loading-ready") === "1") return;
     root.setAttribute("data-hp-loading-ready", "1");
 
-    var loading = root.querySelector("[data-hp-loading]");
+    var loading = root.querySelector("[data-hp-loading]") ||
+      document.querySelector("body > .hp-loading[data-hp-loading]");
     var scrollBtn = root.querySelector("[data-hp-hero-scroll]");
     var topics = root.querySelector(".hp-topics");
     var forced = forceLoading() || holdLoading();
 
     if (forced) clearSession();
 
-    /* fixed が親の transform に閉じ込められないよう body 直下へ */
     if (loading && loading.parentElement !== document.body) {
       document.body.appendChild(loading);
     }
 
-    function finishWithoutLoader() {
-      hideLoader(loading);
-      unlockScroll();
-      root.classList.remove("hp-await-enter");
-      root.classList.add("hp-is-entered");
-      markSession();
-      window.dispatchEvent(new CustomEvent("hp:entered"));
-    }
+    var skipLoader =
+      !forced && (sessionSeen() || !loading);
 
-    /* セッション再訪 / 減モーション → 即表示（強制時は除く） */
-    if (!forced && (sessionSeen() || reduceMotion() || !loading)) {
-      finishWithoutLoader();
+    if (reduceMotion()) {
+      enterInstant(root, loading);
+    } else if (skipLoader) {
+      enterWithoutLoader(root, loading);
     } else {
       root.classList.add("hp-is-loading", "hp-await-enter");
+      root.classList.remove("hp-is-entered");
       document.documentElement.classList.add("hp-preload");
       loading.hidden = false;
       loading.removeAttribute("hidden");
@@ -125,7 +147,6 @@
       loading.setAttribute("aria-busy", "true");
       loading.setAttribute("aria-hidden", "false");
 
-      /* 確認用: ?hp-loading=hold でスピナーのまま止める */
       if (holdLoading()) {
         return;
       }
@@ -139,8 +160,7 @@
           loading.classList.add("is-leaving");
           setTimeout(function () {
             hideLoader(loading);
-            loading.classList.remove("is-active", "is-leaving");
-            enter(root);
+            playEntrance(root, { mark: true });
           }, FADE_MS);
         }, wait);
       }
