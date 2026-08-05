@@ -85,15 +85,15 @@ body:has(#housing) {
   box-sizing: border-box;
 }
 
-/* テーマ干渉リセット（ヘッダー内部） */
-#housing .hp-header a {
+/* テーマ干渉リセット（ヘッダー内部・CTA は除外） */
+#housing .hp-header a:not(.hp-header__cta) {
   color: inherit !important;
   text-decoration: none !important;
   box-shadow: none !important;
   background: transparent;
 }
-#housing .hp-header a:hover,
-#housing .hp-header a:focus {
+#housing .hp-header a:not(.hp-header__cta):hover,
+#housing .hp-header a:not(.hp-header__cta):focus {
   text-decoration: none !important;
   color: inherit !important;
 }
@@ -579,36 +579,45 @@ body:has(#housing) {
   padding: 0 1.25rem 1px;
   border: 1px solid var(--hp-navy);
   border-radius: 5px;
-  background: var(--hp-navy);
+  background: var(--hp-navy) !important;
+  background-image: none !important;
   color: var(--hp-white) !important;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: normal;
   line-height: 1;
   text-decoration: none !important;
+  box-shadow: none !important;
   white-space: nowrap;
   box-sizing: border-box;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-/* ホバーも塗りつぶしのまま（枠線ボタンにしない） */
-#housing .hp-header__cta:hover {
-  background: var(--hp-navy-hover);
-  border-color: var(--hp-navy-hover);
+/* ホバーも塗りつぶしのまま（枠線ボタン・グラデ塗りにしない） */
+#housing .hp-header__cta:hover,
+#housing .hp-header__cta:focus,
+#housing .hp-header__cta:focus-visible {
+  background: var(--hp-navy-hover) !important;
+  background-image: none !important;
+  border-color: var(--hp-navy-hover) !important;
   color: var(--hp-white) !important;
 }
 
-/* ヒーロー上・スクロール後とも塗りネイビー固定（枠線化しない） */
-#housing .hp-header--overlay .hp-header__cta,
-#housing .hp-header--overlay .hp-header__cta:hover {
-  background: var(--hp-navy);
-  border-color: var(--hp-navy);
+/* ヒーロー上・スクロール後とも塗りネイビー固定 */
+#housing .hp-header--overlay .hp-header__cta {
+  background: var(--hp-navy) !important;
+  background-image: none !important;
+  border-color: var(--hp-navy) !important;
   color: var(--hp-white) !important;
 }
 
-#housing .hp-header--overlay .hp-header__cta:hover {
-  background: var(--hp-navy-hover);
-  border-color: var(--hp-navy-hover);
+#housing .hp-header--overlay .hp-header__cta:hover,
+#housing .hp-header--overlay .hp-header__cta:focus,
+#housing .hp-header--overlay .hp-header__cta:focus-visible {
+  background: var(--hp-navy-hover) !important;
+  background-image: none !important;
+  border-color: var(--hp-navy-hover) !important;
+  color: var(--hp-white) !important;
 }
 
 #housing .hp-header__burger {
