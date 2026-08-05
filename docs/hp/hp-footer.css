@@ -122,10 +122,7 @@
   box-shadow: none !important;
   box-sizing: border-box;
   transform: none;
-  /* 文字色は塗り完了時に一拍で切替（補間・先行遅延で消えるのを防ぐ） */
-  transition:
-    color 0.45s steps(1, end),
-    border-color 0.3s ease;
+  transition: border-color 0.3s ease;
 }
 
 #housing .hp-footer__btn svg {
@@ -142,9 +139,11 @@
 }
 
 #housing .hp-footer__btn--mail {
-  background: #fff !important;
-  color: var(--hp-footer-navy) !important;
-  border-color: #fff;
+  /* ヘッダー CTA と同じ：ネイビー塗り・白文字 */
+  background: var(--hp-footer-navy) !important;
+  color: #fff !important;
+  border-color: var(--hp-footer-navy);
+  transition: border-color 0.3s ease;
 }
 
 #housing .hp-footer__btn:hover,
