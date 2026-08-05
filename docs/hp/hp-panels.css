@@ -109,8 +109,8 @@
 #housing .hp-panels__action-icon {
   display: block;
   flex: 0 0 auto;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.15rem;
+  height: 2.15rem;
   color: inherit;
   transition: color 0.2s ease;
 }
@@ -224,7 +224,7 @@
   }
 
   #housing .hp-panels__action-icon {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem;
+    height: 2rem;
   }
 }
