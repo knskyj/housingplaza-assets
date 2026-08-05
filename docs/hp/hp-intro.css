@@ -52,11 +52,6 @@
   white-space: nowrap;
 }
 
-/* PC は1行。SP は読点後で改行（孤児防止） */
-#housing .hp-intro__title br {
-  display: none;
-}
-
 #housing .hp-intro__title::before,
 #housing .hp-intro__title::after {
   content: none !important;
@@ -208,11 +203,6 @@
 
   #housing .hp-intro__title {
     margin-bottom: 1.35rem;
-    white-space: normal;
-  }
-
-  #housing .hp-intro__title br {
-    display: inline;
   }
 
   #housing .hp-intro__body {
@@ -240,7 +230,8 @@
 
   #housing .hp-intro__title {
     margin-bottom: 1.15rem;
-    font-size: clamp(1.15rem, 5.2vw, 1.55rem);
+    /* 1行維持のため狭幅ではやや縮小 */
+    font-size: clamp(0.95rem, 4.6vw, 1.55rem);
     line-height: 1.4;
   }
 
