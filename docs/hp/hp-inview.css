@@ -67,53 +67,11 @@
   transform: scale(1);
 }
 
-/* —— Infcurion 風ボタン（塗りが左から） —— */
-#housing .hp-footer__btn {
-  background-color: transparent !important;
-  background-image: linear-gradient(#fff, #fff);
-  background-size: 0% 100%;
-  background-position: left center;
-  background-repeat: no-repeat;
-  transition:
-    background-size 0.45s var(--hp-in-ease),
-    color 0.35s ease,
-    border-color 0.35s ease,
-    transform 0.35s ease;
-}
-
-#housing .hp-footer__btn--mail {
-  background-color: #fff !important;
-  background-image: linear-gradient(var(--hp-footer-navy, #072653), var(--hp-footer-navy, #072653));
-  background-size: 0% 100%;
-  background-position: left center;
-  background-repeat: no-repeat;
-  color: var(--hp-footer-navy, #072653) !important;
-}
-
-@media (hover: hover) {
-  #housing .hp-footer__btn:hover,
-  #housing .hp-footer__btn:focus-visible {
-    background-size: 100% 100%;
-    color: var(--hp-footer-navy, #072653) !important;
-    border-color: #fff;
-    transform: translateY(-1px);
-  }
-
-  #housing .hp-footer__btn--mail:hover,
-  #housing .hp-footer__btn--mail:focus-visible {
-    background-color: #fff !important;
-    background-size: 100% 100%;
-    color: #fff !important;
-    border-color: #fff;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   #housing [data-hp-inview],
   #housing [data-hp-stagger] > [data-hp-inview],
   #housing [data-hp-shutter]::after,
-  #housing [data-hp-shutter] > img,
-  #housing .hp-footer__btn {
+  #housing [data-hp-shutter] > img {
     transition: none !important;
     animation: none !important;
   }
