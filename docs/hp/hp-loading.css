@@ -194,7 +194,7 @@ html.hp-preload .hp-loading.is-active,
   transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
-/* ページ上部へ（白 + difference） */
+/* ページ上部へ（グレー + difference） */
 .hp-pagetop {
   position: fixed;
   right: 30px;
@@ -207,10 +207,10 @@ html.hp-preload .hp-loading.is-active,
   height: 56px;
   margin: 0;
   padding: 0;
-  border: 1.5px solid #fff;
+  border: 1.5px solid #9a9a9a;
   border-radius: 100%;
   background: transparent;
-  color: #fff;
+  color: #9a9a9a;
   text-decoration: none !important;
   box-shadow: none;
   mix-blend-mode: difference;
