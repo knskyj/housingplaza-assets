@@ -67,13 +67,73 @@
   transform: scale(1);
 }
 
+/* —— Infcurion 風ボタン：左から ::before で塗る（background 競合を避ける） —— */
+#housing .hp-footer__btn::before,
+#housing .hp-header__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s var(--hp-in-ease);
+  pointer-events: none;
+}
+
+#housing .hp-footer__btn::before {
+  background: #fff;
+}
+
+#housing .hp-footer__btn--mail::before {
+  background: var(--hp-footer-navy, #072653);
+}
+
+#housing .hp-header__cta::before {
+  background: var(--hp-navy-hover, #051a38);
+}
+
+@media (hover: hover) {
+  #housing .hp-footer__btn:hover::before,
+  #housing .hp-footer__btn:focus-visible::before,
+  #housing .hp-header__cta:hover::before,
+  #housing .hp-header__cta:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  #housing .hp-footer__btn:hover,
+  #housing .hp-footer__btn:focus-visible {
+    color: var(--hp-footer-navy, #072653) !important;
+    border-color: #fff;
+  }
+
+  #housing .hp-footer__btn--mail:hover,
+  #housing .hp-footer__btn--mail:focus-visible {
+    color: #fff !important;
+    border-color: #fff;
+  }
+
+  #housing .hp-header__cta:hover,
+  #housing .hp-header__cta:focus-visible {
+    color: var(--hp-white, #fff) !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #housing [data-hp-inview],
   #housing [data-hp-stagger] > [data-hp-inview],
   #housing [data-hp-shutter]::after,
-  #housing [data-hp-shutter] > img {
+  #housing [data-hp-shutter] > img,
+  #housing .hp-footer__btn::before,
+  #housing .hp-header__cta::before {
     transition: none !important;
     animation: none !important;
+  }
+
+  #housing .hp-footer__btn:hover::before,
+  #housing .hp-footer__btn:focus-visible::before,
+  #housing .hp-header__cta:hover::before,
+  #housing .hp-header__cta:focus-visible::before {
+    transform: scaleX(1);
   }
 
   #housing [data-hp-inview],
