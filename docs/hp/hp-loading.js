@@ -1,14 +1,11 @@
 /**
- * Housingplaza TOP — session-first loading + every-reload entrance.
- * - Loading spinner: once per session (sessionStorage)
- * - Header / hero copy / topics entrance: every reload
+ * Housingplaza TOP — loading every visit + entrance after hero image ready.
  * Markup: #housing[data-hp-top] + [data-hp-loading]
- * Force loading: ?hp-loading=1  /  hold: ?hp-loading=hold
+ * Hold spinner: ?hp-loading=hold
  */
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "hp-top-session-loaded";
   var MIN_MS = 1200;
   var FADE_MS = 400;
   var HERO_IMAGE_TIMEOUT = 5000;
@@ -18,6 +15,22 @@
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     );
+  }
+
+  function holdLoading() {
+    try {
+      return /(?:^|[?&])hp-loading=hold(?:&|$)/.test(location.search);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function ready(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      fn();
+    }
   }
 
   function firstHeroImageUrl(root) {
@@ -68,57 +81,6 @@
     }
   }
 
-  function reduceMotion() {
-    return (
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    );
-  }
-
-  function forceLoading() {
-    try {
-      return /(?:^|[?&])hp-loading=(?:1|hold)(?:&|$)/.test(location.search);
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function holdLoading() {
-    try {
-      return /(?:^|[?&])hp-loading=hold(?:&|$)/.test(location.search);
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function ready(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", fn);
-    } else {
-      fn();
-    }
-  }
-
-  function sessionSeen() {
-    try {
-      return sessionStorage.getItem(STORAGE_KEY) === "1";
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function markSession() {
-    try {
-      sessionStorage.setItem(STORAGE_KEY, "1");
-    } catch (e) {}
-  }
-
-  function clearSession() {
-    try {
-      sessionStorage.removeItem(STORAGE_KEY);
-    } catch (e) {}
-  }
-
   function unlockScroll() {
     document.documentElement.classList.remove("hp-preload");
   }
@@ -131,33 +93,14 @@
     loading.classList.remove("is-active", "is-leaving");
   }
 
-  /** 入場アニメ再生（ローディング完了後） */
-  function playEntrance(root, opts) {
-    var shouldMark = !opts || opts.mark !== false;
+  function playEntrance(root) {
     root.classList.add("hp-await-enter");
     root.classList.remove("hp-is-loading", "hp-end-loading");
-    /* すでに隠し状態なら外さず、そのまま入場へ */
     root.classList.remove("hp-is-entered");
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         root.classList.add("hp-is-entered");
         unlockScroll();
-        if (shouldMark) markSession();
-        window.dispatchEvent(new CustomEvent("hp:entered"));
-      });
-    });
-  }
-
-  /** ローディングなしで入場のみ（リロード毎回） */
-  function enterWithoutLoader(root, loading) {
-    hideLoader(loading);
-    unlockScroll();
-    root.classList.add("hp-await-enter");
-    root.classList.remove("hp-is-entered", "hp-is-loading", "hp-end-loading");
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        root.classList.add("hp-is-entered");
-        markSession();
         window.dispatchEvent(new CustomEvent("hp:entered"));
       });
     });
@@ -168,7 +111,6 @@
     unlockScroll();
     root.classList.remove("hp-await-enter", "hp-is-loading", "hp-end-loading");
     root.classList.add("hp-is-entered");
-    markSession();
     window.dispatchEvent(new CustomEvent("hp:entered"));
   }
 
@@ -181,33 +123,16 @@
       document.querySelector("body > .hp-loading[data-hp-loading]");
     var scrollBtn = root.querySelector("[data-hp-hero-scroll]");
     var topics = root.querySelector(".hp-topics");
-    var forced = forceLoading() || holdLoading();
-
-    if (forced) clearSession();
 
     if (loading && loading.parentElement !== document.body) {
       document.body.appendChild(loading);
     }
 
-    var skipLoader =
-      !forced && (sessionSeen() || !loading);
-
     var heroUrl = firstHeroImageUrl(root);
     applyHeroFallback(root, heroUrl);
 
-    function revealAfterHeroReady(next) {
-      waitForImage(heroUrl, HERO_IMAGE_TIMEOUT).then(function () {
-        next();
-      });
-    }
-
-    if (reduceMotion()) {
+    if (reduceMotion() || !loading) {
       enterInstant(root, loading);
-    } else if (skipLoader) {
-      /* リロード時も画像準備後に入場（グレー待ちを短く） */
-      revealAfterHeroReady(function () {
-        enterWithoutLoader(root, loading);
-      });
     } else {
       root.classList.add("hp-is-loading", "hp-await-enter");
       root.classList.remove("hp-is-entered");
@@ -226,14 +151,13 @@
 
       function endLoading() {
         var minWait = Math.max(0, MIN_MS - (Date.now() - started));
-        /* 最低表示時間と先頭画像の準備の両方を待つ */
         Promise.all([
           new Promise(function (r) { setTimeout(r, minWait); }),
           waitForImage(heroUrl, HERO_IMAGE_TIMEOUT),
         ]).then(function () {
           root.classList.add("hp-end-loading");
           loading.classList.add("is-leaving");
-          playEntrance(root, { mark: true });
+          playEntrance(root);
           setTimeout(function () {
             hideLoader(loading);
           }, FADE_MS);
@@ -277,7 +201,6 @@
         smoothScrollTo(Math.max(0, top), 900);
       });
 
-      /* ページ上部へボタン */
       var pageTop = document.querySelector(".hp-pagetop");
       if (!pageTop) {
         pageTop = document.createElement("a");
