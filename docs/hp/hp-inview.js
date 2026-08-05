@@ -74,6 +74,9 @@
       ".hp-footer__title",
       ".hp-footer__hours",
       ".hp-footer__actions",
+      ".hp-news__en",
+      ".hp-news__title",
+      ".hp-news__more",
     ].forEach(function (sel) {
       root.querySelectorAll(sel).forEach(wireFade);
     });
@@ -83,6 +86,7 @@
       ".hp-stores__grid",
       ".hp-search__grid",
       ".hp-panels__list",
+      ".hp-news__list",
     ].forEach(function (sel) {
       root.querySelectorAll(sel).forEach(wireStagger);
     });

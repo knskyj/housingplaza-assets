@@ -1,0 +1,200 @@
+/* Housingplaza news list — Infcurion News 風。Crafto なし */
+
+#housing .hp-news {
+  --hp-news-navy: #072653;
+  --hp-news-ink: #151515;
+  --hp-news-muted: #6b6b6b;
+  --hp-news-line: rgba(21, 21, 21, 0.12);
+  --hp-news-bg: #fafafa;
+  --hp-news-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  position: relative;
+  z-index: 1;
+  margin: 0 !important;
+  padding: 150px var(--hp-margin-side, 12.25vw) !important;
+  background: var(--hp-news-bg) !important;
+  color: var(--hp-news-ink);
+  font-family: var(--hp-news-font);
+  -webkit-font-smoothing: antialiased;
+  border: 0 !important;
+}
+
+#housing .hp-news *,
+#housing .hp-news *::before,
+#housing .hp-news *::after {
+  box-sizing: border-box;
+}
+
+#housing .hp-news__inner {
+  display: grid;
+  grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr);
+  gap: 2.5rem 4rem;
+  align-items: start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#housing .hp-news__head {
+  margin: 0;
+  padding: 0;
+}
+
+#housing .hp-news__en {
+  margin: 0 0 0.35rem;
+  color: var(--hp-news-navy);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+#housing .hp-news__title {
+  margin: 0;
+  color: var(--hp-news-ink);
+  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+#housing .hp-news__title::before,
+#housing .hp-news__title::after {
+  content: none !important;
+  display: none !important;
+}
+
+#housing .hp-news__body {
+  min-width: 0;
+}
+
+#housing .hp-news__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hp-news-line);
+}
+
+#housing .hp-news__list > li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--hp-news-line);
+}
+
+#housing .hp-news__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 1.35rem 0.15rem 1.35rem 0;
+  color: inherit;
+  text-decoration: none !important;
+  transition: opacity 0.25s ease;
+}
+
+#housing .hp-news__item:hover,
+#housing .hp-news__item:focus-visible {
+  outline: none;
+  opacity: 0.72;
+}
+
+#housing .hp-news__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+}
+
+#housing .hp-news__meta time {
+  color: var(--hp-news-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+#housing .hp-news__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid rgba(7, 38, 83, 0.35);
+  border-radius: 2px;
+  color: var(--hp-news-navy);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+#housing .hp-news__item-title {
+  margin: 0;
+  color: var(--hp-news-ink);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.65;
+}
+
+#housing .hp-news__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 1.75rem 0 0;
+  color: var(--hp-news-ink);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none !important;
+  transition: opacity 0.25s ease;
+}
+
+#housing .hp-news__more:hover,
+#housing .hp-news__more:focus-visible {
+  outline: none;
+  opacity: 0.72;
+}
+
+#housing .hp-news__more-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--hp-news-ink);
+  border-radius: 50%;
+  color: var(--hp-news-ink);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+#housing .hp-news__more-arrow svg {
+  display: block;
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+#housing .hp-news__more:hover .hp-news__more-arrow,
+#housing .hp-news__more:focus-visible .hp-news__more-arrow {
+  background: var(--hp-news-ink);
+  color: #fff;
+}
+
+@media (max-width: 899px) {
+  #housing .hp-news {
+    padding: 5.5rem var(--hp-margin-side, 8vw) 5rem !important;
+  }
+
+  #housing .hp-news__inner {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  #housing .hp-news__item {
+    padding: 1.15rem 0;
+  }
+
+  #housing .hp-news__item-title {
+    font-size: 0.9375rem;
+  }
+}
