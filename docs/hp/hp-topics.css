@@ -154,19 +154,24 @@
   color: inherit;
 }
 
-/* 丸囲み矢印 — 行の右端へ */
+/* 丸囲み矢印 — 行の右端へ（pagetop と同型の線矢印） */
 #housing .hp-topics__arrow {
   flex: 0 0 auto;
   display: block;
   width: 2rem;
   height: 2rem;
   margin-left: auto;
-  padding: 0.5rem;
+  padding: 0.45rem;
   box-sizing: border-box;
   border: 1px solid var(--hp-topics-accent);
   border-radius: 50%;
   color: var(--hp-topics-accent);
   transition: background 0.2s ease, color 0.2s ease;
+}
+
+#housing .hp-topics__arrow path {
+  fill: none;
+  stroke: currentColor;
 }
 
 #housing .hp-topics__link:hover .hp-topics__arrow {

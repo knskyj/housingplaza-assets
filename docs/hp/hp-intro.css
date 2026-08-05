@@ -29,6 +29,8 @@
   max-width: none;
   margin: 0;
   padding: 0;
+  container-type: inline-size;
+  container-name: hp-intro;
 }
 
 #housing .hp-intro__brand {
@@ -180,13 +182,9 @@
 }
 
 #housing .hp-intro__card-arrow svg {
-  width: 0.7rem;
-  height: 0.7rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  width: 0.9rem;
+  height: 0.9rem;
+  display: block;
 }
 
 #housing .hp-intro__card:hover .hp-intro__card-arrow,
@@ -230,7 +228,7 @@
 
   #housing .hp-intro__title {
     margin-bottom: 1.15rem;
-    /* 1行維持のため狭幅ではやや縮小 */
+    /* 526–767: 1行維持のためやや縮小。525以下は別指定 */
     font-size: clamp(0.95rem, 4.6vw, 1.55rem);
     line-height: 1.4;
   }
@@ -249,5 +247,18 @@
 
   #housing .hp-intro__card-media {
     aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 525px) {
+  /* 固定remの縮小はせず、行の最大幅いっぱいに1行フィット */
+  #housing .hp-intro__title {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    line-height: 1.4;
+    font-size: calc(100cqw / 17.2);
   }
 }
