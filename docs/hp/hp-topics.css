@@ -111,9 +111,9 @@
   justify-content: center;
   margin: 0;
   padding: 3px 12px;
-  border: 1px solid var(--hp-topics-muted);
+  border: 1px solid var(--hp-topics-accent);
   border-radius: 20px;
-  color: var(--hp-topics-muted);
+  color: var(--hp-topics-accent);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.06em;
