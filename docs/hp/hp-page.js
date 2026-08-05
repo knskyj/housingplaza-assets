@@ -1,7 +1,7 @@
 /**
  * Housingplaza — site-wide page fade.
  * サイト内リンクはフェードアウト後に遷移。着地はフェードイン。
- * TOP 初回ローディング中はフェードインをスキップ（hp:entered 待ち）。
+ * TOP（#housing[data-hp-top]）ではページ遷移フェードなし。
  */
 (function () {
   "use strict";
@@ -13,6 +13,10 @@
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     );
+  }
+
+  function isTopPage() {
+    return !!document.querySelector("#housing[data-hp-top]");
   }
 
   function ready(fn) {
@@ -54,33 +58,17 @@
   document.documentElement.classList.add("hp-page");
 
   ready(function () {
-    if (reduceMotion()) {
+    /* TOP: 入場・離脱ともページフェードなし（ローダー／入場アニメは別） */
+    if (isTopPage() || reduceMotion()) {
       document.documentElement.classList.add("hp-page-enter");
       return;
     }
 
-    var topLoading =
-      document.documentElement.classList.contains("hp-preload") &&
-      !!document.querySelector("#housing[data-hp-top]");
-
-    if (topLoading) {
-      window.addEventListener(
-        "hp:entered",
-        function () {
-          document.documentElement.classList.add("hp-page-enter");
-        },
-        { once: true }
-      );
-      setTimeout(function () {
-        document.documentElement.classList.add("hp-page-enter");
-      }, 8000);
-    } else {
+    requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          document.documentElement.classList.add("hp-page-enter");
-        });
+        document.documentElement.classList.add("hp-page-enter");
       });
-    }
+    });
 
     document.addEventListener(
       "click",
