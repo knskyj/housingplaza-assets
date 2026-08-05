@@ -3,20 +3,20 @@
  */
 
 #housing {
-  /* ユートク・ライフ寄せ: 指定なし≒ease、1.5s、30px、開始 0.2s */
-  --hp-in-ease: ease;
+  /* ユートク寄りを少し引き締め */
+  --hp-in-ease: ease-out;
   --hp-shutter-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --hp-shutter-bg: #072653;
 }
 
-/* —— Fade up（yutoku .js-inview_top 相当） —— */
+/* —— Fade up —— */
 #housing [data-hp-inview] {
   opacity: 0;
-  transform: translate3d(0, 30px, 0);
+  transform: translate3d(0, 22px, 0);
   transition:
-    opacity 1.5s var(--hp-in-ease),
-    transform 1.5s var(--hp-in-ease);
-  transition-delay: 0.2s;
+    opacity 1.2s var(--hp-in-ease),
+    transform 1.2s var(--hp-in-ease);
+  transition-delay: 0.1s;
 }
 
 #housing [data-hp-inview].is-in {
@@ -24,10 +24,10 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* —— Stagger（ベース 0.2s + 軽い波。本体の ease/距離は共通） —— */
+/* —— Stagger —— */
 #housing [data-hp-stagger] > [data-hp-inview] {
-  transition-duration: 1.5s, 1.5s;
-  transition-delay: calc(0.2s + var(--hp-stagger, 0) * 100ms);
+  transition-duration: 1.2s, 1.2s;
+  transition-delay: calc(0.1s + var(--hp-stagger, 0) * 90ms);
 }
 
 #housing [data-hp-stagger] > [data-hp-inview].is-in {
