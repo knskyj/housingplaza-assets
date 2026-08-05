@@ -9,7 +9,7 @@
   z-index: 1;
   margin: 0 !important;
   padding: 150px var(--hp-margin-side, 12.25vw) !important;
-  background: #f6f6f6 !important;
+  background: #fff !important;
   color: var(--hp-panels-ink);
   font-family: var(--hp-panels-font);
   -webkit-font-smoothing: antialiased;
@@ -76,7 +76,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: #fafafa !important;
+  background: #f6f6f6 !important;
   color: inherit !important;
   text-decoration: none !important;
   box-shadow: none !important;
