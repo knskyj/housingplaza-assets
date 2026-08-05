@@ -170,13 +170,19 @@ body:has(#housing) {
   box-shadow: none;
 }
 
-/* ヒーロー過ぎ（またはメニュー開）：白背景で固定表示 */
-#housing .hp-header--overlay.is-scrolled .hp-header__bar,
-#housing .hp-header--overlay.is-open .hp-header__bar,
-#housing .hp-header--overlay.is-drawer-closing .hp-header__bar {
+/* ヒーロー過ぎ：白背景で固定表示（メニュー開閉ではバーを白にしない＝パネル連動） */
+#housing .hp-header--overlay.is-scrolled .hp-header__bar {
   position: fixed;
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 1px 0 var(--hp-line);
+}
+
+/* メニュー開閉中はバー自体は透過のまま（白はドロワーパネル側） */
+#housing .hp-header--overlay.is-open:not(.is-scrolled) .hp-header__bar,
+#housing .hp-header--overlay.is-drawer-closing:not(.is-scrolled) .hp-header__bar {
+  position: fixed;
+  background: transparent;
+  box-shadow: none;
 }
 
 /* メガ開時（ヒーロー上）も透過のまま固定 */
