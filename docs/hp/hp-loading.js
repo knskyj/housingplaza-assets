@@ -10,7 +10,7 @@
 
   var STORAGE_KEY = "hp-top-session-loaded";
   var MIN_MS = 1600;
-  var FADE_MS = 600;
+  var FADE_MS = 400;
 
   function reduceMotion() {
     return (
@@ -159,11 +159,12 @@
       function endLoading() {
         var wait = Math.max(0, MIN_MS - (Date.now() - started));
         setTimeout(function () {
+          /* オーバーレイ退場と入場を同時に（画像だけ先に見えてローディングが残るのを防ぐ） */
           root.classList.add("hp-end-loading");
           loading.classList.add("is-leaving");
+          playEntrance(root, { mark: true });
           setTimeout(function () {
             hideLoader(loading);
-            playEntrance(root, { mark: true });
           }, FADE_MS);
         }, wait);
       }
