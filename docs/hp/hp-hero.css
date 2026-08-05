@@ -14,7 +14,7 @@
   min-height: 100vh;
   min-height: 100svh;
   overflow: hidden;
-  background: #0a0f18;
+  background: #f8f8f8;
   color: #fff;
   font-family: var(--hp-hero-font);
   -webkit-font-smoothing: antialiased;
