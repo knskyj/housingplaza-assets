@@ -3,18 +3,18 @@
  */
 
 #housing {
-  --hp-in-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hp-in-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --hp-shutter-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --hp-shutter-bg: #072653;
 }
 
-/* —— Fade up —— */
+/* —— Fade up（ふわっと：距離＋長め＋柔らかい ease） —— */
 #housing [data-hp-inview] {
   opacity: 0;
-  transform: translate3d(0, 22px, 0);
+  transform: translate3d(0, 36px, 0);
   transition:
-    opacity 1.15s var(--hp-in-ease),
-    transform 1.15s var(--hp-in-ease);
+    opacity 1.5s var(--hp-in-ease),
+    transform 1.55s var(--hp-in-ease);
   transition-delay: 0s;
 }
 
@@ -23,11 +23,11 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* —— Stagger（親が一度交差 → 子へ同時 .is-in。短い delay で重ねる） —— */
+/* —— Stagger —— */
 #housing [data-hp-stagger] > [data-hp-inview] {
-  transform: translate3d(0, 22px, 0);
-  transition-duration: 1.15s, 1.15s;
-  transition-delay: calc(var(--hp-stagger, 0) * 150ms);
+  transform: translate3d(0, 36px, 0);
+  transition-duration: 1.5s, 1.55s;
+  transition-delay: calc(var(--hp-stagger, 0) * 160ms);
 }
 
 #housing [data-hp-stagger] > [data-hp-inview].is-in {
