@@ -19,7 +19,7 @@
   }
 
   load("https://knskyj.github.io/housingplaza-assets/hp/hp-page.js?v=1");
-  load("https://knskyj.github.io/housingplaza-assets/hp/hp-loading.js?v=12");
+  load("https://knskyj.github.io/housingplaza-assets/hp/hp-loading.js?v=13");
   load("https://knskyj.github.io/housingplaza-assets/hp/hp-header.js?v=23");
   load("https://knskyj.github.io/housingplaza-assets/hp/hp-hero.js?v=9");
 })();

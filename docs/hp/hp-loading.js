@@ -271,12 +271,18 @@
       });
 
       var syncScrollVisibility = function () {
-        var scrolled =
-          (window.scrollY || document.documentElement.scrollTop) > 80;
+        var scrollY = window.scrollY || document.documentElement.scrollTop;
+        var scrolled = scrollY > 80;
+        var doc = document.documentElement;
+        var atBottom =
+          scrolled &&
+          scrollY + window.innerHeight >= doc.scrollHeight - 48;
         scrollBtn.classList.toggle("is-hidden", scrolled);
         pageTop.classList.toggle("is-visible", scrolled);
+        pageTop.classList.toggle("is-at-bottom", atBottom);
       };
       window.addEventListener("scroll", syncScrollVisibility, { passive: true });
+      window.addEventListener("resize", syncScrollVisibility, { passive: true });
       syncScrollVisibility();
     }
   });

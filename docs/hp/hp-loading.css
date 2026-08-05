@@ -245,7 +245,7 @@ html.hp-preload .hp-loading.is-active,
   height: 100%;
 }
 
-.hp-pagetop.is-visible .hp-pagetop__icon {
+.hp-pagetop.is-at-bottom .hp-pagetop__icon {
   animation: hp-scroll-nudge-up 1.6s ease infinite;
 }
 
@@ -284,7 +284,7 @@ html.hp-preload .hp-loading.is-active,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hp-pagetop.is-visible .hp-pagetop__icon {
+  .hp-pagetop.is-at-bottom .hp-pagetop__icon {
     animation: none;
   }
 }
