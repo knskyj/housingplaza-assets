@@ -1,5 +1,6 @@
-/* Housingplaza — shared inview / shutter / Infcurion button motion
+/* Housingplaza — shared inview / shutter
  * Scoped under #housing. Driven by hp-inview.js (.is-in).
+ * Button wipe hover: 保留（hp-footer / hp-header のソリッドホバーを使用）
  */
 
 #housing {
@@ -67,83 +68,13 @@
   transform: scale(1);
 }
 
-/* —— Infcurion 風ボタン：左から width で塗る（transform 不使用＝本体の揺れ防止） —— */
-#housing .hp-footer__btn::before,
-#housing .hp-header__cta::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: auto;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  width: 0;
-  height: auto;
-  transform: none;
-  transition: width 0.45s var(--hp-in-ease);
-  pointer-events: none;
-}
-
-/* 枠ボタン：ネイビーが左から（白文字固定） */
-#housing .hp-footer__btn::before {
-  background: var(--hp-footer-navy, #072653);
-}
-
-/* お問い合わせ／ヘッダー CTA：ベースより濃いネイビーが左から（白文字固定） */
-#housing .hp-footer__btn--mail::before,
-#housing .hp-header__cta::before {
-  background: var(--hp-footer-deep, #051a38);
-}
-
-#housing .hp-header__cta::before {
-  background: var(--hp-navy-hover, #051a38);
-}
-
-@media (hover: hover) {
-  #housing .hp-footer__btn:hover::before,
-  #housing .hp-footer__btn:focus-visible::before,
-  #housing .hp-header__cta:hover::before,
-  #housing .hp-header__cta:focus-visible::before {
-    width: 100%;
-  }
-
-  #housing .hp-footer__btn:hover,
-  #housing .hp-footer__btn:focus-visible,
-  #housing .hp-footer__btn--mail:hover,
-  #housing .hp-footer__btn--mail:focus-visible {
-    color: #fff !important;
-    border-color: #fff;
-    transform: none;
-  }
-
-  #housing .hp-footer__btn--mail:hover,
-  #housing .hp-footer__btn--mail:focus-visible {
-    border-color: var(--hp-footer-deep, #051a38);
-  }
-
-  #housing .hp-header__cta:hover,
-  #housing .hp-header__cta:focus-visible {
-    color: var(--hp-white, #fff) !important;
-    transform: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   #housing [data-hp-inview],
   #housing [data-hp-stagger] > [data-hp-inview],
   #housing [data-hp-shutter]::after,
-  #housing [data-hp-shutter] > img,
-  #housing .hp-footer__btn::before,
-  #housing .hp-header__cta::before {
+  #housing [data-hp-shutter] > img {
     transition: none !important;
     animation: none !important;
-  }
-
-  #housing .hp-footer__btn:hover::before,
-  #housing .hp-footer__btn:focus-visible::before,
-  #housing .hp-header__cta:hover::before,
-  #housing .hp-header__cta:focus-visible::before {
-    width: 100%;
   }
 
   #housing [data-hp-inview],
