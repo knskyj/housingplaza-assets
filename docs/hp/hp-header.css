@@ -31,7 +31,7 @@ body:has(#housing) {
   --hp-header-margin-side: clamp(1.5rem, 4vw, 3.5rem);
 }
 
-/* Infcurion Insight 風：外部リンク右アイコン */
+/* Infcurion Insight 風：外部リンク右アイコン（メディア SVG を currentColor で着色） */
 #housing a.hp-ext,
 #housing .hp-ext {
   display: inline-flex !important;
@@ -40,44 +40,32 @@ body:has(#housing) {
 }
 
 #housing .hp-ext__icon {
-  position: relative;
   flex: 0 0 auto;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: -0.1em;
-  border: 1px solid currentColor;
-  box-sizing: border-box;
-  opacity: 0.85;
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: -0.05em;
+  border: 0;
+  background-color: currentColor;
+  -webkit-mask: url("/app/uploads/sites/1357/2026/08/external-link.svg") center / contain no-repeat;
+  mask: url("/app/uploads/sites/1357/2026/08/external-link.svg") center / contain no-repeat;
+  opacity: 0.9;
 }
 
 #housing .hp-ext__icon::before {
-  content: "";
-  display: block;
-  box-sizing: border-box;
-  width: 140%;
-  height: 140%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(35%, -35%);
-  border-top: 1px solid currentColor;
-  border-right: 1px solid currentColor;
-}
-
-/* メディア画像アイコン（アップロード後に img.hp-ext__icon で利用） */
-#housing img.hp-ext__icon {
-  display: block;
-  width: 0.7rem;
-  height: 0.7rem;
-  margin-top: 0;
-  border: 0;
-  opacity: 0.9;
-  object-fit: contain;
-}
-
-#housing img.hp-ext__icon::before {
   content: none;
   display: none;
+}
+
+#housing img.hp-ext__icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: -0.05em;
+  background: none;
+  -webkit-mask: none;
+  mask: none;
+  object-fit: contain;
+  opacity: 0.9;
 }
 
 #housing .hp-header {
