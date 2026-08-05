@@ -253,14 +253,12 @@
     line-height: 1.45;
   }
 
-  /* モバイルはタイトルを折り返す（Infcurion 同様） */
+  /* 575pxまでは1行省略。折り返しは下の 575 境界 */
   #housing .hp-topics__title {
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: block;
     flex: 1 1 auto;
     min-width: 0;
     align-self: center;
@@ -275,6 +273,18 @@
     margin-bottom: 0;
     align-self: center;
     flex-shrink: 0;
+  }
+}
+
+/* お知らせと同じ：タイトル折り返し */
+@media (max-width: 575px) {
+  #housing .hp-topics__title {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
