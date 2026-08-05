@@ -10,7 +10,7 @@
   z-index: 1;
   margin: 0 !important;
   padding: 150px var(--hp-margin-side, 12.25vw) !important;
-  background: #f6f6f6 !important;
+  background: #f5f5f5 !important;
   color: var(--hp-stores-ink);
   font-family: var(--hp-stores-font);
   -webkit-font-smoothing: antialiased;
