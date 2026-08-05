@@ -32,7 +32,8 @@ body:has(#housing) {
 }
 
 /* Infcurion Insight 風：外部リンク右アイコン */
-#housing a.hp-ext {
+#housing a.hp-ext,
+#housing .hp-ext {
   display: inline-flex !important;
   align-items: center;
   gap: 0.4em;
@@ -61,6 +62,22 @@ body:has(#housing) {
   transform: translate(35%, -35%);
   border-top: 1px solid currentColor;
   border-right: 1px solid currentColor;
+}
+
+/* メディア画像アイコン（アップロード後に img.hp-ext__icon で利用） */
+#housing img.hp-ext__icon {
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: 0;
+  border: 0;
+  opacity: 0.9;
+  object-fit: contain;
+}
+
+#housing img.hp-ext__icon::before {
+  content: none;
+  display: none;
 }
 
 #housing .hp-header {

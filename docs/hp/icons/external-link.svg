@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+  <!-- Infcurion Insight 風：枠＋右上コーナー -->
+  <rect x="2.5" y="4.5" width="9" height="9" stroke="currentColor" stroke-width="1.25"/>
+  <path d="M7 2.5h6.5V9" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"/>
+</svg>
