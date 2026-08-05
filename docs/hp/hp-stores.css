@@ -251,21 +251,21 @@
   #housing .hp-stores__body {
     flex: 1 1 auto;
     justify-content: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
     min-width: 0;
-    padding: 0.7rem 0.75rem 0.75rem;
+    padding: 0.65rem 0.7rem 0.7rem;
   }
 
   #housing .hp-stores__name {
     font-size: 0.95rem;
   }
 
-  /* 住所は隠す。電話・営業時間のみ */
-  #housing .hp-stores__meta li:first-child {
-    display: none;
+  #housing .hp-stores__meta {
+    gap: 0.25rem;
   }
 
   #housing .hp-stores__meta li {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
+    line-height: 1.4;
   }
 }
