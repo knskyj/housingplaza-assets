@@ -260,9 +260,8 @@
     }
 
     function closeDrawer() {
-      if (!root.classList.contains("is-open") && !root.classList.contains("is-drawer-closing")) {
-        return;
-      }
+      if (root.classList.contains("is-drawer-closing")) return;
+      if (!root.classList.contains("is-open")) return;
       if (burger) {
         burger.setAttribute("aria-expanded", "false");
         burger.setAttribute("aria-label", "メニューを開く");
