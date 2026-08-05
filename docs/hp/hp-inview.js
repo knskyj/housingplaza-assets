@@ -84,13 +84,7 @@
       root.querySelectorAll(sel).forEach(wireStagger);
     });
 
-    [
-      ".hp-intro__card-media",
-      ".hp-stores__media",
-      ".hp-panels__media",
-    ].forEach(function (sel) {
-      root.querySelectorAll(sel).forEach(wireShutter);
-    });
+    /* 画像シャッターは一旦オフ */
   }
 
   function observeAll(scope) {
