@@ -392,10 +392,6 @@
     line-height: 1.9;
   }
 
-  #housing .hp-footer__br {
-    display: inline;
-  }
-
   #housing .hp-footer__nav {
     gap: 1.75rem 1.25rem;
   }
@@ -408,5 +404,12 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.65rem;
+  }
+}
+
+/* 最小幅のみ読点後で改行（大めのスマホ〜は自然折り返し） */
+@media (max-width: 575px) {
+  #housing .hp-footer__br {
+    display: inline;
   }
 }
