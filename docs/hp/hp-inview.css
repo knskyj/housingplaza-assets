@@ -12,7 +12,7 @@
 /* —— Fade up —— */
 #housing [data-hp-inview] {
   opacity: 0;
-  transform: translate3d(0, 36px, 0);
+  transform: translate3d(0, 30px, 0);
   transition:
     opacity 1.2s var(--hp-in-ease),
     transform 1.2s var(--hp-in-ease);
