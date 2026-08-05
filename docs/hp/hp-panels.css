@@ -1,9 +1,8 @@
-/* Housingplaza panels — 解約手続（全幅）。横長カード・Crafto なし */
+/* Housingplaza panels — 解約手続。横長枠ボタン・Crafto なし */
 
 #housing .hp-panels {
   --hp-panels-navy: #072653;
   --hp-panels-ink: #151515;
-  --hp-panels-line: rgba(34, 34, 34, 0.12);
   --hp-panels-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
   z-index: 1;
@@ -57,147 +56,11 @@
   display: none !important;
 }
 
-#housing .hp-panels__list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* 左アイコン／右テキストの横長カード */
-#housing .hp-panels__card {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  height: auto;
-  min-height: 0;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: #f5f5f5 !important;
-  color: inherit !important;
-  text-decoration: none !important;
-  box-shadow: none !important;
-  border: 0 !important;
-  border-radius: 4px;
-}
-
-#housing .hp-panels__card:hover,
-#housing .hp-panels__card:focus-visible {
-  outline: none;
-}
-
-#housing .hp-panels__media {
-  position: relative;
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  width: 4.5rem;
-  min-height: 100%;
-  padding: 1rem 0 1rem 1.15rem;
-  color: var(--hp-panels-navy);
-  background: transparent;
-}
-
-#housing .hp-panels__media svg {
-  display: block;
-  width: 2.75rem;
-  height: 2.75rem;
-  fill: currentColor;
-  transition: transform 0.25s ease;
-}
-
-#housing .hp-panels__card:hover .hp-panels__media svg,
-#housing .hp-panels__card:focus-visible .hp-panels__media svg {
-  transform: scale(1.08);
-}
-
-#housing .hp-panels__body {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  justify-content: center;
-  gap: 0.4rem;
-  min-width: 0;
-  padding: 1rem 1.25rem 1.1rem 1rem;
-  border-top: 0;
-  border-left: 0;
-}
-
-#housing .hp-panels__ja {
-  margin: 0;
-  color: var(--hp-panels-navy);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  line-height: 1.4;
-}
-
-#housing .hp-panels__card-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin: 0;
-}
-
-#housing .hp-panels__name {
-  margin: 0;
-  min-width: 0;
-  color: var(--hp-panels-ink);
-  font-size: clamp(0.97rem, 1.3vw, 1.09rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-/* CANCEL FORM: 外部リンクアイコンは M の直後（インライン。丸矢印は右端のまま） */
-#housing .hp-panels__name .hp-ext__icon {
-  display: inline-block;
-  width: 0.7em;
-  height: 0.7em;
-  margin-left: 0.22em;
-  margin-top: -0.08em;
-  vertical-align: middle;
-  flex: none;
-}
-
-#housing .hp-panels__arrow {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid var(--hp-panels-navy);
-  border-radius: 50%;
-  color: var(--hp-panels-navy);
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
-}
-
-#housing .hp-panels__arrow svg {
-  width: 0.9rem;
-  height: 0.9rem;
-  display: block;
-}
-
-#housing .hp-panels__card:hover .hp-panels__arrow,
-#housing .hp-panels__card:focus-visible .hp-panels__arrow {
-  background: var(--hp-panels-navy);
-  color: #fff;
-  transform: translateX(2px);
-}
-
-/* 横長枠ボタン（上カードの下） */
 #housing .hp-panels__actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  margin: 1.25rem 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -309,17 +172,8 @@
     margin-bottom: 2rem;
   }
 
-  #housing .hp-panels__list {
-    gap: 0.75rem;
-  }
-
-  #housing .hp-panels__body {
-    padding: 0.85rem 1.1rem 0.9rem 0.9rem;
-  }
-
   #housing .hp-panels__actions {
     gap: 0.85rem;
-    margin-top: 1rem;
   }
 
   #housing .hp-panels__action {
@@ -341,12 +195,8 @@
     font-size: clamp(1.45rem, 6.5vw, 1.85rem);
   }
 
-  #housing .hp-panels__list,
   #housing .hp-panels__actions {
     grid-template-columns: 1fr;
-  }
-
-  #housing .hp-panels__actions {
     gap: 0.65rem;
   }
 
@@ -358,39 +208,5 @@
   #housing .hp-panels__action-icon {
     width: 2.25rem;
     height: 2.25rem;
-  }
-
-  #housing .hp-panels__media {
-    width: 3.75rem;
-    padding-left: 0.9rem;
-  }
-
-  #housing .hp-panels__media svg {
-    width: 2.35rem;
-    height: 2.35rem;
-  }
-}
-
-@media (max-width: 525px) {
-  #housing .hp-panels__list {
-    gap: 0.65rem;
-  }
-
-  #housing .hp-panels__body {
-    padding: 0.7rem 0.75rem 0.75rem 0.75rem;
-  }
-
-  #housing .hp-panels__name {
-    font-size: 0.95rem;
-  }
-
-  #housing .hp-panels__arrow {
-    width: 1.75rem;
-    height: 1.75rem;
-  }
-
-  #housing .hp-panels__arrow svg {
-    width: 0.8rem;
-    height: 0.8rem;
   }
 }

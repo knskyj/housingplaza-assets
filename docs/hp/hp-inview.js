@@ -85,7 +85,6 @@
       ".hp-intro__cards",
       ".hp-stores__grid",
       ".hp-search__grid",
-      ".hp-panels__list",
       ".hp-panels__actions",
       ".hp-news__list",
     ].forEach(function (sel) {
