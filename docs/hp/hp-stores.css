@@ -166,9 +166,9 @@
 
 #housing .hp-stores__icon {
   flex: 0 0 auto;
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0.1rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: 0.15rem;
   color: var(--hp-stores-navy);
 }
 
