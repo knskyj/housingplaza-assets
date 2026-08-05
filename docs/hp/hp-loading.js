@@ -9,8 +9,64 @@
   "use strict";
 
   var STORAGE_KEY = "hp-top-session-loaded";
-  var MIN_MS = 1600;
+  var MIN_MS = 1200;
   var FADE_MS = 400;
+  var HERO_IMAGE_TIMEOUT = 5000;
+
+  function reduceMotion() {
+    return (
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
+  function firstHeroImageUrl(root) {
+    var hero = root.querySelector("[data-hp-hero]");
+    if (!hero) return "";
+    var fromHero = /url\(["']?([^"')]+)["']?\)/.exec(hero.style.backgroundImage || "");
+    if (fromHero && fromHero[1]) return fromHero[1];
+    var media = root.querySelector(".hp-hero__media");
+    if (!media) return "";
+    var fromMedia = /url\(["']?([^"')]+)["']?\)/.exec(media.style.backgroundImage || "");
+    return fromMedia ? fromMedia[1] : "";
+  }
+
+  function waitForImage(url, timeoutMs) {
+    return new Promise(function (resolve) {
+      if (!url) {
+        resolve(false);
+        return;
+      }
+      var done = false;
+      var finish = function (ok) {
+        if (done) return;
+        done = true;
+        resolve(!!ok);
+      };
+      var img = new Image();
+      img.onload = function () {
+        if (img.decode) {
+          img.decode().then(function () { finish(true); }).catch(function () { finish(true); });
+        } else {
+          finish(true);
+        }
+      };
+      img.onerror = function () { finish(false); };
+      img.src = url;
+      if (img.complete && img.naturalWidth) {
+        finish(true);
+      }
+      setTimeout(function () { finish(false); }, timeoutMs || HERO_IMAGE_TIMEOUT);
+    });
+  }
+
+  function applyHeroFallback(root, url) {
+    var hero = root.querySelector("[data-hp-hero]");
+    if (!hero || !url) return;
+    if (!hero.style.backgroundImage) {
+      hero.style.backgroundImage = 'url("' + url + '")';
+    }
+  }
 
   function reduceMotion() {
     return (
@@ -136,10 +192,22 @@
     var skipLoader =
       !forced && (sessionSeen() || !loading);
 
+    var heroUrl = firstHeroImageUrl(root);
+    applyHeroFallback(root, heroUrl);
+
+    function revealAfterHeroReady(next) {
+      waitForImage(heroUrl, HERO_IMAGE_TIMEOUT).then(function () {
+        next();
+      });
+    }
+
     if (reduceMotion()) {
       enterInstant(root, loading);
     } else if (skipLoader) {
-      enterWithoutLoader(root, loading);
+      /* リロード時も画像準備後に入場（グレー待ちを短く） */
+      revealAfterHeroReady(function () {
+        enterWithoutLoader(root, loading);
+      });
     } else {
       root.classList.add("hp-is-loading", "hp-await-enter");
       root.classList.remove("hp-is-entered");
@@ -157,16 +225,19 @@
       var started = Date.now();
 
       function endLoading() {
-        var wait = Math.max(0, MIN_MS - (Date.now() - started));
-        setTimeout(function () {
-          /* オーバーレイ退場と入場を同時に（画像だけ先に見えてローディングが残るのを防ぐ） */
+        var minWait = Math.max(0, MIN_MS - (Date.now() - started));
+        /* 最低表示時間と先頭画像の準備の両方を待つ */
+        Promise.all([
+          new Promise(function (r) { setTimeout(r, minWait); }),
+          waitForImage(heroUrl, HERO_IMAGE_TIMEOUT),
+        ]).then(function () {
           root.classList.add("hp-end-loading");
           loading.classList.add("is-leaving");
           playEntrance(root, { mark: true });
           setTimeout(function () {
             hideLoader(loading);
           }, FADE_MS);
-        }, wait);
+        });
       }
 
       if (document.readyState === "complete") {

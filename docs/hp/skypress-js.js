@@ -18,7 +18,7 @@
     document.head.appendChild(s);
   }
 
-  load("https://knskyj.github.io/housingplaza-assets/hp/hp-loading.js?v=9");
+  load("https://knskyj.github.io/housingplaza-assets/hp/hp-loading.js?v=10");
   load("https://knskyj.github.io/housingplaza-assets/hp/hp-header.js?v=23");
   load("https://knskyj.github.io/housingplaza-assets/hp/hp-hero.js?v=9");
 })();
