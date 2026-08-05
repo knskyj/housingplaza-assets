@@ -1038,6 +1038,10 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
     pointer-events: none;
   }
 
+  #housing .hp-header.is-header-no-anim .hp-header__bar {
+    transition: none !important;
+  }
+
   #housing .hp-header__burger,
   #housing .hp-header__drawer {
     display: none !important;

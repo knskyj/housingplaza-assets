@@ -352,6 +352,7 @@
 
     var scrollTicking = false;
     var lastScrollY = window.scrollY || 0;
+    var wasPastHero = false;
     var mqHide = window.matchMedia("(min-width: 1100px)");
 
     function heroScrollThreshold() {
@@ -366,7 +367,11 @@
       return Math.max(24, top + hero.offsetHeight - headerH);
     }
 
-    function syncHeaderHide(y, pastHero) {
+    function clearHeaderNoAnim() {
+      root.classList.remove("is-header-no-anim");
+    }
+
+    function syncHeaderHide(y, pastHero, justCrossedDown, goingDown, goingUp) {
       /* PCのみ：ヒーロー過ぎで下スクロール時に隠す／上スクロール・下部で出す */
       if (
         !mqHide.matches ||
@@ -374,17 +379,24 @@
         root.classList.contains("is-mega-open")
       ) {
         root.classList.remove("is-header-hidden");
+        clearHeaderNoAnim();
         return;
       }
       var doc = document.documentElement;
       var nearBottom = y + window.innerHeight >= doc.scrollHeight - 96;
-      var goingDown = y > lastScrollY + 2;
-      var goingUp = y < lastScrollY - 2;
 
-      if (!pastHero || y < 80 || nearBottom || goingUp) {
+      if (!pastHero || nearBottom || goingUp) {
         root.classList.remove("is-header-hidden");
-      } else if (pastHero && goingDown && y > 120) {
+        clearHeaderNoAnim();
+      } else if (pastHero && (goingDown || justCrossedDown)) {
+        /* 境界を下方向に越えた瞬間は白バーが一瞬出ないよう遷移なしで隠す */
+        if (justCrossedDown) root.classList.add("is-header-no-anim");
         root.classList.add("is-header-hidden");
+        if (justCrossedDown) {
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(clearHeaderNoAnim);
+          });
+        }
       }
     }
 
@@ -394,9 +406,14 @@
       window.requestAnimationFrame(function () {
         var y = window.scrollY || document.documentElement.scrollTop;
         var pastHero = y > heroScrollThreshold();
+        var goingDown = y > lastScrollY + 2;
+        var goingUp = y < lastScrollY - 2;
+        var justCrossedDown = pastHero && !wasPastHero && y >= lastScrollY;
+
         if (pastHero) root.classList.add("is-scrolled");
         else root.classList.remove("is-scrolled");
-        syncHeaderHide(y, pastHero);
+        syncHeaderHide(y, pastHero, justCrossedDown, goingDown, goingUp);
+        wasPastHero = pastHero;
         lastScrollY = y;
         scrollTicking = false;
       });
