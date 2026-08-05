@@ -200,25 +200,22 @@
   }
 
   #housing .hp-panels__action {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.65rem;
-    padding: 1rem 0.65rem;
-    text-align: center;
+    gap: 0.55rem;
+    padding: 0.85rem 0.7rem;
   }
 
   #housing .hp-panels__action-icon {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem;
+    height: 2rem;
   }
 
   #housing .hp-panels__action-name {
-    font-size: 0.85rem;
-    letter-spacing: 0.04em;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
   }
 
   #housing .hp-panels__action-cta {
-    padding: 0.3rem 0.75rem;
+    padding: 0.28rem 0.65rem;
+    font-size: 0.7rem;
   }
 }
