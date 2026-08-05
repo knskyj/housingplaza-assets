@@ -644,11 +644,11 @@ body:has(#housing) {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  gap: 6px;
+  gap: 5px;
   grid-column: 3;
   justify-self: end;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.2rem;
+  height: 2.2rem;
   padding: 0;
   border: 0;
   background: transparent;
@@ -657,7 +657,7 @@ body:has(#housing) {
 
 #housing .hp-header__burger span {
   display: block;
-  width: 1.7rem;
+  width: 1.4rem;
   height: 1.5px;
   margin: 0 auto;
   background: var(--hp-navy);
@@ -675,14 +675,14 @@ body:has(#housing) {
 }
 
 #housing .hp-header.is-open .hp-header__burger span:nth-child(1) {
-  transform: translateY(7.5px) rotate(45deg);
+  transform: translateY(6.5px) rotate(45deg);
 }
 #housing .hp-header.is-open .hp-header__burger span:nth-child(2) {
   opacity: 0;
   transform: scaleX(0);
 }
 #housing .hp-header.is-open .hp-header__burger span:nth-child(3) {
-  transform: translateY(-7.5px) rotate(-45deg);
+  transform: translateY(-6.5px) rotate(-45deg);
 }
 
 /* ===== いい生活テーマ隔離 =====
