@@ -149,6 +149,16 @@ body:has(#housing) {
     transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* 下スクロールでバーだけ隠す（PC / モバイル共通。transform は bar のみ） */
+#housing .hp-header.is-header-hidden:not(.is-open):not(.is-mega-open) .hp-header__bar {
+  transform: translate3d(0, -100%, 0);
+  pointer-events: none;
+}
+
+#housing .hp-header.is-header-no-anim .hp-header__bar {
+  transition: none !important;
+}
+
 #housing .hp-header--overlay .hp-header__bar {
   position: absolute;
   inset: 0 0 auto;
@@ -1030,16 +1040,6 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing .hp-header__cta {
     display: inline-flex;
     grid-column: 5;
-  }
-
-  /* PC: 下スクロールでバーだけ隠す（transform は bar のみ） */
-  #housing .hp-header.is-header-hidden:not(.is-open):not(.is-mega-open) .hp-header__bar {
-    transform: translate3d(0, -100%, 0);
-    pointer-events: none;
-  }
-
-  #housing .hp-header.is-header-no-anim .hp-header__bar {
-    transition: none !important;
   }
 
   #housing .hp-header__burger,

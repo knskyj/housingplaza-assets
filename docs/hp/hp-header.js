@@ -353,7 +353,6 @@
     var scrollTicking = false;
     var lastScrollY = window.scrollY || 0;
     var wasPastHero = false;
-    var mqHide = window.matchMedia("(min-width: 1100px)");
 
     function heroScrollThreshold() {
       var hero =
@@ -372,9 +371,8 @@
     }
 
     function syncHeaderHide(y, pastHero, justCrossedDown, goingDown, goingUp) {
-      /* PCのみ：ヒーロー過ぎで下スクロール時に隠す／上スクロール・下部で出す */
+      /* ヒーロー過ぎで下スクロール時に隠す／上スクロール・下部で出す（全幅共通） */
       if (
-        !mqHide.matches ||
         root.classList.contains("is-open") ||
         root.classList.contains("is-mega-open")
       ) {
@@ -421,11 +419,6 @@
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
-    if (typeof mqHide.addEventListener === "function") {
-      mqHide.addEventListener("change", onScroll);
-    } else if (typeof mqHide.addListener === "function") {
-      mqHide.addListener(onScroll);
-    }
     onScroll();
   });
 })();
