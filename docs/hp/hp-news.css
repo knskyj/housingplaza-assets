@@ -68,6 +68,8 @@
 }
 
 #housing .hp-news__body {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 
@@ -101,6 +103,11 @@
 #housing .hp-news__item:focus-visible {
   outline: none;
   opacity: 0.72;
+}
+
+/* meta を潰して time / badge を item の flex 子にする */
+#housing .hp-news__meta {
+  display: contents;
 }
 
 #housing .hp-news__item time {
@@ -158,11 +165,6 @@
   letter-spacing: 0.06em;
   text-decoration: none !important;
   transition: opacity 0.25s ease;
-}
-
-#housing .hp-news__body {
-  display: flex;
-  flex-direction: column;
 }
 
 #housing .hp-news__more:hover,
