@@ -1,4 +1,4 @@
-/* Housingplaza panels — 解約手続。intro カードボタン同形・Crafto なし */
+/* Housingplaza panels — 解約手続（全幅）。横長カード・Crafto なし */
 
 #housing .hp-panels {
   --hp-panels-navy: #072653;
@@ -60,17 +60,19 @@
 #housing .hp-panels__list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: 0.85rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* intro カードボタン同形: 上写真／下テキスト＋丸矢印 */
+/* 左画像／右テキストの横長カード */
 #housing .hp-panels__card {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  flex-direction: row;
+  align-items: stretch;
+  height: auto;
+  min-height: 0;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -90,8 +92,11 @@
 #housing .hp-panels__media {
   position: relative;
   display: block;
-  width: 100%;
-  aspect-ratio: 16 / 11;
+  flex: 0 0 34%;
+  width: 34%;
+  max-width: 11rem;
+  aspect-ratio: 4 / 3;
+  align-self: center;
   overflow: hidden;
   background: #d8d8d8;
 }
@@ -114,10 +119,13 @@
 #housing .hp-panels__body {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  gap: 0.35rem;
-  padding: 1.35rem 1.35rem 1.5rem;
-  border-top: 1px solid var(--hp-panels-line);
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 1rem 1.25rem 1.1rem 1.35rem;
+  border-top: 0;
+  border-left: 1px solid var(--hp-panels-line);
 }
 
 #housing .hp-panels__ja {
@@ -195,11 +203,11 @@
   }
 
   #housing .hp-panels__list {
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
   #housing .hp-panels__body {
-    padding: 1.15rem 1.1rem 1.25rem;
+    padding: 0.85rem 1.1rem 0.9rem 1.15rem;
   }
 }
 
@@ -219,10 +227,33 @@
 
   #housing .hp-panels__list {
     grid-template-columns: 1fr;
-    gap: 0.85rem;
+  }
+}
+
+@media (max-width: 525px) {
+  #housing .hp-panels__list {
+    gap: 0.65rem;
   }
 
   #housing .hp-panels__media {
-    aspect-ratio: 16 / 10;
+    max-width: 7.5rem;
+  }
+
+  #housing .hp-panels__body {
+    padding: 0.7rem 0.75rem 0.75rem 1rem;
+  }
+
+  #housing .hp-panels__name {
+    font-size: 0.95rem;
+  }
+
+  #housing .hp-panels__arrow {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  #housing .hp-panels__arrow svg {
+    width: 0.8rem;
+    height: 0.8rem;
   }
 }
