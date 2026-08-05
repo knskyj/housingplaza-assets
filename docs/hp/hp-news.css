@@ -121,7 +121,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* topics バッジと同型 */
+/* topics 形＋ネイビー */
 #housing .hp-news__badge {
   display: inline-flex;
   align-items: center;
@@ -129,9 +129,9 @@
   flex: 0 0 auto;
   margin: 0;
   padding: 3px 12px;
-  border: 1px solid var(--hp-news-muted);
+  border: 1px solid var(--hp-news-navy);
   border-radius: 20px;
-  color: var(--hp-news-muted);
+  color: var(--hp-news-navy);
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.06em;
