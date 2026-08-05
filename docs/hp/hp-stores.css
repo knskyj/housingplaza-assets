@@ -194,6 +194,7 @@
   }
 }
 
+/* 576px〜: 2列＋住所・電話・営業時間まで表示 */
 @media (max-width: 767px) {
   #housing .hp-stores {
     padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
@@ -213,12 +214,58 @@
     gap: 0.75rem;
   }
 
-  #housing .hp-stores__badge,
-  #housing .hp-stores__meta {
+  #housing .hp-stores__body {
+    padding: 0.85rem 0.75rem 1rem;
+  }
+
+  #housing .hp-stores__meta li {
+    font-size: 0.75rem;
+  }
+}
+
+/* 575px以下: 1列・左画像／右に店名・電話・営業時間 */
+@media (max-width: 575px) {
+  #housing .hp-stores__grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  #housing .hp-stores__card {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 0;
+  }
+
+  #housing .hp-stores__media {
+    flex: 0 0 34%;
+    width: 34%;
+    max-width: 7.5rem;
+    aspect-ratio: 1;
+    align-self: stretch;
+  }
+
+  #housing .hp-stores__badge {
     display: none;
   }
 
   #housing .hp-stores__body {
-    padding: 0.85rem 0.75rem 1rem;
+    flex: 1 1 auto;
+    justify-content: center;
+    gap: 0.4rem;
+    min-width: 0;
+    padding: 0.7rem 0.75rem 0.75rem;
+  }
+
+  #housing .hp-stores__name {
+    font-size: 0.95rem;
+  }
+
+  /* 住所は隠す。電話・営業時間のみ */
+  #housing .hp-stores__meta li:first-child {
+    display: none;
+  }
+
+  #housing .hp-stores__meta li {
+    font-size: 0.72rem;
   }
 }
