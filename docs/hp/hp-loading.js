@@ -6,8 +6,8 @@
 (function () {
   "use strict";
 
-  var MIN_MS = 1200;
-  var FADE_MS = 400;
+  var MIN_MS = 800;
+  var FADE_MS = 350;
   var HERO_IMAGE_TIMEOUT = 5000;
 
   function reduceMotion() {
