@@ -111,10 +111,11 @@ html.hp-preload #housing .hp-loading,
   }
 }
 
-/* —— First-view entrance（#housing.hp-await-enter で確実にゲート） —— */
+/* —— First-view entrance（#housing.hp-await-enter で確実にゲート） ——
+   overlay ヘッダーは高さ0のため % 移動は効かない → vh / 固定量を使う */
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-header {
-  transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -120px, 0);
 }
 
 #housing.hp-await-enter.hp-is-entered .hp-header {
