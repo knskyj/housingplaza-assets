@@ -372,8 +372,7 @@
 
   #housing .hp-footer__actions {
     width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr;
   }
 
   #housing .hp-footer__btn {
