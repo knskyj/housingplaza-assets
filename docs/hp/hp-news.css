@@ -5,7 +5,7 @@
   --hp-news-ink: #222222;
   --hp-news-muted: #7f7f7f;
   --hp-news-line: rgba(34, 34, 34, 0.12);
-  --hp-news-bg: #f5f5f5;
+  --hp-news-bg: #fff;
   --hp-news-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
   z-index: 1;
