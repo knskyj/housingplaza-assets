@@ -104,12 +104,19 @@
   #housing .hp-footer__btn:focus-visible {
     color: var(--hp-footer-navy, #072653) !important;
     border-color: #fff;
+    /* 塗りが乗ってから文字色を切り替えて中間色のチラつきを防ぐ */
+    transition:
+      color 0s linear 0.28s,
+      border-color 0.3s ease;
   }
 
   #housing .hp-footer__btn--mail:hover,
   #housing .hp-footer__btn--mail:focus-visible {
     color: #fff !important;
     border-color: #fff;
+    transition:
+      color 0s linear 0.28s,
+      border-color 0.3s ease;
   }
 
   #housing .hp-header__cta:hover,

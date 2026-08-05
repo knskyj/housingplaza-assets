@@ -122,8 +122,10 @@
   background: transparent !important;
   box-shadow: none !important;
   box-sizing: border-box;
-  /* 左から塗りは ::before（hp-inview.css） */
-  transition: color 0.35s ease, border-color 0.35s ease;
+  /* 左から塗りは ::before。文字色は補間せず塗りに合わせて遅延スナップ（波打ち防止） */
+  transition:
+    color 0s linear 0.36s,
+    border-color 0.3s ease;
 }
 
 #housing .hp-footer__btn svg {
