@@ -126,7 +126,109 @@
   margin: 0;
   padding-left: 0;
   text-align: left !important;
+}
+
+/* ローディング無し（下層など）用のフォールバック入場。TOP は hp-loading.css が制御 */
+#housing:not([data-hp-top]) .hp-hero__copy-inner {
   animation: hp-hero-copy-in 1s ease-out 0.15s both;
+}
+
+/* スクロール誘導（WeeReform 風） */
+#housing .hp-hero__scroll {
+  position: absolute;
+  right: 30px;
+  bottom: 40px;
+  z-index: 6;
+  box-sizing: border-box;
+  display: block;
+  width: 56px;
+  height: 56px;
+  color: #fff;
+  text-decoration: none !important;
+  opacity: 1;
+}
+
+#housing .hp-hero__scroll .hp-hero__scroll-ring {
+  position: relative;
+  display: block;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 100%;
+}
+
+#housing .hp-hero__scroll .hp-hero__scroll-ring::before,
+#housing .hp-hero__scroll .hp-hero__scroll-ring::after {
+  content: "";
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#housing .hp-hero__scroll .hp-hero__scroll-ring::after {
+  opacity: 0;
+}
+
+#housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::before {
+  animation: hp-hero-scroll-arrow1 1.6s ease infinite;
+}
+
+#housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::after {
+  animation: hp-hero-scroll-arrow2 1.6s ease infinite;
+}
+
+@keyframes hp-hero-scroll-arrow1 {
+  0% {
+    transform: translate(-50%, -50%) translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+  45%,
+  100% {
+    transform: translate(-50%, -50%) translateY(8px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes hp-hero-scroll-arrow2 {
+  0%,
+  45% {
+    transform: translate(-50%, -50%) translateY(-8px) rotate(45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+@media (hover: hover) {
+  #housing .hp-hero__scroll:not(.is-hidden):hover {
+    opacity: 0.7;
+  }
+
+  #housing .hp-hero__scroll:not(.is-hidden):hover .hp-hero__scroll-ring {
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+@media (max-width: 800px) {
+  #housing .hp-hero__scroll {
+    right: 18px;
+    bottom: 28px;
+    width: 48px;
+    height: 48px;
+  }
+
+  #housing .hp-hero__scroll .hp-hero__scroll-ring {
+    width: 48px;
+    height: 48px;
+  }
 }
 
 #housing .hp-hero__title {
@@ -207,6 +309,11 @@
   }
 
   #housing .hp-hero__copy-inner {
+    animation: none !important;
+  }
+
+  #housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::before,
+  #housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::after {
     animation: none !important;
   }
 }

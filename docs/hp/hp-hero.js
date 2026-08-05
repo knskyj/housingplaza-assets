@@ -28,6 +28,12 @@
     if (!root || root.getAttribute("data-hp-ready") === "1") return;
     root.setAttribute("data-hp-ready", "1");
 
+    var housing = document.querySelector("#housing");
+    var waitEnter =
+      housing &&
+      housing.hasAttribute("data-hp-top") &&
+      !housing.classList.contains("hp-is-entered");
+
     var slides = Array.prototype.slice.call(
       root.querySelectorAll("[data-hp-hero-slide]")
     );
@@ -43,6 +49,7 @@
 
     var timer = null;
     var fading = false;
+    var started = false;
 
     function clearTimer() {
       if (timer) {
@@ -53,7 +60,7 @@
 
     function schedule() {
       clearTimer();
-      if (reduceMotion() || document.hidden) return;
+      if (!started || reduceMotion() || document.hidden) return;
       timer = setTimeout(next, INTERVAL_MS);
     }
 
@@ -91,12 +98,26 @@
       }, reduceMotion() ? 0 : FADE_MS);
     }
 
+    function start() {
+      if (started) return;
+      started = true;
+      restartZoom(slides[index]);
+      schedule();
+    }
+
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) clearTimer();
       else schedule();
     });
 
-    restartZoom(slides[index]);
-    schedule();
+    if (waitEnter) {
+      window.addEventListener("hp:entered", start, { once: true });
+      /* フォールバック: ローディングJS未読込でも開始 */
+      setTimeout(function () {
+        if (!started) start();
+      }, 4000);
+    } else {
+      start();
+    }
   });
 })();

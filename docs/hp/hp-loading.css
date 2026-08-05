@@ -1,0 +1,189 @@
+/* Housingplaza TOP loading + first-view entrance — #housing スコープ・Crafto なし
+   中身スロット（.hp-loading__slot）差し替えでロゴ等に変更可 */
+
+html.hp-preload {
+  overflow: hidden;
+}
+
+html.hp-preload body {
+  overflow: hidden;
+}
+
+#housing .hp-loading {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background: #f8f8f8;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease 0.35s;
+}
+
+/* preload 中は [hidden] より優先して表示（FOUC 防止） */
+html.hp-preload #housing .hp-loading {
+  display: flex !important;
+}
+
+#housing.hp-end-loading .hp-loading {
+  opacity: 0;
+}
+
+/* 差し替え用スロット */
+#housing .hp-loading__slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#housing .hp-loading__spinner {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+#housing .hp-loading__spinner::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+#housing .hp-loading__circular {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  transform-origin: center center;
+  animation: hp-loading-rotate 2s linear infinite;
+}
+
+#housing .hp-loading__path {
+  fill: none;
+  stroke: #072653;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: hp-loading-dash 1.5s ease-in-out infinite;
+}
+
+@keyframes hp-loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hp-loading-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124;
+  }
+}
+
+@media (max-width: 800px) {
+  #housing .hp-loading__spinner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* —— First-view entrance (gated by html.hp-preload / #housing.hp-is-entered) —— */
+
+html.hp-preload #housing:not(.hp-is-entered) .hp-header {
+  transform: translate3d(0, -100%, 0);
+}
+
+#housing.hp-is-entered .hp-header {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.hp-preload #housing:not(.hp-is-entered) .hp-hero__title,
+html.hp-preload #housing:not(.hp-is-entered) .hp-hero__lead {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+#housing.hp-is-entered .hp-hero__title,
+#housing.hp-is-entered .hp-hero__lead {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#housing.hp-is-entered .hp-hero__lead {
+  transition-delay: 0.12s;
+}
+
+html.hp-preload #housing:not(.hp-is-entered) .hp-topics {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+}
+
+#housing.hp-is-entered .hp-topics {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 1s ease 0.2s,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+html.hp-preload #housing:not(.hp-is-entered) .hp-hero__scroll {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  pointer-events: none;
+}
+
+#housing.hp-is-entered .hp-hero__scroll {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 0.8s ease 0.45s,
+    transform 0.7s ease 0.45s;
+  pointer-events: auto;
+}
+
+#housing.hp-is-entered .hp-hero__scroll.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #housing .hp-loading__circular,
+  #housing .hp-loading__path {
+    animation: none;
+  }
+
+  html.hp-preload #housing:not(.hp-is-entered) .hp-header,
+  html.hp-preload #housing:not(.hp-is-entered) .hp-hero__title,
+  html.hp-preload #housing:not(.hp-is-entered) .hp-hero__lead,
+  html.hp-preload #housing:not(.hp-is-entered) .hp-topics,
+  html.hp-preload #housing:not(.hp-is-entered) .hp-hero__scroll,
+  #housing.hp-is-entered .hp-header,
+  #housing.hp-is-entered .hp-hero__title,
+  #housing.hp-is-entered .hp-hero__lead,
+  #housing.hp-is-entered .hp-topics,
+  #housing.hp-is-entered .hp-hero__scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
