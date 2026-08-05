@@ -66,7 +66,7 @@
   list-style: none;
 }
 
-/* 左画像／右テキストの横長カード */
+/* 左アイコン／右テキストの横長カード */
 #housing .hp-panels__card {
   display: flex;
   flex-direction: row;
@@ -91,29 +91,28 @@
 
 #housing .hp-panels__media {
   position: relative;
-  display: block;
-  flex: 0 0 34%;
-  width: 34%;
-  max-width: 11rem;
-  aspect-ratio: 4 / 3;
-  align-self: center;
-  overflow: hidden;
-  background: #d8d8d8;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  min-height: 100%;
+  padding: 1rem 0 1rem 1.15rem;
+  color: var(--hp-panels-navy);
+  background: transparent;
 }
 
-#housing .hp-panels__media img {
+#housing .hp-panels__media svg {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1);
-  transition: transform 0.55s ease;
+  width: 2.75rem;
+  height: 2.75rem;
+  fill: currentColor;
+  transition: transform 0.25s ease;
 }
 
-#housing .hp-panels__card:hover .hp-panels__media img,
-#housing .hp-panels__card:focus-visible .hp-panels__media img {
-  transform: scale(1.2);
+#housing .hp-panels__card:hover .hp-panels__media svg,
+#housing .hp-panels__card:focus-visible .hp-panels__media svg {
+  transform: scale(1.08);
 }
 
 #housing .hp-panels__body {
@@ -123,9 +122,9 @@
   justify-content: center;
   gap: 0.4rem;
   min-width: 0;
-  padding: 1rem 1.25rem 1.1rem 1.35rem;
+  padding: 1rem 1.25rem 1.1rem 1rem;
   border-top: 0;
-  border-left: 1px solid var(--hp-panels-line);
+  border-left: 0;
 }
 
 #housing .hp-panels__ja {
@@ -193,7 +192,7 @@
   transform: translateX(2px);
 }
 
-/* 物件検索風の枠ボタン（写真カードの下） */
+/* 横長枠ボタン（上カードの下） */
 #housing .hp-panels__actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -206,18 +205,18 @@
 #housing .hp-panels__action {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 1.1rem;
-  height: 100%;
-  min-height: 13.5rem;
+  justify-content: flex-start;
+  gap: 1rem;
+  height: auto;
+  min-height: 0;
   margin: 0;
-  padding: 2.25rem 1.25rem 2rem;
+  padding: 1.15rem 1.25rem;
   overflow: hidden;
   background: #fff !important;
   color: var(--hp-panels-navy) !important;
-  text-align: center;
+  text-align: left;
   text-decoration: none !important;
   box-shadow: none !important;
   border: 1px solid var(--hp-panels-navy) !important;
@@ -235,8 +234,9 @@
 
 #housing .hp-panels__action-icon {
   display: block;
-  width: 3.125rem;
-  height: 3.125rem;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
   color: inherit;
   transition: color 0.2s ease;
 }
@@ -250,6 +250,8 @@
 
 #housing .hp-panels__action-name {
   margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
   color: var(--hp-panels-navy);
   font-size: clamp(0.97rem, 1.3vw, 1.09rem);
   font-weight: 600;
@@ -274,9 +276,10 @@
 
 #housing .hp-panels__action-cta {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  margin: 0.15rem 0 0;
+  margin: 0;
   padding: 0.35rem 0.95rem;
   background: var(--hp-panels-navy);
   color: #fff;
@@ -311,7 +314,7 @@
   }
 
   #housing .hp-panels__body {
-    padding: 0.85rem 1.1rem 0.9rem 1.15rem;
+    padding: 0.85rem 1.1rem 0.9rem 0.9rem;
   }
 
   #housing .hp-panels__actions {
@@ -320,8 +323,7 @@
   }
 
   #housing .hp-panels__action {
-    min-height: 12rem;
-    padding: 1.75rem 1rem 1.5rem;
+    padding: 1rem 1.1rem;
   }
 }
 
@@ -349,14 +351,23 @@
   }
 
   #housing .hp-panels__action {
-    min-height: 11rem;
     gap: 0.85rem;
-    padding: 1.4rem 0.75rem 1.25rem;
+    padding: 0.95rem 1rem;
   }
 
   #housing .hp-panels__action-icon {
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  #housing .hp-panels__media {
+    width: 3.75rem;
+    padding-left: 0.9rem;
+  }
+
+  #housing .hp-panels__media svg {
+    width: 2.35rem;
+    height: 2.35rem;
   }
 }
 
@@ -365,12 +376,8 @@
     gap: 0.65rem;
   }
 
-  #housing .hp-panels__media {
-    max-width: 7.5rem;
-  }
-
   #housing .hp-panels__body {
-    padding: 0.7rem 0.75rem 0.75rem 1rem;
+    padding: 0.7rem 0.75rem 0.75rem 0.75rem;
   }
 
   #housing .hp-panels__name {
