@@ -351,7 +351,7 @@
 
 @media (max-width: 767px) {
   #housing .hp-footer__contact {
-    padding: 3.25rem var(--hp-margin-side, 9vw) !important;
+    padding: 3.25rem var(--hp-margin-side, 11vw) !important;
   }
 
   #housing .hp-footer__title {
@@ -374,7 +374,7 @@
   }
 
   #housing .hp-footer__main {
-    padding: 3rem var(--hp-margin-side, 9vw) 2.5rem !important;
+    padding: 3rem var(--hp-margin-side, 11vw) 2.5rem !important;
   }
 
   #housing .hp-footer__logo img {
@@ -391,7 +391,7 @@
   }
 
   #housing .hp-footer__bar {
-    padding: 1.15rem var(--hp-margin-side, 9vw) 1.35rem !important;
+    padding: 1.15rem var(--hp-margin-side, 11vw) 1.35rem !important;
   }
 }
 

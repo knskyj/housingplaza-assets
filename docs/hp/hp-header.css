@@ -1075,10 +1075,10 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   }
 }
 
-/* Infcurion SP: --margin-side-sp: 8vw */
+/* Infcurion SP: 左右余白 */
 @media (max-width: 767px) {
   #housing {
-    --hp-margin-side: 9vw;
+    --hp-margin-side: 11vw;
     --hp-header-margin-side: 1.25rem;
   }
 }

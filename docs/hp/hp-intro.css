@@ -218,7 +218,7 @@
 
 @media (max-width: 767px) {
   #housing .hp-intro {
-    padding: 4rem var(--hp-margin-side, 9vw) 4.5rem !important;
+    padding: 4rem var(--hp-margin-side, 11vw) 4.5rem !important;
   }
 
   #housing .hp-intro__brand {

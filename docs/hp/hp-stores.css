@@ -197,7 +197,7 @@
 /* 576px〜: 2列＋住所・電話・営業時間まで表示 */
 @media (max-width: 767px) {
   #housing .hp-stores {
-    padding: 4rem var(--hp-margin-side, 9vw) 4.5rem !important;
+    padding: 4rem var(--hp-margin-side, 11vw) 4.5rem !important;
   }
 
   #housing .hp-stores__en {

@@ -202,7 +202,7 @@
 
 @media (max-width: 899px) {
   #housing .hp-news {
-    padding: 5.5rem var(--hp-margin-side, 9vw) 5rem !important;
+    padding: 5.5rem var(--hp-margin-side, 11vw) 5rem !important;
   }
 
   #housing .hp-news__inner {
