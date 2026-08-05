@@ -9,7 +9,7 @@
   position: relative;
   z-index: 1;
   margin: 0 !important;
-  padding: 150px var(--hp-margin-side, 13vw) !important;
+  padding: 150px var(--hp-margin-side, 12.25vw) !important;
   background: #f6f6f6 !important;
   color: var(--hp-stores-ink);
   font-family: var(--hp-stores-font);
@@ -131,7 +131,8 @@
   flex-direction: column;
   flex: 1;
   gap: 0.55rem;
-  padding: 1.15rem 1.2rem 1.35rem;
+  /* 写真と店名の間隔（上余白） */
+  padding: 1.4rem 1.2rem 1.35rem;
 }
 
 #housing .hp-stores__name {
@@ -181,7 +182,7 @@
 
 @media (max-width: 1099px) {
   #housing .hp-stores {
-    padding: 5.5rem var(--hp-margin-side, 13vw) 6rem !important;
+    padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
   }
 
   #housing .hp-stores__title {
@@ -197,7 +198,7 @@
 /* 576px〜: 2列＋住所・電話・営業時間まで表示 */
 @media (max-width: 767px) {
   #housing .hp-stores {
-    padding: 4rem var(--hp-margin-side, 11vw) 4.5rem !important;
+    padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
   }
 
   #housing .hp-stores__en {
@@ -215,7 +216,7 @@
   }
 
   #housing .hp-stores__body {
-    padding: 0.85rem 0.75rem 1rem;
+    padding: 1.05rem 0.75rem 1rem;
   }
 
   #housing .hp-stores__meta li {
@@ -253,7 +254,8 @@
     justify-content: center;
     gap: 0.4rem;
     min-width: 0;
-    padding: 0.7rem 0.75rem 0.75rem;
+    /* 左写真と店名の間隔 */
+    padding: 0.7rem 0.75rem 0.75rem 1rem;
   }
 
   #housing .hp-stores__name {

@@ -7,7 +7,7 @@
   position: relative;
   z-index: 1;
   margin: 0 !important;
-  padding: 150px var(--hp-margin-side, 13vw) !important;
+  padding: 150px var(--hp-margin-side, 12.25vw) !important;
   background: #fff !important;
   color: var(--hp-search-ink);
   font-family: var(--hp-search-font);
@@ -151,7 +151,7 @@
 
 @media (max-width: 1099px) {
   #housing .hp-search {
-    padding: 5.5rem var(--hp-margin-side, 13vw) 6rem !important;
+    padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
   }
 
   #housing .hp-search__title {
@@ -171,7 +171,7 @@
 
 @media (max-width: 767px) {
   #housing .hp-search {
-    padding: 4rem var(--hp-margin-side, 11vw) 4.5rem !important;
+    padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
   }
 
   #housing .hp-search__en {

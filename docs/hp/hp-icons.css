@@ -1,0 +1,333 @@
+/*
+
+ * Housingplaza icons — SVG via メディア (no icon fonts / mangoose).
+
+ * Upload custom-code/icons/*.svg, then set ICON_BASE_PREVIEW in build-custom-code.py and rebuild.
+
+ * Preview rewrites the media host to /custom-code/icons.
+
+ */
+
+
+
+#housing {
+
+  /* アイコンメディアディレクトリ（末尾スラッシュなし）。変更したら再生成、または下記 url を一括置換 */
+
+  --hp-icon-base: "https://www.housingplaza.jp/app/uploads/sites/1357/2026/08";
+
+}
+
+
+
+#housing .fa-solid.fa-arrow-right {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .fa-solid.fa-arrow-right::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-arrow-right.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-arrow-right.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .fa-solid.fa-location-dot {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .fa-solid.fa-location-dot::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-location-dot.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-location-dot.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .fa-solid.fa-phone {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .fa-solid.fa-phone::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-phone.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-phone.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .fa-solid.fa-clock {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .fa-solid.fa-clock::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-clock.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-clock.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .fa-solid.fa-angle-down {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .fa-solid.fa-angle-down::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-angle-down.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/fa-angle-down.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .icon-feather-phone-call {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .icon-feather-phone-call::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/feather-phone-call.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/feather-phone-call.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .icon-feather-mail {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .icon-feather-mail::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/feather-mail.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/feather-mail.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .icon-feather-search {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .icon-feather-search::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/feather-search.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/feather-search.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .line-icon-Tram {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .line-icon-Tram::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-tram.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-tram.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .line-icon-Location-2 {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .line-icon-Location-2::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-location-2.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-location-2.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .line-icon-Map2 {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .line-icon-Map2::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-map2.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-map2.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}
+
+#housing .line-icon-Home {
+  display: inline-block;
+  line-height: 1;
+  overflow: visible;
+}
+#housing .line-icon-Home::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-home.svg");
+  mask-image: url("https://www.housingplaza.jp/app/uploads/sites/1357/2026/08/line-home.svg");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  line-height: 1;
+}

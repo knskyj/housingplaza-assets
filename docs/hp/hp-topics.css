@@ -27,7 +27,7 @@
   min-height: var(--hp-topics-h);
   /* Crafto section { padding-top/bottom } を打ち消す */
   margin: 0 !important;
-  padding: 0 var(--hp-margin-side, 13vw) !important;
+  padding: 0 var(--hp-margin-side, 12.25vw) !important;
   background: var(--hp-topics-bg) !important;
   color: var(--hp-topics-ink);
   font-family: var(--hp-topics-font);
@@ -207,7 +207,7 @@
     justify-content: flex-start;
     min-height: 0;
     /* 上下均等。左右は Infcurion SP 余白 */
-    padding: 14px var(--hp-margin-side, 11vw) !important;
+    padding: 14px var(--hp-margin-side, 8vw) !important;
   }
 
   #housing .hp-topics__inner {
@@ -284,7 +284,7 @@
   }
 
   #housing .hp-topics {
-    padding: 12px var(--hp-margin-side, 11vw) !important;
+    padding: 12px var(--hp-margin-side, 8vw) !important;
   }
 
   #housing .hp-topics__label {

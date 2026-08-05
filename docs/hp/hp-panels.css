@@ -8,7 +8,7 @@
   position: relative;
   z-index: 1;
   margin: 0 !important;
-  padding: 150px var(--hp-margin-side, 13vw) !important;
+  padding: 150px var(--hp-margin-side, 12.25vw) !important;
   background: #f6f6f6 !important;
   color: var(--hp-panels-ink);
   font-family: var(--hp-panels-font);
@@ -195,7 +195,7 @@
 
 @media (max-width: 1099px) {
   #housing .hp-panels {
-    padding: 5.5rem var(--hp-margin-side, 13vw) 6rem !important;
+    padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
   }
 
   #housing .hp-panels__inner {
@@ -217,7 +217,7 @@
 
 @media (max-width: 767px) {
   #housing .hp-panels {
-    padding: 4rem var(--hp-margin-side, 11vw) 4.5rem !important;
+    padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
   }
 
   #housing .hp-panels__inner {
