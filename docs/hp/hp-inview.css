@@ -11,10 +11,10 @@
 /* —— Fade up —— */
 #housing [data-hp-inview] {
   opacity: 0;
-  transform: translate3d(0, 20px, 0);
+  transform: translate3d(0, 22px, 0);
   transition:
-    opacity 0.95s var(--hp-in-ease),
-    transform 0.95s var(--hp-in-ease);
+    opacity 1.15s var(--hp-in-ease),
+    transform 1.15s var(--hp-in-ease);
   transition-delay: 0s;
 }
 
@@ -25,9 +25,9 @@
 
 /* —— Stagger（親が一度交差 → 子へ同時 .is-in。短い delay で重ねる） —— */
 #housing [data-hp-stagger] > [data-hp-inview] {
-  transform: translate3d(0, 20px, 0);
-  transition-duration: 0.95s, 0.95s;
-  transition-delay: calc(var(--hp-stagger, 0) * 90ms);
+  transform: translate3d(0, 22px, 0);
+  transition-duration: 1.15s, 1.15s;
+  transition-delay: calc(var(--hp-stagger, 0) * 150ms);
 }
 
 #housing [data-hp-stagger] > [data-hp-inview].is-in {
