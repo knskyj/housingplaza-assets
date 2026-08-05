@@ -1,0 +1,32 @@
+/* Housingplaza page transition — サイト内移動のフェード */
+
+html.hp-page {
+  background: #f8f8f8;
+}
+
+html.hp-page body {
+  opacity: 0;
+  transition: opacity 0.38s ease;
+}
+
+/* TOP ローディング中はオーバーレイ下なので body は出してよい */
+html.hp-page.hp-preload body {
+  opacity: 1;
+  transition: none;
+}
+
+html.hp-page.hp-page-enter body {
+  opacity: 1;
+}
+
+html.hp-page.hp-page-leave body {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.hp-page body {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

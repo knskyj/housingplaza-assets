@@ -1,11 +1,12 @@
 /**
- * Housingplaza TOP — loading every visit + entrance after hero image ready.
+ * Housingplaza TOP — session-first loading + entrance after hero image ready.
  * Markup: #housing[data-hp-top] + [data-hp-loading]
- * Hold spinner: ?hp-loading=hold
+ * Hold: ?hp-loading=hold  /  Force: ?hp-loading=1
  */
 (function () {
   "use strict";
 
+  var STORAGE_KEY = "hp-top-session-loaded";
   var MIN_MS = 1200;
   var FADE_MS = 400;
   var HERO_IMAGE_TIMEOUT = 5000;
@@ -15,6 +16,14 @@
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     );
+  }
+
+  function forceLoading() {
+    try {
+      return /(?:^|[?&])hp-loading=(?:1|hold)(?:&|$)/.test(location.search);
+    } catch (e) {
+      return false;
+    }
   }
 
   function holdLoading() {
@@ -31,6 +40,26 @@
     } else {
       fn();
     }
+  }
+
+  function sessionSeen() {
+    try {
+      return sessionStorage.getItem(STORAGE_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function markSession() {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, "1");
+    } catch (e) {}
+  }
+
+  function clearSession() {
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
   }
 
   function firstHeroImageUrl(root) {
@@ -66,9 +95,7 @@
       };
       img.onerror = function () { finish(false); };
       img.src = url;
-      if (img.complete && img.naturalWidth) {
-        finish(true);
-      }
+      if (img.complete && img.naturalWidth) finish(true);
       setTimeout(function () { finish(false); }, timeoutMs || HERO_IMAGE_TIMEOUT);
     });
   }
@@ -95,12 +122,26 @@
 
   function playEntrance(root) {
     root.classList.add("hp-await-enter");
-    root.classList.remove("hp-is-loading", "hp-end-loading");
-    root.classList.remove("hp-is-entered");
+    root.classList.remove("hp-is-loading", "hp-end-loading", "hp-is-entered");
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         root.classList.add("hp-is-entered");
         unlockScroll();
+        markSession();
+        window.dispatchEvent(new CustomEvent("hp:entered"));
+      });
+    });
+  }
+
+  function enterWithoutLoader(root, loading) {
+    hideLoader(loading);
+    unlockScroll();
+    root.classList.add("hp-await-enter");
+    root.classList.remove("hp-is-entered", "hp-is-loading", "hp-end-loading");
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        root.classList.add("hp-is-entered");
+        markSession();
         window.dispatchEvent(new CustomEvent("hp:entered"));
       });
     });
@@ -111,6 +152,7 @@
     unlockScroll();
     root.classList.remove("hp-await-enter", "hp-is-loading", "hp-end-loading");
     root.classList.add("hp-is-entered");
+    markSession();
     window.dispatchEvent(new CustomEvent("hp:entered"));
   }
 
@@ -123,6 +165,9 @@
       document.querySelector("body > .hp-loading[data-hp-loading]");
     var scrollBtn = root.querySelector("[data-hp-hero-scroll]");
     var topics = root.querySelector(".hp-topics");
+    var forced = forceLoading() || holdLoading();
+
+    if (forced) clearSession();
 
     if (loading && loading.parentElement !== document.body) {
       document.body.appendChild(loading);
@@ -131,8 +176,18 @@
     var heroUrl = firstHeroImageUrl(root);
     applyHeroFallback(root, heroUrl);
 
-    if (reduceMotion() || !loading) {
+    var skipLoader = !forced && (sessionSeen() || !loading);
+
+    function afterHero(next) {
+      waitForImage(heroUrl, HERO_IMAGE_TIMEOUT).then(next);
+    }
+
+    if (reduceMotion()) {
       enterInstant(root, loading);
+    } else if (skipLoader) {
+      afterHero(function () {
+        enterWithoutLoader(root, loading);
+      });
     } else {
       root.classList.add("hp-is-loading", "hp-await-enter");
       root.classList.remove("hp-is-entered");
@@ -143,9 +198,7 @@
       loading.setAttribute("aria-busy", "true");
       loading.setAttribute("aria-hidden", "false");
 
-      if (holdLoading()) {
-        return;
-      }
+      if (holdLoading()) return;
 
       var started = Date.now();
 
@@ -164,11 +217,8 @@
         });
       }
 
-      if (document.readyState === "complete") {
-        endLoading();
-      } else {
-        window.addEventListener("load", endLoading, { once: true });
-      }
+      if (document.readyState === "complete") endLoading();
+      else window.addEventListener("load", endLoading, { once: true });
     }
 
     if (scrollBtn && topics) {
