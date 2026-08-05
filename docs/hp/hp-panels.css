@@ -86,7 +86,7 @@
   height: auto;
   min-height: 0;
   margin: 0;
-  padding: 1.15rem 1.25rem;
+  padding: 1.4rem 1.25rem;
   overflow: hidden;
   background: #fff !important;
   color: var(--hp-panels-navy) !important;
@@ -189,7 +189,7 @@
   }
 
   #housing .hp-panels__action {
-    padding: 1rem 1.1rem;
+    padding: 1.25rem 1.1rem;
   }
 }
 
@@ -220,7 +220,7 @@
 
   #housing .hp-panels__action {
     gap: 0.85rem;
-    padding: 0.95rem 1rem;
+    padding: 1.15rem 1rem;
   }
 
   #housing .hp-panels__action-icon {
