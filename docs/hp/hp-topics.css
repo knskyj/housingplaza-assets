@@ -179,8 +179,8 @@
   color: #fff;
 }
 
-/* タブレット: 1行維持。バッジは残す */
-@media (max-width: 1099px) and (min-width: 768px) {
+/* タブレット〜576px: 1行維持。バッジは残す */
+@media (max-width: 1099px) and (min-width: 576px) {
   #housing .hp-topics__type {
     gap: 1rem;
   }
@@ -191,8 +191,39 @@
   }
 }
 
-@media (max-width: 767px) {
-  /* 内容＋余白で高さ決定（余分な min-height だと上寄りに見える） */
+/* 767〜576: まだ1行。字号だけ少し小さく */
+@media (max-width: 767px) and (min-width: 576px) {
+  #housing .hp-topics {
+    padding: 0 var(--hp-margin-side, 8vw) !important;
+  }
+
+  #housing .hp-topics__label,
+  #housing .hp-topics__date {
+    font-size: 13px;
+  }
+
+  #housing .hp-topics__type {
+    gap: 12px;
+  }
+
+  #housing .hp-topics__badge {
+    font-size: 9px;
+    padding: 2px 8px;
+  }
+
+  #housing .hp-topics__link {
+    font-size: 13px;
+  }
+
+  #housing .hp-topics__arrow {
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0.42rem;
+  }
+}
+
+/* 575px以下: TOPICS / 日付 / バッジ / タイトル を折り返し（2段） */
+@media (max-width: 575px) {
   #housing {
     --hp-topics-h: 88px;
   }
@@ -206,7 +237,6 @@
     align-items: center;
     justify-content: flex-start;
     min-height: 0;
-    /* 上下均等。左右は Infcurion SP 余白 */
     padding: 14px var(--hp-margin-side, 8vw) !important;
   }
 
@@ -248,17 +278,18 @@
     max-width: none;
     width: 100%;
     display: flex;
-    align-items: center; /* 2行タイトルの垂直中央に矢印 */
+    align-items: center;
     font-size: 14px;
     line-height: 1.45;
   }
 
-  /* 575pxまでは1行省略。折り返しは下の 575 境界 */
   #housing .hp-topics__title {
-    white-space: nowrap;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: block;
     flex: 1 1 auto;
     min-width: 0;
     align-self: center;
@@ -273,18 +304,6 @@
     margin-bottom: 0;
     align-self: center;
     flex-shrink: 0;
-  }
-}
-
-/* お知らせと同じ：タイトル折り返し */
-@media (max-width: 575px) {
-  #housing .hp-topics__title {
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 
