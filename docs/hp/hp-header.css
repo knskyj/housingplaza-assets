@@ -867,8 +867,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 }
 
 /* モバイルドロワー時: ブランド色フルフェード（Infcurion の緑相当 → navy） */
-#housing .hp-header.is-open .hp-header__backdrop,
-#housing .hp-header.is-drawer-closing .hp-header__backdrop {
+#housing .hp-header__backdrop.is-drawer-veil {
   background: var(--hp-navy);
 }
 

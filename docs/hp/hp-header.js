@@ -236,6 +236,7 @@
 
       if (!drawer) {
         root.classList.remove("is-open", "is-drawer-closing");
+        if (backdrop) backdrop.classList.remove("is-drawer-veil");
         syncBackdrop();
         return;
       }
@@ -253,6 +254,12 @@
         root.classList.remove("is-drawer-closing");
         drawer.hidden = true;
         syncBackdrop();
+        /* フェード完了後に紺ベールを外す（途中で暗転色に戻らないように） */
+        setTimeout(function () {
+          if (backdrop && !isDrawerActive()) {
+            backdrop.classList.remove("is-drawer-veil");
+          }
+        }, FADE_MS);
         drawerHideTimer = null;
       }, DRAWER_MS);
     }
@@ -264,6 +271,7 @@
         drawerHideTimer = null;
       }
       root.classList.remove("is-drawer-closing");
+      if (backdrop) backdrop.classList.add("is-drawer-veil");
       if (drawer) {
         drawer.hidden = false;
         /* アニメ再起動のため一度リフロー */
