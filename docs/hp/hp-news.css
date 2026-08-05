@@ -229,7 +229,7 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 575px) {
   /* 狭い画面は日付＋バッジの次行にタイトル */
   #housing .hp-news__item {
     flex-wrap: wrap;
