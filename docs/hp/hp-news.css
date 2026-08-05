@@ -10,7 +10,7 @@
   position: relative;
   z-index: 1;
   margin: 0 !important;
-  padding: 150px var(--hp-margin-side, 12.25vw) !important;
+  padding: 150px var(--hp-margin-side, 13vw) !important;
   background: var(--hp-news-bg) !important;
   color: var(--hp-news-ink);
   font-family: var(--hp-news-font);
@@ -202,7 +202,7 @@
 
 @media (max-width: 899px) {
   #housing .hp-news {
-    padding: 5.5rem var(--hp-margin-side, 8vw) 5rem !important;
+    padding: 5.5rem var(--hp-margin-side, 9vw) 5rem !important;
   }
 
   #housing .hp-news__inner {

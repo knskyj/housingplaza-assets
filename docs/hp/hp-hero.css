@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: calc(var(--hp-header-h, 76px) + 1.5rem) var(--hp-margin-side, 12.25vw) 3rem;
+  padding: calc(var(--hp-header-h, 76px) + 1.5rem) var(--hp-margin-side, 13vw) 3rem;
   box-sizing: border-box;
   pointer-events: none;
 }
