@@ -193,7 +193,6 @@
 
 #housing .hp-footer__blurb {
   margin: 0;
-  max-width: 26rem;
   color: var(--hp-footer-muted);
   font-size: 0.875rem;
   font-weight: 400;
@@ -389,7 +388,6 @@
   }
 
   #housing .hp-footer__blurb {
-    max-width: none;
     font-size: 0.8125rem;
     line-height: 1.9;
   }
