@@ -127,7 +127,7 @@
   flex: 1 1 auto;
   min-width: 0;
   color: var(--hp-panels-navy);
-  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  font-size: clamp(0.97rem, 1.3vw, 1.09rem);
   font-weight: 600;
   letter-spacing: 0.06em;
   line-height: 1.35;
