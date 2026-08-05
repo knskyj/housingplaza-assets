@@ -47,8 +47,9 @@ body:has(#housing) {
   margin-top: -0.05em;
   border: 0;
   background-color: currentColor;
-  -webkit-mask: url("/app/uploads/sites/1357/2026/08/external-link.svg") center / contain no-repeat;
-  mask: url("/app/uploads/sites/1357/2026/08/external-link.svg") center / contain no-repeat;
+  /* data URI: local preview + /test/ both work without media path */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Crect x='2.5' y='4.5' width='9' height='9' stroke='%23000' stroke-width='1.25'/%3E%3Cpath d='M7 2.5h6.5V9' stroke='%23000' stroke-width='1.25' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Crect x='2.5' y='4.5' width='9' height='9' stroke='%23000' stroke-width='1.25'/%3E%3Cpath d='M7 2.5h6.5V9' stroke='%23000' stroke-width='1.25' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
   opacity: 0.9;
 }
 
@@ -74,6 +75,8 @@ body:has(#housing) {
   font-family: var(--hp-font);
   -webkit-font-smoothing: antialiased;
   isolation: isolate;
+  /* 入場アニメ等で transform が付くと fixed ドロワーが潰れる */
+  transform: none;
 }
 
 #housing .hp-header *,
@@ -820,69 +823,99 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 }
 
 #housing .hp-header__drawer-inner {
-  max-width: none;
-  margin: 0;
-  padding: 0 2rem 1.25rem;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  /* モバイル左右余白。48rem未満のときはこの余白が効く */
+  padding: 0.5rem max(var(--hp-header-margin-side), 8vw) 2rem;
+  box-sizing: border-box;
 }
 
+/* Infcurion 風: 閉じた状態の＋ドロップダウン */
 #housing .hp-header__acc {
   border-bottom: 0;
+  margin: 0;
 }
 
 #housing .hp-header__acc summary {
   list-style: none;
-  cursor: default;
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 1.35rem 0 0.65rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
   position: relative;
-  pointer-events: none;
+  color: var(--hp-ink);
+  user-select: none;
 }
 
 #housing .hp-header__acc summary::-webkit-details-marker {
   display: none;
 }
 
-/* モバイル: 英語サブタイトルは出さない */
-#housing .hp-header__acc-en,
-#housing .hp-header__drawer-link .hp-header__acc-en {
-  display: none;
-}
-
-#housing .hp-header__acc-ja,
-#housing .hp-header__drawer-link .hp-header__acc-ja {
+#housing .hp-header__acc-ja {
   color: var(--hp-ink);
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 0.9rem; /* PCナビと同じ */
+  font-weight: 500;
   letter-spacing: 0.04em;
+  line-height: 1.4;
 }
 
-/* 各セクションタイトル下に区切り線（採用情報リンクは除く） */
-#housing .hp-header__acc > summary {
-  border-bottom: 1px solid var(--hp-divider);
-  padding-bottom: 0.75rem;
-  margin-bottom: 0.35rem;
+#housing .hp-header__acc-plus {
+  position: relative;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 0;
+  background: #f0f0f0;
+  color: var(--hp-navy);
+  box-sizing: border-box;
+}
+
+#housing .hp-header__acc-plus span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+#housing .hp-header__acc-plus span:last-child {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+#housing .hp-header__acc[open] .hp-header__acc-plus span:last-child {
+  transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
 }
 
 #housing .hp-header__drawer-link {
   display: flex;
-  flex-direction: column;
-  gap: 0;
-  border-bottom: 0;
-  padding: 1.75rem 0 0.85rem;
-  margin-bottom: 0.75rem;
+  align-items: center;
+  min-height: 0;
+  padding: 0.7rem 0;
+  color: var(--hp-ink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
   text-decoration: none;
+}
+
+#housing .hp-header__drawer-link:hover {
+  color: var(--hp-ink);
 }
 
 #housing .hp-header__acc ul {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 1rem;
-  row-gap: 0;
+  grid-template-columns: 1fr;
   list-style: none;
-  margin: 0 0 0.85rem !important;
-  padding: 0.2rem 0 0.45rem 1.35rem !important;
+  margin: 0 0 0.35rem !important;
+  padding: 0 0 0.65rem 1.15rem !important;
   border-top: 0;
 }
 
@@ -893,42 +926,25 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 
 #housing .hp-header__acc a {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
   max-width: 100%;
-  padding: 0.38rem 0;
-  color: var(--hp-ink);
-  font-size: 0.92rem;
-  font-weight: 500;
+  padding: 0.55rem 0;
+  color: #555;
+  font-size: 0.8125rem; /* 13px — メインより一段小さく */
+  font-weight: 400;
   letter-spacing: 0.02em;
-  line-height: 1.35;
+  line-height: 1.4;
   text-decoration: none;
 }
 
 #housing .hp-header__acc a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.22rem;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.22s ease;
-  opacity: 0.7;
+  content: none;
 }
 
 #housing .hp-header__acc a:hover {
   color: var(--hp-ink);
-}
-
-#housing .hp-header__acc a:hover::after {
-  transform: scaleX(1);
-}
-
-#housing .hp-header__drawer-cta {
-  /* お問い合わせボタンは PC ヘッダーのみ。ドロワーでは出さない */
-  display: none !important;
 }
 
 @media (min-width: 1100px) {

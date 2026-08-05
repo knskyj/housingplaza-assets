@@ -118,17 +118,25 @@ html.hp-preload .hp-loading.is-active,
 }
 
 /* —— First-view entrance（#housing.hp-await-enter で確実にゲート） ——
-   overlay ヘッダーは高さ0のため % 移動は効かない → vh / 固定量を使う */
+   ヘッダー本体に transform を付けない（付けたままだと fixed ドロワーが
+   ヘッダー高さ分しか出ない）。入場スライドは __bar だけ動かす。 */
 
 #housing.hp-await-enter:not(.hp-is-entered) .hp-header {
-  transform: translate3d(0, -120px, 0);
   visibility: hidden;
   pointer-events: none;
 }
 
+#housing.hp-await-enter:not(.hp-is-entered) .hp-header__bar {
+  transform: translate3d(0, -120px, 0);
+}
+
 #housing.hp-await-enter.hp-is-entered .hp-header {
-  transform: translate3d(0, 0, 0);
   visibility: visible;
+  transform: none;
+}
+
+#housing.hp-await-enter.hp-is-entered .hp-header__bar {
+  transform: none;
   /* ヒーロー文字のあと */
   transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.55s;
 }
@@ -294,16 +302,19 @@ html.hp-preload .hp-loading.is-active,
   }
 
   #housing.hp-await-enter:not(.hp-is-entered) .hp-header,
+  #housing.hp-await-enter:not(.hp-is-entered) .hp-header__bar,
   #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__title,
   #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__lead,
   #housing.hp-await-enter:not(.hp-is-entered) .hp-topics,
   #housing.hp-await-enter:not(.hp-is-entered) .hp-hero__scroll,
   #housing.hp-await-enter.hp-is-entered .hp-header,
+  #housing.hp-await-enter.hp-is-entered .hp-header__bar,
   #housing.hp-await-enter.hp-is-entered .hp-hero__title,
   #housing.hp-await-enter.hp-is-entered .hp-hero__lead,
   #housing.hp-await-enter.hp-is-entered .hp-topics,
   #housing.hp-await-enter.hp-is-entered .hp-hero__scroll {
     opacity: 1;
+    visibility: visible;
     transform: none;
     transition: none;
   }
