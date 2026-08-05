@@ -224,8 +224,8 @@
   }
 }
 
-/* 420px以下: 1列・左画像／右に店名・電話・営業時間 */
-@media (max-width: 420px) {
+/* 520px以下: 1列・左画像／右に店名・電話・営業時間 */
+@media (max-width: 520px) {
   #housing .hp-stores__grid {
     grid-template-columns: 1fr;
     gap: 0.65rem;
