@@ -184,28 +184,53 @@
         return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       };
 
+      var smoothScrollTo = function (targetY, duration) {
+        var startY = window.scrollY || document.documentElement.scrollTop;
+        var distance = targetY - startY;
+        if (!distance) return;
+        var dur = reduceMotion() ? 0 : duration;
+        var startTime = performance.now();
+        var step = function (now) {
+          var progress = dur ? Math.min((now - startTime) / dur, 1) : 1;
+          window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+
       scrollBtn.addEventListener("click", function (event) {
         event.preventDefault();
         var top =
           topics.getBoundingClientRect().top +
           (window.scrollY || document.documentElement.scrollTop);
-        var startY = window.scrollY || document.documentElement.scrollTop;
-        var distance = top - startY;
-        if (!distance) return;
-        var duration = reduceMotion() ? 0 : 900;
-        var startTime = performance.now();
-        var step = function (now) {
-          var progress = duration ? Math.min((now - startTime) / duration, 1) : 1;
-          window.scrollTo(0, startY + distance * easeInOutCubic(progress));
-          if (progress < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
+        smoothScrollTo(Math.max(0, top), 900);
+      });
+
+      /* ページ上部へボタン */
+      var pageTop = document.querySelector(".hp-pagetop");
+      if (!pageTop) {
+        pageTop = document.createElement("a");
+        pageTop.className = "hp-pagetop";
+        pageTop.href = "#housing";
+        pageTop.setAttribute("aria-label", "ページ上部へ");
+        pageTop.innerHTML =
+          '<span class="hp-pagetop__icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+          '<path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>' +
+          "</svg></span>";
+        document.body.appendChild(pageTop);
+      }
+
+      pageTop.addEventListener("click", function (event) {
+        event.preventDefault();
+        smoothScrollTo(0, 900);
       });
 
       var syncScrollVisibility = function () {
         var scrolled =
-          (window.scrollY || document.documentElement.scrollTop) > 0;
+          (window.scrollY || document.documentElement.scrollTop) > 80;
         scrollBtn.classList.toggle("is-hidden", scrolled);
+        pageTop.classList.toggle("is-visible", scrolled);
       };
       window.addEventListener("scroll", syncScrollVisibility, { passive: true });
       syncScrollVisibility();

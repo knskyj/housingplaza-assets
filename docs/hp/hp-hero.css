@@ -133,86 +133,57 @@
   animation: hp-hero-copy-in 1s ease-out 0.15s both;
 }
 
-/* スクロール誘導（WeeReform 風） */
+/* スクロール誘導（下矢印） */
 #housing .hp-hero__scroll {
   position: absolute;
   right: 30px;
   bottom: 40px;
   z-index: 6;
   box-sizing: border-box;
-  display: block;
+  display: grid;
+  place-items: center;
   width: 56px;
   height: 56px;
-  color: #fff;
-  text-decoration: none !important;
-  opacity: 1;
-}
-
-#housing .hp-hero__scroll .hp-hero__scroll-ring {
-  position: relative;
-  display: block;
-  width: 56px;
-  height: 56px;
-  overflow: hidden;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   border-radius: 100%;
+  color: #fff;
+  text-decoration: none !important;
+  background: transparent;
+  opacity: 1;
+  transition: opacity 0.35s ease, border-color 0.25s ease;
 }
 
-#housing .hp-hero__scroll .hp-hero__scroll-ring::before,
-#housing .hp-hero__scroll .hp-hero__scroll-ring::after {
-  content: "";
-  position: absolute;
-  top: 46%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  border-right: 1.5px solid #fff;
-  border-bottom: 1.5px solid #fff;
-  transform: translate(-50%, -50%) rotate(45deg);
+#housing .hp-hero__scroll-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
 }
 
-#housing .hp-hero__scroll .hp-hero__scroll-ring::after {
-  opacity: 0;
+#housing .hp-hero__scroll-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-#housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::before {
-  animation: hp-hero-scroll-arrow1 1.6s ease infinite;
+#housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-icon {
+  animation: hp-scroll-nudge-down 1.6s ease infinite;
 }
 
-#housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::after {
-  animation: hp-hero-scroll-arrow2 1.6s ease infinite;
-}
-
-@keyframes hp-hero-scroll-arrow1 {
-  0% {
-    transform: translate(-50%, -50%) translateY(0) rotate(45deg);
-    opacity: 1;
-  }
-  45%,
-  100% {
-    transform: translate(-50%, -50%) translateY(8px) rotate(45deg);
-    opacity: 0;
-  }
-}
-
-@keyframes hp-hero-scroll-arrow2 {
+@keyframes hp-scroll-nudge-down {
   0%,
-  45% {
-    transform: translate(-50%, -50%) translateY(-8px) rotate(45deg);
-    opacity: 0;
-  }
   100% {
-    transform: translate(-50%, -50%) translateY(0) rotate(45deg);
+    transform: translateY(0);
     opacity: 1;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 0.65;
   }
 }
 
 @media (hover: hover) {
   #housing .hp-hero__scroll:not(.is-hidden):hover {
-    opacity: 0.7;
-  }
-
-  #housing .hp-hero__scroll:not(.is-hidden):hover .hp-hero__scroll-ring {
+    opacity: 0.75;
     border-color: rgba(255, 255, 255, 0.9);
   }
 }
@@ -225,9 +196,9 @@
     height: 48px;
   }
 
-  #housing .hp-hero__scroll .hp-hero__scroll-ring {
-    width: 48px;
-    height: 48px;
+  #housing .hp-hero__scroll-icon {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -312,8 +283,7 @@
     animation: none !important;
   }
 
-  #housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::before,
-  #housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-ring::after {
+  #housing.hp-is-entered .hp-hero__scroll:not(.is-hidden) .hp-hero__scroll-icon {
     animation: none !important;
   }
 }

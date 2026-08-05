@@ -189,8 +189,102 @@ html.hp-preload .hp-loading.is-active,
 
 #housing.hp-is-entered .hp-hero__scroll.is-hidden {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+/* ページ上部へ（固定・下矢印と同型） */
+.hp-pagetop {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 99980;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 1.5px solid rgba(7, 38, 83, 0.35);
+  border-radius: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #072653;
+  text-decoration: none !important;
+  box-shadow: 0 4px 18px rgba(7, 38, 83, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate3d(0, 12px, 0);
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease,
+    transform 0.35s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.hp-pagetop.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+.hp-pagetop__icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.hp-pagetop__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hp-pagetop.is-visible .hp-pagetop__icon {
+  animation: hp-scroll-nudge-up 1.6s ease infinite;
+}
+
+@keyframes hp-scroll-nudge-up {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-5px);
+    opacity: 0.65;
+  }
+}
+
+@media (hover: hover) {
+  .hp-pagetop.is-visible:hover {
+    border-color: #072653;
+    background: #fff;
+  }
+}
+
+@media (max-width: 800px) {
+  .hp-pagetop {
+    right: 18px;
+    bottom: 22px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .hp-pagetop__icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hp-pagetop.is-visible .hp-pagetop__icon {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
