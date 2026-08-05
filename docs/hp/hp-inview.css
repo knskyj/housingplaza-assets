@@ -67,16 +67,20 @@
   transform: scale(1);
 }
 
-/* —— Infcurion 風ボタン：左から ::before で塗る（background 競合を避ける） —— */
+/* —— Infcurion 風ボタン：左から width で塗る（transform 不使用＝本体の揺れ防止） —— */
 #housing .hp-footer__btn::before,
 #housing .hp-header__cta::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 0;
   z-index: -1;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.45s var(--hp-in-ease);
+  width: 0;
+  height: auto;
+  transform: none;
+  transition: width 0.45s var(--hp-in-ease);
   pointer-events: none;
 }
 
@@ -97,13 +101,14 @@
   #housing .hp-footer__btn:focus-visible::before,
   #housing .hp-header__cta:hover::before,
   #housing .hp-header__cta:focus-visible::before {
-    transform: scaleX(1);
+    width: 100%;
   }
 
   #housing .hp-footer__btn:hover,
   #housing .hp-footer__btn:focus-visible {
     color: var(--hp-footer-navy, #072653) !important;
     border-color: #fff;
+    transform: none;
     /* 塗りが乗ってから文字色を切り替えて中間色のチラつきを防ぐ */
     transition:
       color 0s linear 0.28s,
@@ -114,6 +119,7 @@
   #housing .hp-footer__btn--mail:focus-visible {
     color: #fff !important;
     border-color: #fff;
+    transform: none;
     transition:
       color 0s linear 0.28s,
       border-color 0.3s ease;
@@ -122,6 +128,7 @@
   #housing .hp-header__cta:hover,
   #housing .hp-header__cta:focus-visible {
     color: var(--hp-white, #fff) !important;
+    transform: none;
   }
 }
 
@@ -140,7 +147,7 @@
   #housing .hp-footer__btn:focus-visible::before,
   #housing .hp-header__cta:hover::before,
   #housing .hp-header__cta:focus-visible::before {
-    transform: scaleX(1);
+    width: 100%;
   }
 
   #housing [data-hp-inview],

@@ -99,7 +99,6 @@
 #housing .hp-footer__btn {
   position: relative;
   z-index: 0;
-  isolation: isolate;
   overflow: hidden;
   display: inline-flex;
   align-items: center;
@@ -122,6 +121,7 @@
   background: transparent !important;
   box-shadow: none !important;
   box-sizing: border-box;
+  transform: none;
   /* 左から塗りは ::before。文字色は補間せず塗りに合わせて遅延スナップ（波打ち防止） */
   transition:
     color 0s linear 0.36s,
