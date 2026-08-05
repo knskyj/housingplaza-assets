@@ -5,8 +5,8 @@
 (function () {
   "use strict";
 
-  var FADE_MS = 200;
-  var DRAWER_MS = 420;
+  var FADE_MS = 300;
+  var DRAWER_MS = 500;
 
   function ready(fn) {
     if (document.readyState === "loading") {
@@ -53,10 +53,17 @@
     var navLeaveTimer = null;
     var backdropShowRaf = null;
 
+    function isDrawerActive() {
+      return (
+        root.classList.contains("is-open") ||
+        root.classList.contains("is-drawer-closing")
+      );
+    }
+
     function syncBackdrop() {
       if (!backdrop) return;
       var show =
-        root.classList.contains("is-open") ||
+        isDrawerActive() ||
         root.classList.contains("is-mega-open") ||
         root.classList.contains("is-nav-hover");
 
@@ -72,11 +79,11 @@
       if (show) {
         backdrop.hidden = false;
         // PCメガ時は暗転を見た目だけにし、ホバー判定を奪わない
-        backdrop.style.pointerEvents = root.classList.contains("is-open") ? "" : "none";
+        backdrop.style.pointerEvents = isDrawerActive() ? "" : "none";
         backdropShowRaf = window.requestAnimationFrame(function () {
           backdropShowRaf = null;
           if (
-            root.classList.contains("is-open") ||
+            isDrawerActive() ||
             root.classList.contains("is-mega-open") ||
             root.classList.contains("is-nav-hover")
           ) {
@@ -218,20 +225,34 @@
     }
 
     function closeDrawer() {
-      root.classList.remove("is-open");
+      if (!root.classList.contains("is-open") && !root.classList.contains("is-drawer-closing")) {
+        return;
+      }
       if (burger) {
         burger.setAttribute("aria-expanded", "false");
         burger.setAttribute("aria-label", "メニューを開く");
       }
       unlockScroll();
-      syncBackdrop();
 
-      if (!drawer) return;
+      if (!drawer) {
+        root.classList.remove("is-open", "is-drawer-closing");
+        syncBackdrop();
+        return;
+      }
+
       var accs = drawer.querySelectorAll(".hp-header__acc");
       for (var i = 0; i < accs.length; i++) accs[i].open = false;
+
+      /* Infcurion: 白パネルは上へ抜け、ブランド色はフェードアウト */
+      root.classList.add("is-drawer-closing");
+      root.classList.remove("is-open");
+      syncBackdrop();
+
       if (drawerHideTimer) clearTimeout(drawerHideTimer);
       drawerHideTimer = setTimeout(function () {
-        if (!root.classList.contains("is-open")) drawer.hidden = true;
+        root.classList.remove("is-drawer-closing");
+        drawer.hidden = true;
+        syncBackdrop();
         drawerHideTimer = null;
       }, DRAWER_MS);
     }
@@ -242,8 +263,10 @@
         clearTimeout(drawerHideTimer);
         drawerHideTimer = null;
       }
+      root.classList.remove("is-drawer-closing");
       if (drawer) {
         drawer.hidden = false;
+        /* アニメ再起動のため一度リフロー */
         void drawer.offsetWidth;
       }
       root.classList.add("is-open");
@@ -379,6 +402,7 @@
        */
       if (
         root.classList.contains("is-open") ||
+        root.classList.contains("is-drawer-closing") ||
         root.classList.contains("is-mega-open")
       ) {
         root.classList.remove("is-header-hidden");
