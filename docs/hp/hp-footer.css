@@ -403,8 +403,8 @@
   }
 }
 
-/* 最小幅のみ読点後で改行（大めのスマホ〜は自然折り返し） */
-@media (max-width: 575px) {
+/* 極小幅のみ読点後で改行 */
+@media (max-width: 420px) {
   #housing .hp-footer__br {
     display: inline;
   }
