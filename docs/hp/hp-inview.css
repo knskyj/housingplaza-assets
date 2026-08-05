@@ -27,7 +27,7 @@
 /* —— Stagger —— */
 #housing [data-hp-stagger] > [data-hp-inview] {
   transition-duration: 1.2s, 1.2s;
-  transition-delay: calc(0.1s + var(--hp-stagger, 0) * 90ms);
+  transition-delay: calc(0.1s + var(--hp-stagger, 0) * 140ms);
 }
 
 #housing [data-hp-stagger] > [data-hp-inview].is-in {
