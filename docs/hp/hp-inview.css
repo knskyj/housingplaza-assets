@@ -109,9 +109,8 @@
     color: var(--hp-footer-navy, #072653) !important;
     border-color: #fff;
     transform: none;
-    /* 塗りが乗ってから文字色を切り替えて中間色のチラつきを防ぐ */
     transition:
-      color 0s linear 0.28s,
+      color 0.45s steps(1, end),
       border-color 0.3s ease;
   }
 
@@ -121,7 +120,7 @@
     border-color: #fff;
     transform: none;
     transition:
-      color 0s linear 0.28s,
+      color 0.45s steps(1, end),
       border-color 0.3s ease;
   }
 

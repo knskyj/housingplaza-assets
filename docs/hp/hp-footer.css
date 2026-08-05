@@ -122,9 +122,9 @@
   box-shadow: none !important;
   box-sizing: border-box;
   transform: none;
-  /* 左から塗りは ::before。文字色は補間せず塗りに合わせて遅延スナップ（波打ち防止） */
+  /* 文字色は塗り完了時に一拍で切替（補間・先行遅延で消えるのを防ぐ） */
   transition:
-    color 0s linear 0.36s,
+    color 0.45s steps(1, end),
     border-color 0.3s ease;
 }
 
