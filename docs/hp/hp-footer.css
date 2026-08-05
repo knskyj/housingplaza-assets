@@ -163,7 +163,7 @@
 #housing .hp-footer__inner {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 2.65fr);
-  gap: 3rem 5.5rem;
+  gap: 3rem 4rem;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -209,8 +209,9 @@
 
 #housing .hp-footer__nav {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem 1.5rem;
+  grid-template-columns: repeat(3, max-content);
+  gap: 2rem 3.5rem;
+  justify-self: end;
   margin: 0;
   padding: 0;
   min-width: 0;
@@ -350,6 +351,8 @@
   #housing .hp-footer__nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2rem 1.75rem;
+    justify-self: stretch;
+    width: 100%;
   }
 }
 
