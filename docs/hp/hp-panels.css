@@ -86,7 +86,7 @@
   height: auto;
   min-height: 0;
   margin: 0;
-  padding: 1.65rem 1.4rem;
+  padding: 1.85rem 1.5rem;
   overflow: hidden;
   background: #fff !important;
   color: var(--hp-panels-navy) !important;
@@ -189,7 +189,7 @@
   }
 
   #housing .hp-panels__action {
-    padding: 1.45rem 1.25rem;
+    padding: 1.65rem 1.35rem;
   }
 }
 
