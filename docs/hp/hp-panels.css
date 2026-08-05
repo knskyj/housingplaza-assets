@@ -95,8 +95,8 @@
   flex: 0 0 34%;
   width: 34%;
   max-width: 11rem;
-  aspect-ratio: 1;
-  align-self: stretch;
+  aspect-ratio: 4 / 3;
+  align-self: center;
   overflow: hidden;
   background: #d8d8d8;
 }
