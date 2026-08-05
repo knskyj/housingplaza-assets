@@ -284,6 +284,7 @@
   }
 
   #housing .hp-topics__title {
+    /* 2段レイアウトで幅は増える。それでも入り切らなければ1行省略 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
