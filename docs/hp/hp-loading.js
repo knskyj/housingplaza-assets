@@ -2,19 +2,28 @@
  * Housingplaza TOP — session-first loading + first-view entrance.
  * Markup: #housing[data-hp-top] + [data-hp-loading]
  * sessionStorage key: hp-top-session-loaded
+ * Force replay: ?hp-loading=1
  */
 (function () {
   "use strict";
 
   var STORAGE_KEY = "hp-top-session-loaded";
-  var MIN_MS = 1000;
-  var FADE_MS = 850;
+  var MIN_MS = 1600;
+  var FADE_MS = 600;
 
   function reduceMotion() {
     return (
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     );
+  }
+
+  function forceLoading() {
+    try {
+      return /(?:^|[?&])hp-loading=1(?:&|$)/.test(location.search);
+    } catch (e) {
+      return false;
+    }
   }
 
   function ready(fn) {
@@ -39,16 +48,28 @@
     } catch (e) {}
   }
 
+  function clearSession() {
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+  }
+
   function unlockScroll() {
     document.documentElement.classList.remove("hp-preload");
   }
 
   function enter(root) {
-    root.classList.add("hp-is-entered");
+    /* 先に入場クラス → 次フレームでスクロール解除（遷移の開始点を確保） */
+    root.classList.add("hp-await-enter");
     root.classList.remove("hp-is-loading");
-    unlockScroll();
-    markSession();
-    window.dispatchEvent(new CustomEvent("hp:entered"));
+    requestAnimationFrame(function () {
+      root.classList.add("hp-is-entered");
+      requestAnimationFrame(function () {
+        unlockScroll();
+        markSession();
+        window.dispatchEvent(new CustomEvent("hp:entered"));
+      });
+    });
   }
 
   function hideLoader(loading) {
@@ -66,18 +87,24 @@
     var loading = root.querySelector("[data-hp-loading]");
     var scrollBtn = root.querySelector("[data-hp-hero-scroll]");
     var topics = root.querySelector(".hp-topics");
+    var forced = forceLoading();
+
+    if (forced) clearSession();
 
     function finishWithoutLoader() {
       hideLoader(loading);
-      enter(root);
+      unlockScroll();
+      root.classList.remove("hp-await-enter");
+      root.classList.add("hp-is-entered");
+      markSession();
+      window.dispatchEvent(new CustomEvent("hp:entered"));
     }
 
-    /* セッション再訪 / 減モーション → 即入場 */
-    if (sessionSeen() || reduceMotion() || !loading) {
-      document.documentElement.classList.remove("hp-preload");
+    /* セッション再訪 / 減モーション → 即表示（強制時は除く） */
+    if (!forced && (sessionSeen() || reduceMotion() || !loading)) {
       finishWithoutLoader();
     } else {
-      root.classList.add("hp-is-loading");
+      root.classList.add("hp-is-loading", "hp-await-enter");
       document.documentElement.classList.add("hp-preload");
       loading.hidden = false;
       loading.removeAttribute("hidden");
@@ -104,7 +131,6 @@
       }
     }
 
-    /* スクロール矢印 → TOPICS へ */
     if (scrollBtn && topics) {
       if (!topics.id) topics.id = "hp-topics";
       scrollBtn.setAttribute("href", "#" + topics.id);
