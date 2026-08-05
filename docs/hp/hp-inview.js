@@ -86,6 +86,7 @@
       ".hp-stores__grid",
       ".hp-search__grid",
       ".hp-panels__list",
+      ".hp-panels__actions",
       ".hp-news__list",
     ].forEach(function (sel) {
       root.querySelectorAll(sel).forEach(wireStagger);
