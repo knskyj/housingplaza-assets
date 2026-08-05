@@ -159,19 +159,18 @@
   align-items: center;
   gap: 0.85rem;
   margin: 1.75rem 0 0 auto;
-  color: var(--hp-news-ink) !important;
+  color: var(--hp-news-ink);
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-decoration: none !important;
-  transition: opacity 0.25s ease;
+  transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 #housing .hp-news__more:hover,
 #housing .hp-news__more:focus-visible {
   outline: none;
-  opacity: 0.72;
-  color: var(--hp-news-ink) !important; /* テーマ a:hover のネイビーを打ち消し */
+  color: var(--hp-news-navy) !important;
 }
 
 #housing .hp-news__more-arrow {
@@ -182,9 +181,9 @@
   height: 2rem;
   border: 1px solid var(--hp-news-ink);
   border-radius: 50%;
-  color: var(--hp-news-ink) !important;
+  color: var(--hp-news-ink);
   background: transparent;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 #housing .hp-news__more-arrow svg {
@@ -193,10 +192,10 @@
   height: 0.85rem;
 }
 
-/* ホバー塗りは黒（#222）。ネイビーにはしない */
 #housing .hp-news__more:hover .hp-news__more-arrow,
 #housing .hp-news__more:focus-visible .hp-news__more-arrow {
-  background: var(--hp-news-ink);
+  background: var(--hp-news-navy);
+  border-color: var(--hp-news-navy);
   color: #fff !important;
 }
 
