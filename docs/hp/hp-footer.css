@@ -202,6 +202,11 @@
   text-align: left !important;
 }
 
+/* PC は1行。モバイルのみ読点後で改行 */
+#housing .hp-footer__br {
+  display: none;
+}
+
 #housing .hp-footer__nav {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -385,6 +390,10 @@
     max-width: none;
     font-size: 0.8125rem;
     line-height: 1.9;
+  }
+
+  #housing .hp-footer__br {
+    display: inline;
   }
 
   #housing .hp-footer__nav {
