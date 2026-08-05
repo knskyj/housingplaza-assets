@@ -194,7 +194,7 @@ html.hp-preload .hp-loading.is-active,
   transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
-/* ページ上部へ（グレー） */
+/* ページ上部へ（枠・矢印のみ・薄いグレー） */
 .hp-pagetop {
   position: fixed;
   right: 30px;
@@ -207,12 +207,12 @@ html.hp-preload .hp-loading.is-active,
   height: 56px;
   margin: 0;
   padding: 0;
-  border: 1.5px solid #9a9a9a;
+  border: 1.5px solid #e0e0e0;
   border-radius: 100%;
-  background: rgba(255, 255, 255, 0.92);
-  color: #6b6b6b;
+  background: transparent;
+  color: #e0e0e0;
   text-decoration: none !important;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -222,8 +222,7 @@ html.hp-preload .hp-loading.is-active,
     visibility 0.35s ease,
     transform 0.35s ease,
     border-color 0.25s ease,
-    color 0.25s ease,
-    background-color 0.25s ease;
+    color 0.25s ease;
 }
 
 .hp-pagetop.is-visible {
@@ -263,9 +262,8 @@ html.hp-preload .hp-loading.is-active,
 
 @media (hover: hover) {
   .hp-pagetop.is-visible:hover {
-    border-color: #6b6b6b;
-    color: #4a4a4a;
-    background: #fff;
+    border-color: #f2f2f2;
+    color: #f2f2f2;
   }
 }
 
