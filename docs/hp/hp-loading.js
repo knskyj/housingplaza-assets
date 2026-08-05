@@ -20,7 +20,7 @@
 
   function forceLoading() {
     try {
-      return /(?:^|[?&])hp-loading=1(?:&|$)/.test(location.search);
+      return /(?:^|[?&])hp-loading=(?:1|hold)(?:&|$)/.test(location.search);
     } catch (e) {
       return false;
     }
@@ -79,6 +79,14 @@
     loading.removeAttribute("aria-busy");
   }
 
+  function holdLoading() {
+    try {
+      return /(?:^|[?&])hp-loading=hold(?:&|$)/.test(location.search);
+    } catch (e) {
+      return false;
+    }
+  }
+
   ready(function () {
     var root = document.querySelector("#housing[data-hp-top]");
     if (!root || root.getAttribute("data-hp-loading-ready") === "1") return;
@@ -87,9 +95,14 @@
     var loading = root.querySelector("[data-hp-loading]");
     var scrollBtn = root.querySelector("[data-hp-hero-scroll]");
     var topics = root.querySelector(".hp-topics");
-    var forced = forceLoading();
+    var forced = forceLoading() || holdLoading();
 
     if (forced) clearSession();
+
+    /* fixed が親の transform に閉じ込められないよう body 直下へ */
+    if (loading && loading.parentElement !== document.body) {
+      document.body.appendChild(loading);
+    }
 
     function finishWithoutLoader() {
       hideLoader(loading);
@@ -108,8 +121,14 @@
       document.documentElement.classList.add("hp-preload");
       loading.hidden = false;
       loading.removeAttribute("hidden");
+      loading.classList.add("is-active");
       loading.setAttribute("aria-busy", "true");
       loading.setAttribute("aria-hidden", "false");
+
+      /* 確認用: ?hp-loading=hold でスピナーのまま止める */
+      if (holdLoading()) {
+        return;
+      }
 
       var started = Date.now();
 
@@ -117,8 +136,10 @@
         var wait = Math.max(0, MIN_MS - (Date.now() - started));
         setTimeout(function () {
           root.classList.add("hp-end-loading");
+          loading.classList.add("is-leaving");
           setTimeout(function () {
             hideLoader(loading);
+            loading.classList.remove("is-active", "is-leaving");
             enter(root);
           }, FADE_MS);
         }, wait);

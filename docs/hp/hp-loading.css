@@ -9,11 +9,13 @@ html.hp-preload body {
   overflow: hidden;
 }
 
+/* body 直下にも置く（fixed が親 transform に閉じ込められないように） */
+.hp-loading,
 #housing .hp-loading {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 999999;
+  z-index: 2147483000;
   align-items: center;
   justify-content: center;
   margin: 0;
@@ -24,15 +26,18 @@ html.hp-preload body {
   transition: opacity 0.55s ease;
 }
 
-/* preload 中は [hidden] より優先して表示 */
-html.hp-preload #housing .hp-loading {
+html.hp-preload .hp-loading,
+html.hp-preload #housing .hp-loading,
+.hp-loading.is-active {
   display: flex !important;
 }
 
+.hp-loading.is-leaving,
 #housing.hp-end-loading .hp-loading {
   opacity: 0;
 }
 
+.hp-loading__slot,
 #housing .hp-loading__slot {
   position: relative;
   display: flex;
@@ -40,18 +45,21 @@ html.hp-preload #housing .hp-loading {
   justify-content: center;
 }
 
+.hp-loading__spinner,
 #housing .hp-loading__spinner {
   position: relative;
   width: 60px;
   height: 60px;
 }
 
+.hp-loading__spinner::before,
 #housing .hp-loading__spinner::before {
   content: "";
   display: block;
   padding-top: 100%;
 }
 
+.hp-loading__circular,
 #housing .hp-loading__circular {
   position: absolute;
   inset: 0;
@@ -62,6 +70,7 @@ html.hp-preload #housing .hp-loading {
   animation: hp-loading-rotate 2s linear infinite;
 }
 
+.hp-loading__path,
 #housing .hp-loading__path {
   fill: none;
   stroke: #072653;
@@ -95,6 +104,7 @@ html.hp-preload #housing .hp-loading {
 }
 
 @media (max-width: 800px) {
+  .hp-loading__spinner,
   #housing .hp-loading__spinner {
     width: 40px;
     height: 40px;
