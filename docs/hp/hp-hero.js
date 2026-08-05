@@ -28,12 +28,6 @@
     if (!root || root.getAttribute("data-hp-ready") === "1") return;
     root.setAttribute("data-hp-ready", "1");
 
-    var housing = document.querySelector("#housing");
-    var waitEnter =
-      housing &&
-      housing.hasAttribute("data-hp-top") &&
-      !housing.classList.contains("hp-is-entered");
-
     var slides = Array.prototype.slice.call(
       root.querySelectorAll("[data-hp-hero-slide]")
     );
@@ -101,11 +95,7 @@
     function start() {
       if (started) return;
       started = true;
-      /* 入場待ちだった場合は restartZoom しない（入場瞬間の背景跳ね防止）。
-         CSS が .hp-is-entered でズームを開始する */
-      if (!waitEnter) {
-        restartZoom(slides[index]);
-      }
+      restartZoom(slides[index]);
       schedule();
     }
 
@@ -114,14 +104,7 @@
       else schedule();
     });
 
-    if (waitEnter) {
-      window.addEventListener("hp:entered", start, { once: true });
-      /* フォールバック: ローディングJS未読込でも開始 */
-      setTimeout(function () {
-        if (!started) start();
-      }, 4000);
-    } else {
-      start();
-    }
+    /* ズームは入場を待たず開始（入場時に止まって見えるのを防ぐ） */
+    start();
   });
 })();

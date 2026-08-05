@@ -25,7 +25,7 @@ html.hp-preload body {
   justify-content: center;
   margin: 0;
   padding: 0;
-  background: #f8f8f8;
+  background: #0a0f18;
   pointer-events: none;
   opacity: 1;
   transition: opacity 0.55s ease;
@@ -78,7 +78,7 @@ html.hp-preload #housing .hp-loading,
 .hp-loading__path,
 #housing .hp-loading__path {
   fill: none;
-  stroke: #072653;
+  stroke: rgba(255, 255, 255, 0.88);
   stroke-width: 2;
   stroke-miterlimit: 10;
   stroke-linecap: round;
