@@ -15,7 +15,9 @@
     meta.content = "noindex, nofollow";
   }
 
-  var BASE = "https://knskyj.github.io/housingplaza-assets/hp/";
+  /* Pages (github.io) がデプロイ遅延することがあるため jsDelivr 経由（main 追従） */
+  var BASE =
+    "https://cdn.jsdelivr.net/gh/knskyj/housingplaza-assets@main/docs/hp/";
 
   function loadCss(href) {
     var l = document.createElement("link");
@@ -57,13 +59,13 @@
     "hp-header.css?v=70",
     "hp-hero.css?v=24",
     "hp-topics.css?v=14",
-    "hp-intro.css?v=28",
-    "hp-stores.css?v=39",
+    "hp-intro.css?v=29",
+    "hp-stores.css?v=40",
     "hp-search.css?v=20",
     "hp-panels.css?v=40",
     "hp-news.css?v=17",
     "hp-recruit.css?v=8",
-    "hp-footer.css?v=31",
+    "hp-footer.css?v=32",
     "hp-inview.css?v=18",
   ].forEach(function (file) {
     loadCss(BASE + file);
