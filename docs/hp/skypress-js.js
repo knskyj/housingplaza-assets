@@ -17,7 +17,7 @@
 
   /* jsDelivr @main はキャッシュ遅れがあるため、反映確認時はコミット固定 */
   var BASE =
-    "https://cdn.jsdelivr.net/gh/knskyj/housingplaza-assets@bb61c1e/docs/hp/";
+    "https://cdn.jsdelivr.net/gh/knskyj/housingplaza-assets@9adc9fa/docs/hp/";
 
   function loadCss(href) {
     var l = document.createElement("link");
