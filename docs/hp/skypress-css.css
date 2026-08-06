@@ -1,15 +1,29 @@
-/* Housingplaza SkyPress custom CSS — paste this file's contents into SkyPress */
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-page.css?v=1");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-loading.css?v=17");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-header.css?v=69");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-hero.css?v=24");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-topics.css?v=14");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-intro.css?v=25");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-services.css?v=14");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-stores.css?v=38");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-search.css?v=20");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-panels.css?v=40");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-news.css?v=17");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-recruit.css?v=8");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-footer.css?v=30");
-@import url("https://knskyj.github.io/housingplaza-assets/hp/hp-inview.css?v=18");
+/* Housingplaza SkyPress custom CSS — paste this file's contents into SkyPress
+ *
+ * 本体CSSは skypress-js.js が <link> で head 末尾注入する（@import 禁止）。
+ * ここには JS 読込前のちらつき防止だけ置く。
+ */
+#housing .hp-hero {
+  background: #f8f8f8;
+}
+#housing.hp-await-enter:not(.hp-is-entered) .hp-header {
+  visibility: hidden;
+  pointer-events: none;
+}
+#housing.hp-await-enter:not(.hp-is-entered) .hp-header__bar {
+  transform: translate3d(0, -120px, 0);
+}
+#housing.hp-await-enter:not(.hp-is-entered) .hp-hero__title,
+#housing.hp-await-enter:not(.hp-is-entered) .hp-hero__lead,
+#housing.hp-await-enter:not(.hp-is-entered) .hp-topics {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 28px, 0);
+  pointer-events: none;
+}
+#housing.hp-await-enter:not(.hp-is-entered) .hp-hero__scroll {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 12px, 0);
+  pointer-events: none;
+}

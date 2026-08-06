@@ -9,6 +9,9 @@
 
 SkyPress には `docs/hp/skypress-css.css` / `skypress-js.js` の中身だけ貼る。
 
+- **skypress-css.css**: ちらつき防止のみ（`@import` は使わない）
+- **skypress-js.js**: Pages の CSS を `<link>` で head 末尾注入し、続けて JS を読み込む
+
 ## Update from housingplaza workspace
 
 ```bash
@@ -18,4 +21,4 @@ cp ../production-snapshot/admin-export/custom-code/js/hp-header.js docs/hp/
 git add docs/hp && git commit -m "Update hp-header" && git push
 ```
 
-Bump `?v=` in SkyPress loaders if cache sticks.
+Bump `?v=` in `skypress-js.js` if cache sticks.
