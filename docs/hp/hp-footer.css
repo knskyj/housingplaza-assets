@@ -163,7 +163,7 @@
 #housing .hp-footer__inner {
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(0, 2.25fr);
-  gap: 3rem 5rem;
+  gap: 3rem 3rem;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -348,11 +348,16 @@
   /* ブランド帯をフル幅1カラム。ナビは3列のまま */
   #housing .hp-footer__inner {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 0;
   }
 
+  /* 文言〜会社情報のあいだ：余白＋下線（≤1099） */
   #housing .hp-footer__nav {
     padding-left: 0;
+    padding-top: 2.5rem;
+    margin-top: 2.5rem;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
   }
 }
 

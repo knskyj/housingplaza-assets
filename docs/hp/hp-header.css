@@ -158,9 +158,10 @@ body:has(#housing) {
     transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* 下スクロールでバーだけ隠す（PC / モバイル共通。transform は bar のみ） */
+/* 下スクロールでバーだけ隠す（PC / モバイル共通。transform は bar のみ）
+ * iOS は -100% だとセーフエリア／サブピクセルで上端がうっすら残るため余白分も逃がす */
 #housing .hp-header.is-header-hidden:not(.is-open):not(.is-drawer-closing):not(.is-mega-open) .hp-header__bar {
-  transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, calc(-100% - env(safe-area-inset-top, 0px) - 12px), 0);
   pointer-events: none;
 }
 
