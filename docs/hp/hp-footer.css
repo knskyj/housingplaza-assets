@@ -61,7 +61,7 @@
 }
 
 #housing .hp-footer__title {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.85rem;
   color: #fff;
   font-size: clamp(1.85rem, 3.8vw, 2.75rem);
   font-weight: 600;
@@ -79,11 +79,12 @@
 #housing .hp-footer__hours {
   margin: 0;
   color: var(--hp-footer-muted);
-  font-size: 0.875rem;
+  font-size: clamp(0.875rem, 1.2vw, 0.95rem);
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 1.7;
   text-align: left !important;
+  word-break: keep-all;
 }
 
 #housing .hp-footer__actions {
@@ -195,21 +196,18 @@
 #housing .hp-footer__blurb {
   margin: 0;
   color: var(--hp-footer-muted);
-  font-size: 0.875rem;
+  font-size: clamp(0.875rem, 1.2vw, 0.95rem);
   font-weight: 400;
   letter-spacing: 0.04em;
   line-height: 2;
   text-align: left !important;
-}
-
-/* PC は1行。モバイルのみ読点後で改行 */
-#housing .hp-footer__br {
-  display: none;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 #housing .hp-footer__nav {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2rem 1.5rem;
   margin: 0;
   padding: 0 0 0 2.5rem;
@@ -230,10 +228,6 @@
   letter-spacing: 0.06em;
   line-height: 1.4;
   text-align: left !important;
-}
-
-#housing .hp-footer__col-title--stacked {
-  margin-top: 1.75rem;
 }
 
 #housing .hp-footer__col-title::before,
@@ -268,12 +262,14 @@
   letter-spacing: 0.04em;
   line-height: 1.6;
   text-decoration: none !important;
-  transition: color 0.3s ease, transform 0.3s ease;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
 
 #housing .hp-footer__list a:hover,
 #housing .hp-footer__list a:focus-visible {
   color: #fff !important;
+  text-decoration: underline !important;
+  text-underline-offset: 0.2em;
   outline: none;
 }
 
@@ -367,7 +363,7 @@
   }
 
   #housing .hp-footer__hours {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
   }
 
   #housing .hp-footer__actions {
@@ -390,7 +386,7 @@
   }
 
   #housing .hp-footer__blurb {
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     line-height: 1.9;
   }
 
@@ -400,12 +396,5 @@
 
   #housing .hp-footer__bar {
     padding: 1.15rem var(--hp-margin-side, 8vw) 1.35rem !important;
-  }
-}
-
-/* 極小幅のみ読点後で改行 */
-@media (max-width: 420px) {
-  #housing .hp-footer__br {
-    display: inline;
   }
 }

@@ -1,16 +1,17 @@
-/* Housingplaza intro / About — Infcurion About 風。Crafto なし */
+/* Housingplaza intro（白）+ about links（写真背景）。Crafto なし */
 
 #housing .hp-intro {
   --hp-intro-navy: #072653;
   --hp-intro-ink: #151515;
-  --hp-intro-muted: #6b6b6b;
-  --hp-intro-line: rgba(34, 34, 34, 0.12);
   --hp-intro-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
   z-index: 1;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
   margin: 0 !important;
-  /* Infcurion: padding: 150px var(--margin-side-pc) */
-  padding: 150px var(--hp-margin-side, 12.25vw) !important;
+  padding: 9rem var(--hp-margin-side, 12.25vw) 11rem !important;
+  overflow: hidden;
   background: #fff !important;
   color: var(--hp-intro-ink);
   font-family: var(--hp-intro-font);
@@ -25,33 +26,80 @@
 }
 
 #housing .hp-intro__inner {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: none;
   margin: 0;
   padding: 0;
-  container-type: inline-size;
-  container-name: hp-intro;
 }
 
-#housing .hp-intro__brand {
-  margin: 0 0 1.25rem;
+/* 右背景の極薄ロゴ（Hマーク）— 右アクセント＋文字に軽く重なる透かし */
+#housing .hp-intro__mark {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  /* 1100: 約 -9px → 1600で右余白内。それ以上は余白に固定 */
+  right: clamp(
+    -28vw,
+    calc(
+      -9px + (var(--hp-margin-side, 12.25vw) + 9px) *
+        max(0, (100vw - 1100px) / 500px)
+    ),
+    var(--hp-margin-side, 12.25vw)
+  );
+  width: clamp(21rem, 12rem + 23vw, 29rem);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 0;
+  color: var(--hp-intro-navy);
+  opacity: 0.04;
+  pointer-events: none;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+/* 背景ロゴは薄いままフェードイン（inview の opacity:1 / 移動を打ち消し） */
+#housing .hp-intro__mark[data-hp-inview] {
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 1.4s var(--hp-in-ease, ease-out) 0.15s;
+}
+
+#housing .hp-intro__mark[data-hp-inview].is-in {
+  opacity: 0.04;
+  transform: translateY(-50%);
+}
+
+#housing .hp-intro__mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#housing .hp-intro__en {
+  margin: 0 0 1.35rem;
   color: var(--hp-intro-navy);
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.3;
+  text-transform: none;
   text-align: left !important;
 }
 
 #housing .hp-intro__title {
-  margin: 0 0 1.75rem;
+  margin: 0 0 1.6rem;
+  max-width: 18em;
   color: var(--hp-intro-ink);
   font-size: clamp(1.85rem, 3.8vw, 2.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
   line-height: 1.45;
   text-align: left !important;
-  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 #housing .hp-intro__title::before,
@@ -60,205 +108,487 @@
   display: none !important;
 }
 
-#housing .hp-intro__body {
-  margin: 0 0 3.5rem;
-  max-width: 46rem;
+/* 575px以下のみ改行 */
+#housing .hp-intro__br-sm {
+  display: none;
+}
+
+#housing .hp-nobr {
+  white-space: nowrap;
+}
+
+#housing .hp-intro__lead {
+  margin: 0;
+  width: 60%;
+  max-width: 1000px;
   color: var(--hp-intro-ink);
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+  font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1.9;
   text-align: left !important;
 }
 
-/* 3 cards — Infcurion About の並び */
-#housing .hp-intro__cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+/* —— about links（背景画像） —— */
 
-#housing .hp-intro__card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: #fafafa !important;
-  color: inherit !important;
-  text-decoration: none !important;
-  box-shadow: none !important;
-  border: 0 !important;
-  border-radius: 4px;
-}
-
-#housing .hp-intro__card:hover,
-#housing .hp-intro__card:focus-visible {
-  outline: none;
-}
-
-#housing .hp-intro__card-media {
+#housing .hp-about-links {
+  --hp-about-navy: #072653;
+  --hp-about-line: rgba(255, 255, 255, 0.35);
+  --hp-about-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   position: relative;
+  z-index: 1;
   display: block;
+  box-sizing: border-box;
   width: 100%;
-  aspect-ratio: 16 / 11;
+  margin: 0 !important;
+  padding: 7.5rem var(--hp-margin-side, 12.25vw) !important;
   overflow: hidden;
-  background: #d8d8d8;
+  background: #0a1524 !important;
+  color: #fff;
+  font-family: var(--hp-about-font);
+  -webkit-font-smoothing: antialiased;
+  border: 0 !important;
 }
 
-#housing .hp-intro__card-media img {
+#housing .hp-about-links *,
+#housing .hp-about-links *::before,
+#housing .hp-about-links *::after {
+  box-sizing: border-box;
+}
+
+#housing .hp-about-links__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #0a1524;
+  pointer-events: none;
+}
+
+#housing .hp-about-links__media img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: scale(1);
-  transition: transform 0.55s ease;
+  transform: scale(1.06);
+  transform-origin: center center;
+  animation: hp-about-links-ken 18s ease-out both;
 }
 
-#housing .hp-intro__card:hover .hp-intro__card-media img,
-#housing .hp-intro__card:focus-visible .hp-intro__card-media img {
-  transform: scale(1.2);
+@keyframes hp-about-links-ken {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1.06);
+  }
 }
 
-#housing .hp-intro__card-body {
+#housing .hp-about-links__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    rgba(7, 38, 83, 0.72) 0%,
+    rgba(7, 38, 83, 0.52) 48%,
+    rgba(7, 38, 83, 0.4) 100%
+  );
+  pointer-events: none;
+}
+
+#housing .hp-about-links__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr);
+  gap: 2.5rem 4rem;
+  align-items: start;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+#housing .hp-about-links__head {
+  margin: 0;
+  padding: 0;
+}
+
+#housing .hp-about-links__body {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  gap: 0.35rem;
-  padding: 1.35rem 1.35rem 1.5rem;
-  border-top: 1px solid var(--hp-intro-line);
-}
-
-#housing .hp-intro__card-ja {
-  margin: 0;
-  color: var(--hp-intro-navy);
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  line-height: 1.4;
-}
-
-#housing .hp-intro__card-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin: 0;
-}
-
-#housing .hp-intro__card-en {
-  margin: 0;
   min-width: 0;
-  color: var(--hp-intro-ink);
-  font-size: clamp(1rem, 1.35vw, 1.125rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  line-height: 1.35;
-  text-transform: uppercase;
 }
 
-#housing .hp-intro__card-en::before,
-#housing .hp-intro__card-en::after {
+#housing .hp-about-links__brand {
+  margin: 0 0 0.5rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-align: left !important;
+}
+
+#housing .hp-about-links__title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  text-align: left !important;
+}
+
+#housing .hp-about-links__title::before,
+#housing .hp-about-links__title::after {
   content: none !important;
   display: none !important;
 }
 
-#housing .hp-intro__card-arrow {
+#housing .hp-about-links__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+}
+
+#housing .hp-about-links__list > li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* 行間の区切りのみ（最上・最下の線はなし） */
+#housing .hp-about-links__list > li + li {
+  border-top: 1px solid var(--hp-about-line);
+}
+
+#housing .hp-about-links__item {
+  display: grid;
+  /* 1360〜: JA 上段、EN | サブ | View More を横一列 */
+  grid-template-columns: minmax(9.5rem, 12.5rem) minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 2rem;
+  row-gap: 0.3rem;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 2rem 0.15rem 2rem 0;
+  color: #fff !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  background: transparent !important;
+  transition: opacity 0.25s ease;
+}
+
+/* 先頭上線を消したぶん、タイトル下の空きを詰める */
+#housing .hp-about-links__list > li:first-child .hp-about-links__item {
+  padding-top: 0.85rem;
+}
+
+#housing .hp-about-links__item:hover,
+#housing .hp-about-links__item:focus-visible {
+  outline: none;
+  opacity: 0.78;
+  color: #fff !important;
+}
+
+#housing .hp-about-links__label,
+#housing .hp-about-links__copy {
+  display: contents;
+}
+
+#housing .hp-about-links__ja {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+#housing .hp-about-links__en {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#housing .hp-about-links__en::before,
+#housing .hp-about-links__en::after {
+  content: none !important;
+  display: none !important;
+}
+
+#housing .hp-about-links__sub {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+#housing .hp-about-links__more {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  color: #fff !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: none;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+#housing .hp-about-links__item:hover .hp-about-links__more,
+#housing .hp-about-links__item:focus-visible .hp-about-links__more {
+  opacity: 1;
+}
+
+#housing .hp-about-links__more-arrow {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border: 1px solid var(--hp-intro-navy);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 50%;
-  color: var(--hp-intro-navy);
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  color: #fff;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
 
-#housing .hp-intro__card-arrow svg {
+#housing .hp-about-links__more-arrow svg {
+  display: block;
   width: 0.9rem;
   height: 0.9rem;
-  display: block;
 }
 
-#housing .hp-intro__card:hover .hp-intro__card-arrow,
-#housing .hp-intro__card:focus-visible .hp-intro__card-arrow {
-  background: var(--hp-intro-navy);
-  color: #fff;
+#housing .hp-about-links__item:hover .hp-about-links__more-arrow,
+#housing .hp-about-links__item:focus-visible .hp-about-links__more-arrow {
+  background: #fff;
+  border-color: #fff;
+  color: var(--hp-about-navy);
   transform: translateX(2px);
 }
 
+/* 1250–1359: EN の下にサブ、右に View More */
+@media (max-width: 1359px) {
+  #housing .hp-about-links__item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+    column-gap: 2.5rem;
+    row-gap: 0.35rem;
+    align-items: start;
+  }
+
+  #housing .hp-about-links__sub {
+    grid-column: 1;
+    grid-row: 3;
+    margin: 0.15rem 0 0;
+  }
+
+  #housing .hp-about-links__more {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: center;
+  }
+}
+
+/* 〜1099: セクション見出し＋リストを1カラム */
 @media (max-width: 1099px) {
   #housing .hp-intro {
-    padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
+    padding: 9rem var(--hp-margin-side, 12.25vw) 11rem !important;
   }
 
-  #housing .hp-intro__title {
-    margin-bottom: 1.35rem;
+  #housing .hp-about-links {
+    padding: 7.5rem var(--hp-margin-side, 12.25vw) !important;
   }
 
-  #housing .hp-intro__body {
-    margin-bottom: 2.5rem;
-  }
-
-  #housing .hp-intro__cards {
+  #housing .hp-about-links__inner {
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 
-  #housing .hp-intro__card-body {
-    padding: 1.15rem 1.1rem 1.25rem;
+  /* セクション1カラム幅では行を横一列に戻す */
+  #housing .hp-about-links__item {
+    grid-template-columns: minmax(9.5rem, 12.5rem) minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 2rem;
+    row-gap: 0.3rem;
+    align-items: center;
+    padding: 1.7rem 0;
+  }
+
+  #housing .hp-about-links__sub {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+  }
+
+  #housing .hp-about-links__more {
+    grid-column: 3;
+    grid-row: 2;
+    align-self: center;
   }
 }
 
 @media (max-width: 767px) {
   #housing .hp-intro {
-    padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
+    padding: 7.5rem var(--hp-margin-side, 8vw) 9rem !important;
   }
 
-  #housing .hp-intro__brand {
-    margin-bottom: 0.85rem;
+  #housing .hp-intro__en {
     font-size: 1rem;
+    margin-bottom: 0.85rem;
   }
 
   #housing .hp-intro__title {
-    margin-bottom: 1.15rem;
-    /* 526–767: 1行維持のためやや縮小。525以下は別指定 */
-    font-size: clamp(0.95rem, 4.6vw, 1.55rem);
-    line-height: 1.4;
+    margin-bottom: 1rem;
+    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
   }
 
-  #housing .hp-intro__body {
-    margin-bottom: 1.75rem;
-    max-width: none;
-    font-size: 0.95rem;
-    line-height: 1.9;
+  #housing .hp-intro__lead {
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.92rem;
+    line-height: 1.85;
   }
 
-  #housing .hp-intro__cards {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
+  #housing .hp-about-links {
+    padding: 5rem var(--hp-margin-side, 8vw) !important;
   }
 
-  #housing .hp-intro__card-media {
-    aspect-ratio: 16 / 10;
+  #housing .hp-about-links__title {
+    font-size: clamp(1.45rem, 6.5vw, 1.85rem);
+  }
+
+  #housing .hp-about-links__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: 1.5rem 0;
+  }
+
+  #housing .hp-about-links__label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  #housing .hp-about-links__copy {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.85rem 1rem;
+    width: 100%;
+  }
+
+  #housing .hp-about-links__ja,
+  #housing .hp-about-links__en,
+  #housing .hp-about-links__sub,
+  #housing .hp-about-links__more {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  #housing .hp-about-links__en,
+  #housing .hp-about-links__sub {
+    white-space: normal;
+  }
+
+  #housing .hp-about-links__sub {
+    flex: 1 1 auto;
+    margin-top: 0;
+  }
+
+  #housing .hp-about-links__more {
+    align-self: center;
+  }
+}
+
+/* 〜1098：右配置。1100付近の位置に接続、狭いほど右端が少し切れる */
+@media (max-width: 1098px) {
+  #housing .hp-intro__mark,
+  #housing .hp-intro__mark[data-hp-inview],
+  #housing .hp-intro__mark[data-hp-inview].is-in {
+    left: auto;
+    /* 1099/1100 の約 -9px に収束。狭いほどもう少し右へ */
+    right: calc(-9px - max(0px, 1099px - 100vw) * 0.075);
+    width: clamp(22rem, 12.5rem + 23vw, 28rem);
+    transform: translateY(-50%);
+  }
+}
+
+/* 576以上はタイトルを1行のまま */
+@media (min-width: 576px) {
+  #housing .hp-intro__title {
+    white-space: nowrap;
+  }
+}
+
+/* 〜575：タイトル折り返し */
+@media (max-width: 575px) {
+  #housing .hp-intro__br-sm {
+    display: inline;
+  }
+
+  #housing .hp-intro__title {
+    white-space: normal;
   }
 }
 
 @media (max-width: 525px) {
-  /* 固定remの縮小はせず、行の最大幅いっぱいに1行フィット */
-  #housing .hp-intro__title {
-    display: flex;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    white-space: nowrap;
-    line-height: 1.4;
-    font-size: calc(100cqw / 17.2);
+  #housing .hp-about-links__copy {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  #housing .hp-about-links__more {
+    align-self: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #housing .hp-about-links__media img {
+    animation: none;
+    transform: scale(1.04);
+  }
+
+  #housing .hp-intro__mark[data-hp-inview],
+  #housing .hp-intro__mark[data-hp-inview].is-in {
+    opacity: 0.04 !important;
+    transition: none !important;
   }
 }

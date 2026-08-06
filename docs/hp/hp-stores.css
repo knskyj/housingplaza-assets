@@ -9,7 +9,7 @@
   position: relative;
   z-index: 1;
   margin: 0 !important;
-  padding: 150px var(--hp-margin-side, 12.25vw) !important;
+  padding: 9.375rem var(--hp-margin-side, 12.25vw) !important;
   background: #f5f5f5 !important;
   color: var(--hp-stores-ink);
   font-family: var(--hp-stores-font);
@@ -42,7 +42,7 @@
 }
 
 #housing .hp-stores__title {
-  margin: 0 0 2.75rem;
+  margin: 0 0 0.85rem;
   color: var(--hp-stores-ink);
   font-size: clamp(1.85rem, 3.8vw, 2.75rem);
   font-weight: 600;
@@ -57,6 +57,17 @@
   display: none !important;
 }
 
+#housing .hp-stores__desc {
+  margin: 0 0 2.25rem;
+  max-width: 40em;
+  color: var(--hp-stores-ink);
+  font-size: clamp(0.875rem, 1.2vw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.85;
+  text-align: left !important;
+}
+
 #housing .hp-stores__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -67,6 +78,7 @@
 }
 
 #housing .hp-stores__card {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -81,9 +93,26 @@
   border-radius: 4px;
 }
 
+#housing .hp-stores__hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-decoration: none !important;
+  color: transparent !important;
+}
+
 #housing .hp-stores__card:hover,
-#housing .hp-stores__card:focus-visible {
+#housing .hp-stores__card:has(.hp-stores__hit:focus-visible) {
   outline: none;
+}
+
+#housing .hp-stores__hit:focus-visible {
+  outline: 2px solid var(--hp-stores-navy);
+  outline-offset: -2px;
 }
 
 #housing .hp-stores__media {
@@ -106,7 +135,7 @@
 }
 
 #housing .hp-stores__card:hover .hp-stores__media img,
-#housing .hp-stores__card:focus-visible .hp-stores__media img {
+#housing .hp-stores__card:has(.hp-stores__hit:focus-visible) .hp-stores__media img {
   transform: scale(1.2);
 }
 
@@ -120,7 +149,7 @@
   background: var(--hp-stores-navy);
   color: #fff;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1.2;
   border-radius: 999px;
@@ -137,7 +166,7 @@
 
 #housing .hp-stores__name {
   margin: 0;
-  color: var(--hp-stores-ink);
+  color: var(--hp-stores-navy);
   font-size: clamp(0.97rem, 1.3vw, 1.09rem);
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -159,17 +188,37 @@
   gap: 0.45rem;
   margin: 0;
   color: var(--hp-stores-muted);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.02em;
   line-height: 1.5;
 }
 
+#housing .hp-stores__tel {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  color: inherit !important;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-decoration: none !important;
+}
+
+#housing .hp-stores__tel:hover,
+#housing .hp-stores__tel:focus-visible {
+  color: var(--hp-stores-navy) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 0.15em;
+  outline: none;
+}
+
 #housing .hp-stores__icon {
   flex: 0 0 auto;
-  width: 0.85rem;
-  height: 0.85rem;
-  margin-top: 0.15rem;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.1rem;
   color: var(--hp-stores-navy);
 }
 
@@ -177,15 +226,21 @@
   display: block;
   width: 100%;
   height: 100%;
-  fill: currentColor;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
 }
 
 @media (max-width: 1099px) {
   #housing .hp-stores {
-    padding: 5.5rem var(--hp-margin-side, 12.25vw) 6rem !important;
+    padding: 9.375rem var(--hp-margin-side, 12.25vw) !important;
   }
 
   #housing .hp-stores__title {
+    margin-bottom: 0.85rem;
+  }
+
+  #housing .hp-stores__desc {
     margin-bottom: 2rem;
   }
 
@@ -198,7 +253,7 @@
 /* 576px〜: 2列＋住所・電話・営業時間まで表示 */
 @media (max-width: 767px) {
   #housing .hp-stores {
-    padding: 4rem var(--hp-margin-side, 8vw) 4.5rem !important;
+    padding: 5rem var(--hp-margin-side, 8vw) !important;
   }
 
   #housing .hp-stores__en {
@@ -206,8 +261,14 @@
   }
 
   #housing .hp-stores__title {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.85rem;
     font-size: clamp(1.45rem, 6.5vw, 1.85rem);
+  }
+
+  #housing .hp-stores__desc {
+    margin-bottom: 1.75rem;
+    font-size: 0.875rem;
+    line-height: 1.75;
   }
 
   #housing .hp-stores__grid {
@@ -220,17 +281,17 @@
   }
 
   #housing .hp-stores__meta li {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 
   #housing .hp-stores__icon {
-    width: 0.7rem;
-    height: 0.7rem;
-    margin-top: 0.12rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-top: 0.1rem;
   }
 }
 
-/* 525px以下: 1列・左画像／右に店名・電話・営業時間（intro と同境界） */
+/* 525px以下: 1列・右画像／左に店名・電話・営業時間（intro と同境界） */
 @media (max-width: 525px) {
   #housing .hp-stores__grid {
     grid-template-columns: 1fr;
@@ -238,7 +299,7 @@
   }
 
   #housing .hp-stores__card {
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: stretch;
     min-height: 0;
   }
@@ -260,8 +321,8 @@
     justify-content: center;
     gap: 0.4rem;
     min-width: 0;
-    /* 左写真と店名の間隔 */
-    padding: 0.7rem 0.75rem 0.75rem 1rem;
+    /* 右写真と店名の間隔／左余白 */
+    padding: 0.7rem 1rem 0.75rem 1.3rem;
   }
 
   #housing .hp-stores__name {
@@ -274,12 +335,12 @@
   }
 
   #housing .hp-stores__meta li {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 
   #housing .hp-stores__icon {
-    width: 0.65rem;
-    height: 0.65rem;
+    width: 0.875rem;
+    height: 0.875rem;
     margin-top: 0.1rem;
   }
 }

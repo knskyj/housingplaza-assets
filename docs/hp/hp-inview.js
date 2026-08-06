@@ -61,11 +61,12 @@
     root.setAttribute("data-hp-inview-wired", "1");
 
     [
-      ".hp-intro__brand",
-      ".hp-intro__title",
-      ".hp-intro__body",
+      ".hp-intro__inner",
+      ".hp-about-links__brand",
+      ".hp-about-links__title",
       ".hp-stores__en",
       ".hp-stores__title",
+      ".hp-stores__desc",
       ".hp-search__en",
       ".hp-search__title",
       ".hp-panels__en",
@@ -86,7 +87,7 @@
     });
 
     [
-      ".hp-intro__cards",
+      ".hp-about-links__list",
       ".hp-stores__grid",
       ".hp-search__grid",
       ".hp-panels__actions",

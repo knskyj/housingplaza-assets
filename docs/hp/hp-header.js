@@ -5,8 +5,9 @@
 (function () {
   "use strict";
 
-  var FADE_MS = 300;
+  var FADE_MS = 420;
   var DRAWER_MS = 600;
+  var ACC_MS = 700;
 
   function ready(fn) {
     if (document.readyState === "loading") {
@@ -259,6 +260,106 @@
       document.documentElement.style.paddingRight = "";
     }
 
+    function getAccSummary(acc) {
+      return acc ? acc.querySelector("summary") : null;
+    }
+
+    function getAccPanel(acc) {
+      return acc ? acc.querySelector(".hp-header__acc-panel") : null;
+    }
+
+    function ensureAccPanel(acc) {
+      var panel = getAccPanel(acc);
+      if (panel) return panel;
+      var ul = acc.querySelector(":scope > ul");
+      if (!ul) return null;
+      panel = document.createElement("div");
+      panel.className = "hp-header__acc-panel";
+      acc.insertBefore(panel, ul);
+      panel.appendChild(ul);
+      return panel;
+    }
+
+    function closeAcc(acc, immediate) {
+      if (!acc) return;
+      if (acc._hpAccTimer) {
+        clearTimeout(acc._hpAccTimer);
+        acc._hpAccTimer = null;
+      }
+      var summary = getAccSummary(acc);
+      var panel = getAccPanel(acc);
+      acc.classList.remove("is-open");
+      if (summary) summary.setAttribute("aria-expanded", "false");
+      if (immediate) {
+        if (panel) {
+          panel.style.transition = "none";
+          void panel.offsetHeight;
+          panel.style.transition = "";
+        }
+        acc.open = false;
+        return;
+      }
+      acc._hpAccTimer = setTimeout(function () {
+        acc.open = false;
+        acc._hpAccTimer = null;
+      }, ACC_MS);
+    }
+
+    function openAcc(acc) {
+      if (!acc) return;
+      if (acc._hpAccTimer) {
+        clearTimeout(acc._hpAccTimer);
+        acc._hpAccTimer = null;
+      }
+      var summary = getAccSummary(acc);
+      var panel = ensureAccPanel(acc);
+      acc.open = true;
+      if (summary) summary.setAttribute("aria-expanded", "true");
+      /* 閉じた高さ(0fr)を一度確定してから開く */
+      if (panel) {
+        panel.style.transition = "none";
+        void panel.offsetHeight;
+        panel.style.transition = "";
+      }
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(function () {
+          acc.classList.add("is-open");
+        });
+      });
+    }
+
+    function wireDrawerAccordions() {
+      if (!drawer) return;
+      var accs = Array.prototype.slice.call(
+        drawer.querySelectorAll(".hp-header__acc")
+      );
+      accs.forEach(function (acc) {
+        var summary = getAccSummary(acc);
+        if (!summary) return;
+        ensureAccPanel(acc);
+        acc.open = false;
+        acc.classList.remove("is-open");
+        summary.setAttribute("aria-expanded", "false");
+
+        summary.addEventListener("click", function (e) {
+          e.preventDefault();
+          var willOpen = !acc.classList.contains("is-open");
+          if (willOpen) {
+            accs.forEach(function (other) {
+              if (other !== acc && other.classList.contains("is-open")) {
+                closeAcc(other, false);
+              }
+            });
+            openAcc(acc);
+          } else {
+            closeAcc(acc, false);
+          }
+        });
+      });
+    }
+
+    wireDrawerAccordions();
+
     function closeDrawer() {
       if (root.classList.contains("is-drawer-closing")) return;
       if (!root.classList.contains("is-open")) return;
@@ -276,7 +377,9 @@
       }
 
       var accs = drawer.querySelectorAll(".hp-header__acc");
-      for (var i = 0; i < accs.length; i++) accs[i].open = false;
+      for (var i = 0; i < accs.length; i++) {
+        closeAcc(accs[i], true);
+      }
 
       /* Infcurion: 白パネルは上へ抜け、ブランド色はフェードアウト */
       root.classList.add("is-drawer-closing");
@@ -307,6 +410,11 @@
       root.classList.remove("is-drawer-closing");
       if (backdrop) backdrop.classList.add("is-drawer-veil");
       if (drawer) {
+        /* スライドアップ時はサブメニューを閉じた状態から */
+        var accsOpen = drawer.querySelectorAll(".hp-header__acc");
+        for (var ai = 0; ai < accsOpen.length; ai++) {
+          closeAcc(accsOpen[ai], true);
+        }
         drawer.hidden = false;
         /* アニメ再起動のため一度リフロー */
         void drawer.offsetWidth;

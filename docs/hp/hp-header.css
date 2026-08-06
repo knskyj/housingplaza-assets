@@ -358,8 +358,11 @@ body:has(#housing) {
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-6px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  transform: translateY(-12px);
+  transition:
+    opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.38s linear;
 }
 
 #housing .hp-header__panel[hidden] {
@@ -370,6 +373,19 @@ body:has(#housing) {
   pointer-events: auto;
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
+}
+
+#housing .hp-header__panel-card {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.04s,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.04s;
+}
+
+#housing .hp-header__item.is-open .hp-header__panel-card {
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -783,6 +799,7 @@ body:has(#housing .hp-header) #primary {
 #housing:has(.hp-header) > .hp-hero,
 #housing:has(.hp-header) > .hp-topics,
 #housing:has(.hp-header) > .hp-intro,
+#housing:has(.hp-header) > .hp-about-links,
 #housing:has(.hp-header) > .hp-stores,
 #housing:has(.hp-header) > .hp-search,
 #housing:has(.hp-header) > .hp-panels,
@@ -801,7 +818,7 @@ body:has(#housing .hp-header) #primary {
 }
 
 /* 旧 Crafto section など: Infcurion と同じ左右余白柱 */
-#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-topics):not(.hp-intro):not(.hp-stores):not(.hp-search):not(.hp-panels):not(.hp-news):not(.hp-recruit):not(.hp-footer):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
+#housing:has(.hp-header) > *:not(.hp-header):not(.hp-hero):not(.hp-topics):not(.hp-intro):not(.hp-about-links):not(.hp-stores):not(.hp-search):not(.hp-panels):not(.hp-news):not(.hp-recruit):not(.hp-footer):not(.hp-hero-standin):not(.hp-fullbleed):not(.full-screen):not(.swiper):not(.page-layout):not(.navbar-modern-inner):not(.navbar-show-modern-bg):not(.navbar-toggler-clone) {
   max-width: none;
   width: 100%;
   margin-left: 0;
@@ -894,7 +911,7 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 
 /* モバイルドロワー時: ネイビー半透明ベール */
 #housing .hp-header__backdrop.is-drawer-veil {
-  background: rgba(7, 38, 83, 0.78);
+  background: rgba(7, 38, 83, 0.9);
 }
 
 #housing .hp-header__backdrop.is-visible {
@@ -917,9 +934,8 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 
 #housing .hp-header__drawer-inner {
   width: 100%;
-  max-width: 48rem;
   margin: 0 auto;
-  /* モバイル左右余白。48rem未満のときはこの余白が効く */
+  /* モバイル左右余白 */
   padding: 0.5rem max(var(--hp-header-margin-side), 8vw) 2rem;
   box-sizing: border-box;
 }
@@ -989,17 +1005,9 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   animation: hp-reveal-out 0.45s ease-out both;
 }
 
-/* アコーディオン開閉 */
-#housing .hp-header__acc ul {
-  transition: opacity 0.28s ease;
-}
-
-#housing .hp-header__acc[open] ul {
-  opacity: 1;
-}
-
-/* Infcurion 風: 閉じた状態の＋ドロップダウン */
+/* アコーディオン開閉 — パネル内 grid 0fr→1fr（初期は閉じたまま） */
 #housing .hp-header__acc {
+  display: block;
   border-bottom: 0;
   margin: 0;
 }
@@ -1049,14 +1057,15 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   height: 1px;
   background: currentColor;
   transform: translate(-50%, -50%);
-  transition: transform 0.22s ease, opacity 0.22s ease;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #housing .hp-header__acc-plus span:last-child {
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
-#housing .hp-header__acc[open] .hp-header__acc-plus span:last-child {
+#housing .hp-header__acc.is-open .hp-header__acc-plus span:last-child {
   transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
 }
 
@@ -1078,13 +1087,35 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   color: var(--hp-navy) !important;
 }
 
-#housing .hp-header__acc ul {
+#housing .hp-header__acc-panel {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#housing .hp-header__acc.is-open .hp-header__acc-panel {
+  grid-template-rows: 1fr;
+}
+
+#housing .hp-header__acc-panel > ul {
+  display: block;
   list-style: none;
-  margin: 0 0 0.35rem !important;
-  padding: 0 0 0.65rem 1.15rem !important;
+  margin: 0 !important;
+  padding: 0 0 0 1.15rem !important;
   border-top: 0;
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#housing .hp-header__acc.is-open .hp-header__acc-panel > ul {
+  opacity: 1;
+  pointer-events: auto;
+  padding-bottom: 0.65rem !important;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.12s,
+    padding-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #housing .hp-header__acc li {
@@ -1174,6 +1205,13 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   #housing {
     --hp-margin-side: 8vw;
     --hp-header-margin-side: 1.25rem;
+  }
+}
+
+/* 極小幅は左右を少し詰める（420pxで約25px） */
+@media (max-width: 420px) {
+  #housing {
+    --hp-margin-side: 6vw;
   }
 }
 
