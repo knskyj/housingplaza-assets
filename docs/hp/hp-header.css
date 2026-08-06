@@ -174,7 +174,7 @@ body:has(#housing) {
 #housing .hp-header--overlay.is-scrolled .hp-header__bar {
   position: fixed;
   background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 1px 0 var(--hp-line);
+  box-shadow: none;
 }
 
 /* メニュー開閉中はバー自体は透過のまま（白はドロワーパネル側） */
