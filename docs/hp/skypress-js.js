@@ -57,13 +57,13 @@
     "hp-header.css?v=70",
     "hp-hero.css?v=24",
     "hp-topics.css?v=14",
-    "hp-intro.css?v=27",
-    "hp-stores.css?v=38",
+    "hp-intro.css?v=28",
+    "hp-stores.css?v=39",
     "hp-search.css?v=20",
     "hp-panels.css?v=40",
     "hp-news.css?v=17",
     "hp-recruit.css?v=8",
-    "hp-footer.css?v=30",
+    "hp-footer.css?v=31",
     "hp-inview.css?v=18",
   ].forEach(function (file) {
     loadCss(BASE + file);
