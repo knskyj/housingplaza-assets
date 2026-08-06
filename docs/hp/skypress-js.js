@@ -15,9 +15,9 @@
     meta.content = "noindex, nofollow";
   }
 
-  /* Pages (github.io) がデプロイ遅延することがあるため jsDelivr 経由（main 追従） */
+  /* jsDelivr @main はキャッシュ遅れがあるため、反映確認時はコミット固定 */
   var BASE =
-    "https://cdn.jsdelivr.net/gh/knskyj/housingplaza-assets@main/docs/hp/";
+    "https://cdn.jsdelivr.net/gh/knskyj/housingplaza-assets@bb61c1e/docs/hp/";
 
   function loadCss(href) {
     var l = document.createElement("link");
