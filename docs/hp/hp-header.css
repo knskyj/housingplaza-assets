@@ -173,7 +173,7 @@ body:has(#housing) {
 /* ヒーロー過ぎ：白背景で固定表示（メニュー開閉ではバーを白にしない＝パネル連動） */
 #housing .hp-header--overlay.is-scrolled .hp-header__bar {
   position: fixed;
-  background: rgba(255, 255, 255, 0.97);
+  background: #fff;
   box-shadow: none;
 }
 
