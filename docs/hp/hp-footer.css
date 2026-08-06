@@ -146,6 +146,13 @@
   border-color: #fff;
 }
 
+/* いい生活 es_base: PCで a[href^=tel]{pointer-events:none} → ホバー不能になるため解除 */
+@media (min-width: 481px) {
+  #housing a[href^="tel:"] {
+    pointer-events: auto !important;
+  }
+}
+
 /* —— MAIN / NAV —— */
 #housing .hp-footer__main {
   margin: 0;

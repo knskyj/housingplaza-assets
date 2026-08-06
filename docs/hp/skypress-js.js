@@ -65,7 +65,7 @@
     "hp-panels.css?v=40",
     "hp-news.css?v=17",
     "hp-recruit.css?v=8",
-    "hp-footer.css?v=33",
+    "hp-footer.css?v=34",
     "hp-inview.css?v=18",
   ].forEach(function (file) {
     loadCss(BASE + file);
