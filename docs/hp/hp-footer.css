@@ -138,24 +138,11 @@
   stroke-linejoin: round;
 }
 
-#housing .hp-footer__btn--mail {
-  background: #fff !important;
-  color: var(--hp-footer-navy) !important;
-  border-color: #fff;
-}
-
 #housing .hp-footer__btn:hover,
 #housing .hp-footer__btn:focus-visible {
   outline: none;
   background: #fff !important;
   color: var(--hp-footer-navy) !important;
-  border-color: #fff;
-}
-
-#housing .hp-footer__btn--mail:hover,
-#housing .hp-footer__btn--mail:focus-visible {
-  background: var(--hp-footer-navy) !important;
-  color: #fff !important;
   border-color: #fff;
 }
 
@@ -168,8 +155,8 @@
 
 #housing .hp-footer__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 2.45fr);
-  gap: 3rem 4rem;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 2.25fr);
+  gap: 3rem 3rem;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -211,10 +198,10 @@
 
 #housing .hp-footer__nav {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 2rem 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem 2.25rem;
   margin: 0;
-  padding: 0 0 0 2.5rem;
+  padding: 0;
   min-width: 0;
 }
 
@@ -232,6 +219,7 @@
   letter-spacing: 0.06em;
   line-height: 1.4;
   text-align: left !important;
+  white-space: nowrap;
 }
 
 #housing .hp-footer__col-title::before,
@@ -266,6 +254,7 @@
   letter-spacing: 0.04em;
   line-height: 1.6;
   text-decoration: none !important;
+  white-space: nowrap;
   transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
 
@@ -275,6 +264,11 @@
   text-decoration: underline !important;
   text-underline-offset: 0.2em;
   outline: none;
+}
+
+#housing .hp-footer__list a.hp-footer__link--recruit {
+  color: #fff !important;
+  font-weight: 500;
 }
 
 /* —— BAR —— */
@@ -344,15 +338,13 @@
     padding: 3.5rem var(--hp-margin-side, 12.25vw) 3rem !important;
   }
 
-  /* ナビ2列と同時にブランド帯をフル幅1カラムへ */
+  /* ブランド帯をフル幅1カラム。ナビは3列のまま */
   #housing .hp-footer__inner {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
 
   #housing .hp-footer__nav {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem 1.75rem;
     padding-left: 0;
   }
 }
@@ -400,5 +392,16 @@
 
   #housing .hp-footer__bar {
     padding: 1.15rem var(--hp-margin-side, 8vw) 1.35rem !important;
+  }
+}
+
+/* 〜420 のみ「ハウジング／シリーズ」改行 */
+#housing .hp-footer__br--xs {
+  display: none;
+}
+
+@media (max-width: 420px) {
+  #housing .hp-footer__br--xs {
+    display: block;
   }
 }

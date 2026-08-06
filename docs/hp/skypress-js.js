@@ -56,16 +56,16 @@
   [
     "hp-page.css?v=1",
     "hp-loading.css?v=17",
-    "hp-header.css?v=70",
+    "hp-header.css?v=71",
     "hp-hero.css?v=24",
     "hp-topics.css?v=14",
-    "hp-intro.css?v=29",
+    "hp-intro.css?v=30",
     "hp-stores.css?v=40",
     "hp-search.css?v=20",
     "hp-panels.css?v=40",
     "hp-news.css?v=17",
     "hp-recruit.css?v=8",
-    "hp-footer.css?v=32",
+    "hp-footer.css?v=33",
     "hp-inview.css?v=18",
   ].forEach(function (file) {
     loadCss(BASE + file);
@@ -74,7 +74,7 @@
   [
     "hp-page.js?v=2",
     "hp-loading.js?v=15",
-    "hp-header.js?v=34",
+    "hp-header.js?v=35",
     "hp-hero.js?v=9",
     "hp-news.js?v=1",
     "hp-inview.js?v=17",

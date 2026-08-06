@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  var FADE_MS = 420;
+  var FADE_MS = 300;
   var DRAWER_MS = 600;
   var ACC_MS = 700;
 

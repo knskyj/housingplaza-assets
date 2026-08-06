@@ -24,7 +24,7 @@ body:has(#housing) {
   --hp-font: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   --hp-shadow: 0 24px 60px rgba(7, 38, 83, 0.14);
   /* メガタイトル列：全メガ共通の固定幅 */
-  --hp-mega-lead: 18rem;
+  --hp-mega-lead: 15rem;
   /* Infcurion 相当の左右余白（PC 12.25vw / SP 8vw） */
   --hp-margin-side: 12.25vw;
   /* ヘッダーは少し広く（左右を詰める） */
@@ -95,7 +95,16 @@ body:has(#housing) {
 #housing .hp-header a:not(.hp-header__cta):hover,
 #housing .hp-header a:not(.hp-header__cta):focus {
   text-decoration: none !important;
-  color: inherit !important;
+}
+
+/* メガ内テキストリンクは inherit リセットより濃い色指定を勝たせる */
+#housing .hp-header .hp-header__panel .hp-header__cols a {
+  color: var(--hp-ink) !important;
+}
+
+#housing .hp-header .hp-header__panel .hp-header__cols a:hover,
+#housing .hp-header .hp-header__panel .hp-header__cols a:focus-visible {
+  color: var(--hp-ink) !important;
 }
 #housing .hp-header ul,
 #housing .hp-header ol,
@@ -358,11 +367,11 @@ body:has(#housing) {
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-12px);
+  transform: translateY(-8px);
   transition:
-    opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0.38s linear;
+    opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.28s linear;
 }
 
 #housing .hp-header__panel[hidden] {
@@ -378,10 +387,10 @@ body:has(#housing) {
 
 #housing .hp-header__panel-card {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(6px);
   transition:
-    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.04s,
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.04s;
+    opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1) 0.02s,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) 0.02s;
 }
 
 #housing .hp-header__item.is-open .hp-header__panel-card {
@@ -389,10 +398,15 @@ body:has(#housing) {
   transform: translateY(0);
 }
 
+/*
+ * メガカード共通骨格（会社情報・物件検索）:
+ *   Lead(--hp-mega-lead) | リンク領域(minmax 0 1fr・最大3列) | 写真?(--with-visual 時)
+ * 店舗一覧は panel-card--stores + store-grid（この枠とは別）
+ */
 #housing .hp-header__panel-card {
   display: grid;
   grid-template-columns: var(--hp-mega-lead) minmax(0, 1fr);
-  gap: 2.5rem 3rem;
+  gap: 2.5rem 1.5rem;
   align-items: start;
   /* inner は Infcurion 風の左右マージン柱に合わせる */
   max-width: calc(100vw - var(--hp-header-margin-side) * 2);
@@ -420,9 +434,10 @@ body:has(#housing) {
 }
 
 #housing .hp-header__panel-card--with-visual .hp-header__cols {
-  /* 物件検索: card 2.25rem + cols 0.2rem 上、下は card 2.4rem */
-  padding: calc(2.25rem + 0.2rem) 2.5rem 2.4rem 1rem !important;
-  margin-left: 3rem;
+  /* 他メガの column-gap(1.5rem)+cols pl(1rem) と揃える */
+  min-width: 0;
+  padding: calc(2.25rem + 0.2rem) 2.5rem 2.4rem calc(1rem + 1.5rem) !important;
+  margin-left: 0;
 }
 
 /* 写真はテキスト列の高さに合わせる（絶対配置で固有高さの干渉を防ぐ） */
@@ -483,34 +498,59 @@ body:has(#housing) {
   color: var(--hp-ink);
 }
 
+#housing .hp-header__store-media {
+  display: block;
+  overflow: hidden;
+  border-radius: 2px;
+  line-height: 0;
+  background: var(--hp-placeholder);
+}
+
+#housing .hp-header__store-media img,
 #housing .hp-header__store img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 1600 / 1020;
   object-fit: cover;
-  border-radius: 2px;
+  border-radius: 0;
   background: var(--hp-placeholder);
-  transition: transform 0.35s ease, opacity 0.2s ease;
+  transform: scale(1);
+  transition: transform 0.35s ease;
 }
 
-#housing .hp-header__store span {
-  display: block;
+#housing .hp-header__store span:not(.hp-header__store-media) {
+  position: relative;
+  display: inline-block;
   margin-top: 0.35rem;
-  font-size: 0.78rem;
+  padding-bottom: 0.15rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.35;
-  transition: color 0.18s ease;
 }
 
-#housing .hp-header__store:hover img {
-  transform: scale(1.03);
-  opacity: 0.92;
+#housing .hp-header__store span:not(.hp-header__store-media)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.22s ease;
+  opacity: 0.7;
 }
 
-#housing .hp-header__store:hover span {
-  color: var(--hp-navy);
+#housing .hp-header__store:hover .hp-header__store-media img,
+#housing .hp-header__store:hover > img {
+  transform: scale(1.08);
+}
+
+#housing .hp-header__store:hover span:not(.hp-header__store-media)::after {
+  transform: scaleX(1);
 }
 
 #housing .hp-header__panel-lead {
@@ -522,12 +562,12 @@ body:has(#housing) {
   align-self: stretch;
 }
 
-/* 区切り線は上下に余白を空けてフルハイトにしない */
+/* 区切り線はカード端まで伸ばしすぎない程度に上下余白を残す */
 #housing .hp-header__panel-lead::after {
   content: "";
   position: absolute;
-  top: 1.1rem;
-  bottom: 1.1rem;
+  top: 0.35rem;
+  bottom: 0.35rem;
   right: 1rem;
   width: 1px;
   background: var(--hp-divider);
@@ -535,12 +575,12 @@ body:has(#housing) {
 
 /* with-visual は lead にカード相当の padding があるので、線の上下も同じ基準に合わせる */
 #housing .hp-header__panel-card--with-visual .hp-header__panel-lead::after {
-  top: calc(2.25rem + 1.1rem);
-  bottom: calc(2.4rem + 1.1rem);
+  top: calc(2.25rem + 0.35rem);
+  bottom: calc(2.4rem + 0.35rem);
 }
 
-#housing .hp-header__panel-en {
-  margin: 0 0 0.35rem;
+#housing .hp-header p.hp-header__panel-en {
+  margin: 0 0 0.3rem;
   color: var(--hp-ink);
   font-size: clamp(1.75rem, 2.2vw, 2.35rem);
   font-weight: 700;
@@ -550,7 +590,7 @@ body:has(#housing) {
   white-space: nowrap;
 }
 
-#housing .hp-header__panel-ja {
+#housing .hp-header p.hp-header__panel-ja {
   margin: 0;
   color: var(--hp-ink);
   font-size: 0.85rem;
@@ -565,11 +605,96 @@ body:has(#housing) {
   row-gap: 0.15rem;
   list-style: none;
   margin: 0;
+  min-width: 0;
+  width: 100%;
   padding: 0.2rem 0 0 1rem !important;
 }
 
 #housing .hp-header__cols--3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* 会社情報メガ（案A）:
+ * Col1: 代表挨拶 / ハウジングシリーズ / 会社概要 / 会社沿革
+ * Col2: お知らせ
+ * Col3: なし / 右端写真は panel-visual */
+#housing .hp-header__cols--company {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(4, auto);
+  column-gap: 3rem;
+  align-items: start;
+}
+
+#housing .hp-header__cols--company > li:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#housing .hp-header__cols--company > li:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#housing .hp-header__cols--company > li:nth-child(3) {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#housing .hp-header__cols--company > li:nth-child(4) {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+#housing .hp-header__cols--company > .hp-header__cols-aside {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* 物件検索メガ（案A）:
+ * Col1: エリア / 沿線 / 地図
+ * Col2: 新築・築浅 / 駅近 / ペット可
+ * Col3: 駐車場
+ * 写真は後から --with-visual で右端に追加可 */
+#housing .hp-header__cols--search {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto auto auto;
+  column-gap: 3rem;
+  align-items: start;
+}
+
+#housing .hp-header__cols--search > li:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#housing .hp-header__cols--search > li:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#housing .hp-header__cols--search > li:nth-child(3) {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#housing .hp-header__cols--search > li:nth-child(4) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#housing .hp-header__cols--search > li:nth-child(5) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#housing .hp-header__cols--search > li:nth-child(6) {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+#housing .hp-header__cols--search > .hp-header__cols-aside {
+  grid-column: 3;
+  grid-row: 1;
 }
 
 #housing .hp-header__cols a {
@@ -600,7 +725,7 @@ body:has(#housing) {
 
 #housing .hp-header__cols a:hover,
 #housing .hp-header__cols a:focus-visible {
-  color: var(--hp-navy) !important;
+  color: var(--hp-ink) !important;
 }
 
 #housing .hp-header__cols a:hover::after {
@@ -636,9 +761,9 @@ body:has(#housing) {
 #housing .hp-header__cta:focus,
 #housing .hp-header__cta:focus-visible {
   outline: none;
-  background: var(--hp-navy-hover) !important;
-  border-color: var(--hp-navy-hover) !important;
-  color: var(--hp-white) !important;
+  background: var(--hp-white) !important;
+  border-color: var(--hp-navy) !important;
+  color: var(--hp-navy) !important;
 }
 
 /* ヒーロー上・スクロール後ともベースは塗りネイビー */
@@ -651,9 +776,9 @@ body:has(#housing) {
 #housing .hp-header--overlay .hp-header__cta:hover,
 #housing .hp-header--overlay .hp-header__cta:focus,
 #housing .hp-header--overlay .hp-header__cta:focus-visible {
-  background: var(--hp-navy-hover) !important;
-  border-color: var(--hp-navy-hover) !important;
-  color: var(--hp-white) !important;
+  background: var(--hp-white) !important;
+  border-color: var(--hp-navy) !important;
+  color: var(--hp-navy) !important;
 }
 
 #housing .hp-header__burger {
@@ -708,8 +833,8 @@ body:has(#housing) {
 
 /* --- A: #housing ページ共通（本番TOPの左右余白対策） --- */
 
-/* いい生活 .site-content a:hover img { scale(1.1) } をサイト全体で無効化 */
-.site-content a:hover img {
+/* いい生活 .site-content a:hover img { scale(1.1) } を無効化（店舗メガは枠内ズームのため除外） */
+.site-content a:not(.hp-header__store):hover img {
   transform: none !important;
 }
 html:has(#housing),
@@ -1012,6 +1137,23 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   margin: 0;
 }
 
+/* モバイルメニュー先頭（会社情報）の上に区切り線
+ * JS が .hp-header__drawer-reveal でラップするため、ラッパー側に付ける */
+#housing .hp-header__drawer-inner > .hp-header__drawer-reveal:first-child {
+  position: relative;
+  border-top: 0;
+}
+
+#housing .hp-header__drawer-inner > .hp-header__drawer-reveal:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1.5rem;
+  height: 1px;
+  background: var(--hp-divider);
+}
+
 #housing .hp-header__acc summary {
   list-style: none;
   cursor: pointer;
@@ -1035,6 +1177,12 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1.4;
+  transition: color 0.25s ease;
+}
+
+#housing .hp-header__acc summary:hover .hp-header__acc-ja,
+#housing .hp-header__acc summary:focus-visible .hp-header__acc-ja {
+  color: var(--hp-navy);
 }
 
 #housing .hp-header__acc-plus {
@@ -1218,11 +1366,11 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
 /* ~1000px: 余白を詰め、タイトル列も少し縮める（全メガ共通） */
 @media (max-width: 1100px) {
   #housing {
-    --hp-mega-lead: 16rem;
+    --hp-mega-lead: 13.5rem;
   }
 
   #housing .hp-header__panel-card {
-    gap: 1.75rem 2.25rem;
+    gap: 1.75rem 1.25rem;
     padding: 1.75rem 1.75rem 1.9rem;
   }
 
@@ -1238,13 +1386,13 @@ body:has(#housing .hp-header) .entry-content > p:has(> br:only-child) {
   }
 
   #housing .hp-header__panel-card--with-visual .hp-header__panel-lead::after {
-    top: calc(1.75rem + 1.1rem);
-    bottom: calc(1.9rem + 1.1rem);
+    top: calc(1.75rem + 0.35rem);
+    bottom: calc(1.9rem + 0.35rem);
   }
 
   #housing .hp-header__panel-card--with-visual .hp-header__cols {
-    padding: calc(1.75rem + 0.2rem) 1.75rem 1.9rem 1rem !important;
-    margin-left: 2.25rem;
+    padding: calc(1.75rem + 0.2rem) 1.75rem 1.9rem calc(1rem + 1.25rem) !important;
+    margin-left: 0;
   }
 
   #housing .hp-header__cols--3 {

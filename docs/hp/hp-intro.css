@@ -573,6 +573,14 @@
 }
 
 @media (max-width: 525px) {
+  #housing .hp-intro__mark,
+  #housing .hp-intro__mark[data-hp-inview],
+  #housing .hp-intro__mark[data-hp-inview].is-in {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%) !important;
+  }
+
   #housing .hp-about-links__copy {
     flex-direction: column;
     align-items: flex-start;
