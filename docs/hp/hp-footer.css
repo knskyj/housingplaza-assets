@@ -163,7 +163,7 @@
 #housing .hp-footer__inner {
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(0, 2.25fr);
-  gap: 3rem 3rem;
+  gap: 3rem 5rem;
   width: 100%;
   margin: 0;
   padding: 0;
