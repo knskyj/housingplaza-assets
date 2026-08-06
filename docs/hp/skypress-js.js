@@ -31,6 +31,25 @@
     document.head.appendChild(s);
   }
 
+  /* テーマは 400/700 のみ → 500/600 を確実に足す（CSS @import と二重でも可） */
+  if (!document.querySelector('link[data-hp-noto]')) {
+    var pre1 = document.createElement("link");
+    pre1.rel = "preconnect";
+    pre1.href = "https://fonts.googleapis.com";
+    document.head.appendChild(pre1);
+    var pre2 = document.createElement("link");
+    pre2.rel = "preconnect";
+    pre2.href = "https://fonts.gstatic.com";
+    pre2.crossOrigin = "anonymous";
+    document.head.appendChild(pre2);
+    var noto = document.createElement("link");
+    noto.rel = "stylesheet";
+    noto.href =
+      "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap";
+    noto.setAttribute("data-hp-noto", "1");
+    document.head.appendChild(noto);
+  }
+
   /* 順序固定（依存の読みやすさ用。実カスケードはすべて head 末尾） */
   [
     "hp-page.css?v=1",

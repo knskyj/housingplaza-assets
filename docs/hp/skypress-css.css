@@ -1,8 +1,12 @@
 /* Housingplaza SkyPress custom CSS — paste this file's contents into SkyPress
  *
  * 本体CSSは skypress-js.js が <link> で head 末尾注入する（@import 禁止）。
- * ここには JS 読込前のちらつき防止だけ置く。
+ * ここには: Noto 字重の補完 + JS 読込前のちらつき防止。
+ *
+ * テーマは Noto Sans JP 400/700 のみ。hp-* は 500/600 を使うためここで追加読込。
  */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap");
+
 #housing .hp-hero {
   background: #f8f8f8;
 }
