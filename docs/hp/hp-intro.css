@@ -222,9 +222,11 @@
   min-width: 0;
 }
 
+/* news / stores と同じ見出しサイズ・字重 */
 #housing .hp-about-links__brand {
   margin: 0 0 0.5rem;
   color: rgba(255, 255, 255, 0.92);
+  font-family: var(--hp-about-font);
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -236,6 +238,7 @@
 #housing .hp-about-links__title {
   margin: 0;
   color: #fff;
+  font-family: var(--hp-about-font);
   font-size: clamp(1.85rem, 3.8vw, 2.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
